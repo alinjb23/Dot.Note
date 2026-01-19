@@ -2034,28 +2034,33 @@
                               `• Kapak Görseli: ${uploadedImage ? 'Yüklendi' : 'Yüklenmedi'}\n\n` +
                               `Lütfen bu mesajı ve ekindeki görseli bize ileterek siparişinizi tamamlayın.`;
 
-          const dataUrl = canvas.toDataURL("image/png");
-
-          // Always try to use Web Share API for mobile first
+          // Modern Sharing (Mobile)
           if (navigator.share && navigator.canShare) {
-              try {
-                  const blob = await (await fetch(dataUrl)).blob();
+              canvas.toBlob(async (blob) => {
                   const file = new File([blob], 'defter-tasarimim.png', { type: 'image/png' });
-                  
                   if (navigator.canShare({ files: [file] })) {
-                      await navigator.share({
-                          files: [file],
-                          title: 'Dot Note Defter Siparişim',
-                          text: messageText
-                      });
-                      return;
+                      try {
+                          await navigator.share({
+                              files: [file],
+                              title: 'Dot Note Defter Siparişim',
+                              text: messageText
+                          });
+                          return;
+                      } catch (e) {
+                          console.warn("Share failed", e);
+                          fallbackOrder(messageText);
+                      }
+                  } else {
+                      fallbackOrder(messageText);
                   }
-              } catch (e) { 
-                  console.warn("Navigator share failed, using fallback", e);
-              }
+              }, 'image/png');
+          } else {
+              fallbackOrder(messageText);
           }
+      }
 
-          // FALLBACK Logic: Download + WhatsApp Link
+      function fallbackOrder(messageText) {
+          const dataUrl = canvas.toDataURL("image/png");
           const link = document.createElement('a');
           link.download = 'dot-note-tasarimim.png';
           link.href = dataUrl;
