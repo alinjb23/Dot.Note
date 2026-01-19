@@ -1595,8 +1595,8 @@
                 </div>
               </div>
 
-               <button class="order-button" style="margin-top: 1.5rem;" onclick="finishDesign()">TASARIMI TAMAMLA & SİPARİŞ VER</button>
-               <p class="designer-note">* Siparişiniz doğrudan WhatsApp üzerinden telefonumuza iletilecektir.</p>
+                <button class="order-button" style="margin-top: 1.5rem;" onclick="finishDesign()">TASARIMI TAMAMLA & WHATSAPP’TAN SİPARİŞ VER</button>
+                <p class="designer-note">* Siparişiniz WhatsApp üzerinden iletilecektir. Lütfen açılacak ekranda kapakta olmasını istediğiniz fotoğrafı da bize göndermeyi unutmayın!</p>
             </div>
           </div>
         </div>
@@ -2056,7 +2056,7 @@
                               `• Tasarım Stili: ${selectedStyle}\n` +
                               `• Kapak Rengi: ${colorName}\n` +
                               `• Kapak Metni: ${userText || 'Yok'}\n\n` +
-                              `Merhaba! Yukarıdaki detaylara sahip özel tasarım defterimi sipariş etmek istiyorum.`;
+                              `Merhaba! Özel tasarım defterimi sipariş etmek istiyorum. Kapakta kullanılacak fotoğrafı da şimdi gönderiyorum.`;
 
           const waUrl = `https://wa.me/905359287488?text=${encodeURIComponent(messageText)}`;
           window.open(waUrl, '_blank');
