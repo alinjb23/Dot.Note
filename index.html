@@ -1,0 +1,1860 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOT NOTE - Özel Tasarım Defterler</title>
+    <meta
+      name="description"
+      content="El yapımı, özel tasarım defterler. 50+ farklı tasarım, premium kalite, 24 saat teslimat."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary-color: #0b1b4d;
+        --secondary-color: #162a5e;
+        --accent-color: #0b1b4d;
+        --accent-light: #1a3d8f;
+        --text-primary: #0F172A;
+        --text-secondary: #64748B;
+        --bg-primary: #FFFFFF;
+        --bg-secondary: #F8FAFC;
+        --bg-accent: #F1F5F9;
+        --border-color: #E2E8F0;
+        --border-width: 2px;
+        --spacing-sm: 1rem;
+        --spacing-md: 2rem;
+        --spacing-lg: 4rem;
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 16px;
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      * {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        line-height: 1.6;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* Typography */
+      h1 {
+        font-size: clamp(2.5rem, 8vw, 5rem);
+        font-weight: 900;
+        letter-spacing: -0.02em;
+        line-height: 0.9;
+      }
+
+      h2 {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 800;
+        letter-spacing: -0.01em;
+      }
+
+      h3 {
+        font-size: clamp(1.2rem, 3vw, 1.8rem);
+        font-weight: 700;
+      }
+
+      /* Header */
+      header {
+        position: sticky;
+        top: 0;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border-color);
+        padding: 1.2rem var(--spacing-sm);
+        z-index: 1000;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: var(--shadow-sm);
+      }
+
+      header.scrolled {
+        box-shadow: var(--shadow-md);
+      }
+
+      .header-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+
+      .logo img {
+        height: 60px;
+        width: auto;
+        transition: transform 0.3s ease;
+      }
+
+      .logo-text {
+        font-size: 1.5rem;
+        font-weight: 900;
+        letter-spacing: 2px;
+      }
+
+      .logo:hover img {
+        transform: rotate(180deg);
+      }
+
+      .logo:hover .logo-text {
+        letter-spacing: 3px;
+      }
+
+      nav {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+      }
+
+      nav a:not(.nav-cta) {
+        color: var(--text-primary);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+        letter-spacing: -0.01em;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        padding-bottom: 4px;
+      }
+
+
+      .nav-cta {
+        /* Removed background style to match other links */
+        color: var(--text-primary);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+        cursor: pointer;
+      }
+      
+      .nav-cta:hover {
+        color: var(--accent-light);
+      }
+
+      nav a:not(.nav-cta):after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--accent-color);
+        transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      nav a:not(.nav-cta):hover {
+        color: var(--accent-color);
+      }
+
+      nav a:not(.nav-cta):hover:after {
+        width: 100%;
+      }
+
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        padding: 5px;
+      }
+
+      .menu-toggle span {
+        width: 25px;
+        height: 3px;
+        background: #000000;
+        transition: all 0.3s ease;
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--spacing-lg) var(--spacing-md);
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(to bottom right, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-accent) 100%);
+      }
+
+      .hero:before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(11, 27, 77, 0.1) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: float 20s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        50% { transform: translate(-50px, 50px) scale(1.1); }
+      }
+
+      .hero-content {
+        max-width: 1400px;
+        width: 100%;
+        text-align: center;
+        animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero h1 {
+        margin-bottom: var(--spacing-md);
+      }
+
+      .hero p {
+        font-size: clamp(1rem, 2vw, 1.3rem);
+        max-width: 600px;
+        margin: 0 auto var(--spacing-md);
+        font-weight: 400;
+      }
+
+      .cta-button {
+        display: inline-block;
+        padding: 1.2rem 3rem;
+        background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.1rem;
+        border: none;
+        border-radius: var(--radius-md);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        letter-spacing: 0.02em;
+        position: relative;
+        overflow: hidden;
+        box-shadow: var(--shadow-lg);
+      }
+
+      .cta-button:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #0a1642 0%, #0e2157 100%);
+        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: -1;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-xl);
+      }
+
+      .cta-button:hover:before {
+        left: 0;
+      }
+
+      /* Stats Section */
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-md);
+        padding: var(--spacing-lg) var(--spacing-md);
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .stat-item {
+        padding: var(--spacing-lg) var(--spacing-md);
+        text-align: center;
+        background: var(--bg-primary);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border-color);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .stat-item:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-xl);
+        border-color: var(--accent-color);
+        background: linear-gradient(135deg, rgba(11, 27, 77, 0.05) 0%, rgba(26, 61, 143, 0.05) 100%);
+      }
+
+      .stat-item h3 {
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        margin-bottom: 0.5rem;
+        background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .stat-item p {
+        font-size: 2rem;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .stat-item:hover p {
+        transform: scale(1.2);
+      }
+
+      /* Products Grid */
+      .products-section {
+        padding: var(--spacing-lg) var(--spacing-md);
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        margin-bottom: var(--spacing-md);
+        text-align: center;
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: var(--spacing-lg);
+        margin-bottom: var(--spacing-lg);
+      }
+
+      .product-card {
+        background: var(--bg-primary);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        opacity: 0;
+        animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        box-shadow: var(--shadow-md);
+      }
+
+      .product-card:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .product-card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .product-card:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .product-card:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+      .product-card:nth-child(5) {
+        animation-delay: 0.5s;
+      }
+      .product-card:nth-child(6) {
+        animation-delay: 0.6s;
+      }
+
+      .product-card:hover {
+        transform: translateY(-12px);
+        box-shadow: var(--shadow-xl);
+        border-color: var(--accent-color);
+      }
+
+      .product-badge {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
+        color: #ffffff;
+        padding: 0.5rem 1rem;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        z-index: 10;
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow-md);
+      }
+
+      .product-image {
+        width: 100%;
+        height: 300px;
+        background: linear-gradient(135deg, var(--bg-accent) 0%, var(--bg-secondary) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3.5rem;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .product-image:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        transition: left 0.5s;
+      }
+
+      .product-card:hover .product-image:before {
+        left: 100%;
+      }
+
+      .product-info {
+        padding: 1.5rem;
+      }
+
+      .product-info h3 {
+        margin-bottom: 0.5rem;
+      }
+
+      .product-info p {
+        color: #666;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+      }
+
+      .product-price {
+        font-size: 1.8rem;
+        font-weight: 900;
+      }
+
+
+
+      /* About Section */
+      .about {
+        padding: var(--spacing-lg) var(--spacing-md);
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        color: #ffffff;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .about:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: -20%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+        border-radius: 50%;
+      }
+
+      .about-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--spacing-lg);
+        position: relative;
+        z-index: 1;
+      }
+
+      .about h2 {
+        margin-bottom: var(--spacing-md);
+        font-size: clamp(2.5rem, 5vw, 4rem);
+      }
+
+      .about h3 {
+        margin-top: var(--spacing-md);
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .about-content p {
+        line-height: 1.8;
+        font-size: 1.05rem;
+        margin-bottom: 1rem;
+      }
+
+      /* How to Order Section */
+      .how-to-order {
+        padding: var(--spacing-lg) var(--spacing-md);
+        background: var(--bg-secondary);
+        text-align: center;
+      }
+
+      .steps-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: var(--spacing-md);
+        flex-wrap: wrap;
+      }
+
+      .step-item {
+        flex: 1;
+        min-width: 250px;
+        background: var(--bg-primary);
+        padding: var(--spacing-md);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-sm);
+        transition: transform 0.3s ease;
+        position: relative;
+        z-index: 1;
+      }
+
+      .step-item:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-md);
+      }
+
+      .step-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        background: var(--bg-accent);
+        width: 80px;
+        height: 80px;
+        line-height: 80px;
+        border-radius: 50%;
+        margin: 0 auto 1rem;
+      }
+
+      .step-item h3 {
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+        font-size: 1.3rem;
+      }
+
+      .step-item p {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+      }
+
+      .step-arrow {
+        font-size: 2rem;
+        color: var(--accent-light);
+        font-weight: bold;
+      }
+
+      @media (max-width: 768px) {
+        .steps-container {
+          flex-direction: column;
+          gap: 2rem;
+        }
+
+        .step-arrow {
+          transform: rotate(90deg);
+        }
+      }
+
+      /* Custom Designer Styles */
+      .custom-design-section {
+        padding: var(--spacing-lg) var(--spacing-md);
+        background: var(--bg-secondary);
+      }
+
+      .designer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-lg);
+        background: white;
+        padding: var(--spacing-lg);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .designer-preview {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #f0f0f0;
+        padding: 2rem;
+        border-radius: var(--radius-md);
+      }
+
+      .canvas-wrapper {
+        position: relative;
+        box-shadow: var(--shadow-xl);
+      }
+
+      #designCanvas {
+        background: white;
+        max-width: 100%;
+        height: auto;
+      }
+
+      .designer-tools {
+        padding: 1rem;
+      }
+
+      .designer-tools h3 {
+        margin-bottom: 2rem;
+        font-size: 1.5rem;
+      }
+
+      .tool-group {
+        margin-bottom: 2rem;
+      }
+
+      .tool-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+      }
+
+      .file-input {
+        display: none;
+      }
+
+      .upload-btn, .tool-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 100%;
+        padding: 1rem;
+        border: 2px solid #000;
+        background: transparent;
+        color: #000;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-radius: var(--radius-sm);
+      }
+
+      .upload-btn:hover, .tool-btn:hover {
+        background: #000;
+        color: white;
+      }
+
+      .text-input {
+        width: 100%;
+        padding: 1rem;
+        border: 1px solid #E2E8F0;
+        border-radius: var(--radius-sm);
+        margin-bottom: 0.5rem;
+        font-family: inherit;
+        font-size: 0.95rem;
+        background: #F8FAFC;
+        transition: all 0.3s ease;
+      }
+      
+      .text-input:focus {
+        outline: none;
+        border-color: #000;
+        background: #fff;
+        box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
+      }
+
+      .color-picker {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .color-option {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid var(--border-color);
+        cursor: pointer;
+        transition: transform 0.2s ease;
+      }
+
+      .color-option:hover {
+        transform: scale(1.1);
+        border-color: #000;
+      }
+
+      .designer-note {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        margin-top: 1rem;
+        text-align: center;
+      }
+
+       @media (max-width: 768px) {
+        .designer-container {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Contact Section */
+      .contact-section {
+        background: #050a1f; /* Very deep navy/black to match reference */
+        padding: var(--spacing-lg) var(--spacing-md);
+        color: white;
+        margin-top: var(--spacing-lg);
+      }
+
+      .contact-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-lg);
+      }
+
+      .contact-column h4 {
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #64748B;
+        margin-bottom: 1.5rem;
+      }
+
+      .contact-column p, 
+      .contact-column a {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: #ffffff;
+        display: block;
+        margin-bottom: 0.5rem;
+        text-decoration: none;
+        font-weight: 400;
+      }
+
+      .contact-column a:hover {
+        color: var(--accent-light);
+      }
+
+      /* Footer */
+      footer {
+        background: #050a1f;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        padding: 2rem var(--spacing-md);
+        text-align: center;
+        margin-top: 0;
+      }
+
+      footer p {
+        color: #64748B;
+        font-size: 0.9rem;
+      }
+
+
+      /* WhatsApp Button */
+      .whatsapp-button {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+        color: #ffffff;
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 999;
+        text-decoration: none;
+        box-shadow: var(--shadow-lg);
+      }
+
+      .whatsapp-button:hover {
+        transform: scale(1.15) rotate(5deg);
+        box-shadow: var(--shadow-xl);
+      }
+
+      /* Custom CTA Section */
+      .custom-cta-section {
+          padding: 4rem var(--spacing-md);
+          background: #0F172A;
+          color: white;
+          text-align: center;
+          margin-top: 2rem;
+      }
+      
+      .custom-cta-content h2 {
+          font-size: 2.5rem;
+          margin-bottom: 1rem;
+      }
+
+      .custom-cta-content p {
+          color: #ccc;
+          margin-bottom: 2rem;
+          max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
+      }
+
+      .cta-button.large {
+          font-size: 1.2rem;
+          padding: 1.2rem 4rem;
+          background: white;
+          color: black;
+      }
+      .cta-button.large:before {
+          background: #e2e2e2;
+      }
+
+      /* Modal */
+      .designer-modal {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0,0,0,0.9);
+          z-index: 2000;
+          overflow-y: auto;
+          padding: 2rem 1rem;
+      }
+
+      .modal-content {
+          background: white;
+          max-width: 1100px;
+          margin: 2rem auto;
+          border-radius: var(--radius-lg);
+          padding: 2rem;
+          position: relative;
+      }
+
+      .close-modal {
+          position: absolute;
+          top: 1rem;
+          right: 1.5rem;
+          font-size: 2.5rem;
+          cursor: pointer;
+          line-height: 1;
+      }
+
+      .modal-title {
+          text-align: center;
+          margin-bottom: 2rem;
+      }
+
+      .designer-container-modal {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+      }
+
+      @media (max-width: 900px) {
+          .designer-container-modal {
+              grid-template-columns: 1fr;
+          }
+      }
+
+      /* Product Detail Page */
+      .product-detail {
+        display: none;
+        opacity: 0;
+        animation: fadeIn 0.5s ease forwards;
+      }
+
+      .product-detail.active {
+        display: block;
+      }
+
+      .detail-header {
+        padding: var(--spacing-md);
+        border-bottom: var(--border-width) solid #000000;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .back-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.8rem 1.5rem;
+        background: #ffffff;
+        border: var(--border-width) solid #000000;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+      }
+
+      .back-button:hover {
+        background: #000000;
+        color: #ffffff;
+      }
+
+      .detail-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: var(--spacing-lg) var(--spacing-md);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-lg);
+      }
+
+      .detail-images {
+        position: sticky;
+        top: 100px;
+        height: fit-content;
+      }
+
+      .main-image {
+        width: 100%;
+        height: 500px;
+        background: #f0f0f0;
+        border: var(--border-width) solid #000000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        margin-bottom: var(--spacing-md);
+      }
+
+      .thumbnail-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+      }
+
+      .thumbnail {
+        height: 120px;
+        background: #f0f0f0;
+        border: var(--border-width) solid #000000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-align: center;
+        padding: 0.5rem;
+      }
+
+      .thumbnail:hover,
+      .thumbnail.active {
+        background: #000000;
+        color: #ffffff;
+      }
+
+      .detail-info h1 {
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .detail-price {
+        font-size: 3rem;
+        font-weight: 900;
+        margin-bottom: var(--spacing-md);
+      }
+
+      .specs {
+        border: var(--border-width) solid #000000;
+        padding: var(--spacing-md);
+        margin-bottom: var(--spacing-md);
+      }
+
+      .specs h3 {
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .spec-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.8rem 0;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      .spec-item:last-child {
+        border-bottom: none;
+      }
+
+      .spec-label {
+        font-weight: 600;
+      }
+
+      .features {
+        margin-bottom: var(--spacing-md);
+      }
+
+      .features h3 {
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .features ul {
+        list-style: none;
+      }
+
+      .features li {
+        padding: 0.8rem 0;
+        border-bottom: 1px solid #e0e0e0;
+        padding-left: 1.5rem;
+        position: relative;
+      }
+
+      .features li:before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        font-weight: 900;
+      }
+
+      .features li:last-child {
+        border-bottom: none;
+      }
+
+      .order-button {
+        width: 100%;
+        padding: 1.5rem;
+        background: #000000;
+        color: #ffffff;
+        border: var(--border-width) solid #000000;
+        font-size: 1.2rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        letter-spacing: 1px;
+      }
+
+      .order-button:hover {
+        background: #ffffff;
+        color: #000000;
+        transform: translateY(-4px);
+        box-shadow: 0 4px 0 #000000;
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        nav {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: #ffffff;
+          flex-direction: column;
+          border-bottom: var(--border-width) solid #000000;
+          padding: var(--spacing-sm);
+          gap: 1rem;
+        }
+
+        nav.active {
+          display: flex;
+        }
+
+        .menu-toggle {
+          display: flex;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+          transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+          opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+          transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        .detail-content {
+          grid-template-columns: 1fr;
+        }
+
+        .detail-images {
+          position: static;
+        }
+
+        .stats {
+          grid-template-columns: 1fr;
+        }
+
+        .stat-item {
+          border-right: none;
+          border-bottom: var(--border-width) solid #000000;
+        }
+
+        .stat-item:last-child {
+          border-bottom: none;
+        }
+
+        .whatsapp-button {
+          width: 50px;
+          height: 50px;
+          font-size: 1.5rem;
+          bottom: 1rem;
+          right: 1rem;
+        }
+      }
+
+      /* Utility Classes */
+      .hidden {
+        display: none !important;
+      }
+
+      /* Loader Styles */
+      .loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+      }
+
+      .loader.fade-out {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .loader-content {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .loader-logo {
+        width: 150px;
+        height: auto;
+        animation: logoPulse 2s ease-in-out infinite;
+      }
+
+      .loader-dots {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .loader-dots span {
+        width: 8px;
+        height: 8px;
+        background: var(--primary-color);
+        border-radius: 50%;
+        animation: dotBounce 1.4s infinite ease-in-out both;
+      }
+
+      .loader-dots span:nth-child(1) { animation-delay: -0.32s; }
+      .loader-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+      @keyframes logoPulse {
+        0% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.1); opacity: 0.8; }
+        100% { transform: scale(1); opacity: 1; }
+      }
+
+      @keyframes dotBounce {
+        0%, 80%, 100% { transform: scale(0); }
+        40% { transform: scale(1); }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading Screen -->
+    <div id="loader" class="loader">
+      <div class="loader-content">
+        <img src="logo.png" alt="DOT NOTE Logo" class="loader-logo">
+        <div class="loader-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+      <div class="header-content">
+        <div class="logo" onclick="showHome()">
+          <img src="logo.png" alt="DOT NOTE Logo">
+          <span class="logo-text">DOT NOTE</span>
+        </div>
+        <nav id="mainNav">
+          <a href="#products">Ürünler</a>
+          <a href="hakkimizda.html">Hakkımızda</a>
+          <a href="#contact">İletişim</a>
+          <a href="#" onclick="openDesigner(); return false;">KENDİN TASARLA</a>
+        </nav>
+        <div class="menu-toggle" id="menuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Home Page -->
+    <div id="homePage">
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="hero-content">
+          <h1>ÖZEL TASARIM<br />DEFTERLER</h1>
+          <p>
+            El yapımı, premium kalitede, size özel tasarlanmış defterler. Her
+            sayfa bir sanat eseri.
+          </p>
+        <a href="#products" class="cta-button">ÜRÜNLERİ KEŞFET</a>
+        </div>
+      </section>
+
+      <!-- Stats Section -->
+      <section class="stats">
+        <div class="stat-item">
+          <h3>100% EL YAPIMI</h3>
+          <p>✨</p>
+        </div>
+        <div class="stat-item">
+          <h3>2 HAFTADAN KISA SÜREDE</h3>
+          <p>📦</p>
+        </div>
+        <div class="stat-item">
+          <h3>10+ FARKLI TASARIM</h3>
+          <p>💎</p>
+        </div>
+      </section>
+
+
+
+      <!-- Products Section -->
+      <section class="products-section" id="products">
+        <h2 class="section-title">TASARIMLARIMIZ</h2>
+        
+
+
+        <div class="products-grid" id="productsGrid"></div>
+      </section>
+
+      <!-- How to Order Section -->
+      <section class="how-to-order">
+        <h2 class="section-title">NASIL SİPARİŞ VERİLİR?</h2>
+        <div class="steps-container">
+          <div class="step-item">
+            <div class="step-icon">🎨</div>
+            <h3>1. Tasarımı Seç</h3>
+            <p>Koleksiyonumuzdan beğendiğin defter tasarımını seç. Kapak tasarımı 1-2 gün sürer.</p>
+          </div>
+          <div class="step-arrow">→</div>
+          <div class="step-item">
+            <div class="step-icon">💬</div>
+            <h3>2. WhatsApp'tan Yaz</h3>
+            <p>Sipariş butonuna tıkla ve WhatsApp üzerinden bizimle iletişime geç.</p>
+          </div>
+          <div class="step-arrow">→</div>
+          <div class="step-item">
+            <div class="step-icon">📦</div>
+            <h3>3. Kapına Gelsin</h3>
+            <p>Siparişin özenle hazırlansın. Kargo 10 günden kısa sürede adresine teslim edilir.</p>
+          </div>
+        </div>
+      </section>
+
+
+
+      <!-- Custom Design CTA Section -->
+      <section class="custom-cta-section">
+          <div class="custom-cta-content">
+              <h2>KENDİ DEFTERİNİ YARAT</h2>
+              <p>Hayalindeki tasarımı gerçeğe dönüştür. Kapak görselini seç, ismini yaz ve iç sayfa düzenini belirle.</p>
+              <button class="cta-button large" onclick="openDesigner()">KENDİN TASARLA</button>
+          </div>
+      </section>
+
+      <!-- Custom Designer Modal -->
+      <div id="designerModal" class="designer-modal">
+        <div class="modal-content">
+          <span class="close-modal" onclick="closeDesigner()">&times;</span>
+          <h2 class="modal-title">KENDİN TASARLA</h2>
+          
+          <div class="designer-container-modal">
+            <!-- Canvas Area -->
+            <div class="designer-preview">
+              <div class="canvas-wrapper">
+                <canvas id="designCanvas" width="400" height="560"></canvas>
+                <div class="notebook-overlay"></div>
+              </div>
+            </div>
+          
+            <!-- Tools Area -->
+            <div class="designer-tools">
+              <h3>Dizayn Araçları</h3>
+            
+              <div class="tool-group">
+                <label>Sayfa Düzeni</label>
+                <select id="notebookStyle" class="text-input">
+                  <option value="Cizgili">Çizgili</option>
+                  <option value="Kareli">Kareli</option>
+                  <option value="Noktali">Noktalı</option>
+                  <option value="Duz">Düz</option>
+                </select>
+              </div>
+
+              <div class="tool-group">
+                <label>Kapak Tasarımı (Opsiyonel)</label>
+                <select id="coverDesign" class="text-input">
+                  <option value="">Kendi Görselimi Yükleyeceğim</option>
+                </select>
+              </div>
+
+              <div class="tool-group">
+                <label>Veya Fotoğraf Yükle</label>
+                <input type="file" id="imageUpload" accept="image/*" class="file-input">
+                <label for="imageUpload" class="upload-btn">
+                  <span>📷</span> Fotoğraf Yükle
+                </label>
+              </div>
+
+              <div class="tool-group">
+                <label>Metin Ekle</label>
+                <input type="text" id="textInput" placeholder="İsim veya Söz Yazın" class="text-input">
+                <button class="tool-btn" onclick="addText()">Metni Ekle</button>
+              </div>
+
+              <div class="tool-group">
+                <label>Kapak Rengi</label>
+                <div class="color-picker">
+                  <div class="color-option" style="background: #ffffff" onclick="setBgColor('#ffffff')"></div>
+                  <div class="color-option" style="background: #000000" onclick="setBgColor('#000000')"></div>
+                  <div class="color-option" style="background: #1a1a1a" onclick="setBgColor('#1a1a1a')"></div>
+                  <div class="color-option" style="background: #f4f1ea" onclick="setBgColor('#f4f1ea')"></div>
+                  <div class="color-option" style="background: #e2e8f0" onclick="setBgColor('#e2e8f0')"></div>
+                  <div class="color-option" style="background: #ffb7b2" onclick="setBgColor('#ffb7b2')"></div>
+                </div>
+              </div>
+
+               <button class="order-button" onclick="finishDesign()">TASARIMI TAMAMLA</button>
+               <p class="designer-note">* Tasarımınız WhatsApp üzerinden bize iletilecektir.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Section -->
+      <section class="contact-section" id="contact">
+        <div class="contact-container">
+
+          <div class="contact-column">
+            <h4>SOSYAL MEDYA</h4>
+            <a href="https://instagram.com/dotnote" target="_blank">Instagram</a>
+            <a href="#" target="_blank">TikTok</a>
+            <a href="#" target="_blank">Pinterest</a>
+          </div>
+          <div class="contact-column">
+            <h4>İLETİŞİM</h4>
+            <a href="mailto:dot.note.2026@gmail.com">dot.note.2026@gmail.com</a>
+            <p>+90 535 928 74 88</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer>
+        <p>&copy; 2026 DOT NOTE. Tüm hakları saklıdır.</p>
+      </footer>
+    </div>
+
+    <!-- Product Detail Page -->
+    <div id="detailPage" class="product-detail">
+      <div class="detail-header">
+        <button class="back-button" onclick="showHome()">← Geri Dön</button>
+      </div>
+      <div class="detail-content">
+        <div class="detail-images">
+          <div class="main-image" id="mainImage">📕</div>
+          <div class="thumbnail-grid">
+            <div class="thumbnail active" onclick="changeView(0)">
+              Ön Görünüm<br />📕
+            </div>
+            <div class="thumbnail" onclick="changeView(1)">
+              Arka Görünüm<br />📔
+            </div>
+            <div class="thumbnail" onclick="changeView(2)">
+              Açık Görünüm<br />📖
+            </div>
+            <div class="thumbnail" onclick="changeView(3)">
+              Yan Görünüm<br />📓
+            </div>
+          </div>
+        </div>
+        <div class="detail-info">
+          <h1 id="detailTitle"></h1>
+          <div class="detail-price" id="detailPrice"></div>
+
+          <div class="specs">
+            <h3>Ürün Özellikleri</h3>
+            <div class="spec-item">
+              <span class="spec-label">Sayfa Sayısı:</span>
+              <span>160 Sayfa</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Kağıt Türü:</span>
+              <span>Premium 120gsm</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Boyut:</span>
+              <span>A5 (14.8 x 21 cm)</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Cilt Türü:</span>
+              <span>Sert Kapak</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Kişiselleştirme:</span>
+              <span>Mevcut</span>
+            </div>
+          </div>
+
+          <div class="features">
+            <h3>Özellikler</h3>
+            <ul>
+              <li>El yapımı özel tasarım kapak</li>
+              <li>Çevre dostu, geri dönüştürülebilir kağıt</li>
+              <li>Noktalı ve çizgili sayfa seçenekleri</li>
+              <li>Elastik kapama bandı</li>
+              <li>İç cep bölümü</li>
+              <li>Şerit yer imi</li>
+              <li>İsim ve mesaj kişiselleştirme imkanı</li>
+              <li>Özel hediye kutusu ile gönderim</li>
+            </ul>
+          </div>
+
+          <a href="#" class="order-button" id="orderButton">SİPARİŞ VER</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- WhatsApp Button -->
+    <a
+      href="https://wa.me/905359287488"
+      target="_blank"
+      class="whatsapp-button"
+      title="WhatsApp ile iletişime geç"
+    >
+      💬
+    </a>
+
+    <script>
+      // Loading Screen
+      window.addEventListener('load', () => {
+        const loader = document.getElementById('loader');
+        setTimeout(() => {
+          loader.classList.add('fade-out');
+          setTimeout(() => {
+            loader.style.display = 'none';
+          }, 500);
+        }, 1500); 
+      });
+
+      // Products Data
+      // Products Data
+      const products = [
+        {
+          id: 1,
+          name: "Romantik Animasyon",
+          style: "Disney Pixar style",
+          price: "₺450",
+          badge: "POPÜLER",
+          emoji: "🎨",
+          category: "romantic"
+        },
+        {
+          id: 2,
+          name: "Romantik Anime",
+          style: "Makoto Shinkai style",
+          price: "₺480",
+          badge: "",
+          emoji: "🌸",
+          category: "romantic"
+        },
+        {
+          id: 3,
+          name: "Ghibli İllüstrasyonu",
+          style: "Studio Ghibli",
+          price: "₺470",
+          badge: "YENİ",
+          emoji: "🍃",
+          category: "collection"
+        },
+        {
+          id: 4,
+          name: "En İyi Arkadaş",
+          style: "Best Friends Illustrated",
+          price: "₺520",
+          badge: "",
+          emoji: "👯‍♀️",
+          category: "friend"
+        },
+        {
+          id: 5,
+          name: "Sinematik Aşk",
+          style: "Arcane style",
+          price: "₺590",
+          badge: "POPÜLER",
+          emoji: "⚡",
+          category: "romantic"
+        },
+        {
+          id: 6,
+          name: "Ofis Şıklığı",
+          style: "Minimal Business",
+          price: "₺550",
+          badge: "",
+          emoji: "💼",
+          category: "business"
+        },
+        {
+          id: 7,
+          name: "Profesyonel Notlar",
+          style: "Professional Leather Look",
+          price: "₺580",
+          badge: "",
+          emoji: "�️",
+          category: "business"
+        },
+        {
+          id: 8,
+          name: "Minimalist Beyaz",
+          style: "Clean & Simple",
+          price: "₺440",
+          badge: "",
+          emoji: "⚪",
+          category: "collection"
+        },
+        {
+          id: 9,
+          name: "Sonsuz Dostluk",
+          style: "Friends Forever",
+          price: "₺490",
+          badge: "YENİ",
+          emoji: "🤝",
+          category: "friend"
+        },
+        {
+          id: 10,
+          name: "Suluboya Anılar",
+          style: "Watercolor Memories",
+          price: "₺460",
+          badge: "",
+          emoji: "🎨",
+          category: "friend"
+        },
+        {
+          id: 11,
+          name: "Girişimci Ruhu",
+          style: "Entrepreneur Style",
+          price: "₺470",
+          badge: "",
+          emoji: "�",
+          category: "business"
+        },
+        {
+          id: 12,
+          name: "Masalsı Aşk",
+          style: "Fairytale Romance",
+          price: "₺510",
+          badge: "POPÜLER",
+          emoji: "�",
+          category: "romantic"
+        },
+      ];
+
+      const views = ["📕", "📔", "📖", "📓"];
+      let currentProduct = null;
+
+
+
+      // Show Product Detail
+      function showProductDetail(product) {
+        currentProduct = product;
+        document.getElementById("detailTitle").textContent = product.name;
+        document.getElementById("detailPrice").textContent = product.price;
+        document.getElementById("mainImage").textContent = views[0];
+
+        // Update order button
+        const orderBtn = document.getElementById("orderButton");
+        orderBtn.href = `https://wa.me/905359287488?text=Merhaba! ${product.name} defteri hakkında bilgi almak istiyorum.`;
+
+        // Reset thumbnails
+        document.querySelectorAll(".thumbnail").forEach((thumb, idx) => {
+          thumb.classList.toggle("active", idx === 0);
+        });
+
+        // Switch pages
+        document.getElementById("homePage").classList.add("hidden");
+        document.getElementById("detailPage").classList.add("active");
+        window.scrollTo(0, 0);
+      }
+
+      // Show Home Page
+      function showHome() {
+        document.getElementById("homePage").classList.remove("hidden");
+        document.getElementById("detailPage").classList.remove("active");
+        window.scrollTo(0, 0);
+      }
+
+      // Change Product View
+      function changeView(index) {
+        document.getElementById("mainImage").textContent = views[index];
+        document.querySelectorAll(".thumbnail").forEach((thumb, idx) => {
+          thumb.classList.toggle("active", idx === index);
+        });
+      }
+
+      // Mobile Menu Toggle
+      document
+        .getElementById("menuToggle")
+        .addEventListener("click", function () {
+          this.classList.toggle("active");
+          document.getElementById("mainNav").classList.toggle("active");
+        });
+
+      // Close mobile menu when clicking on a link
+      document.querySelectorAll("nav a").forEach((link) => {
+        link.addEventListener("click", () => {
+          document.getElementById("menuToggle").classList.remove("active");
+          document.getElementById("mainNav").classList.remove("active");
+        });
+      });
+
+      // Scroll Animation Observer
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      // Observe product cards when they're added
+      setTimeout(() => {
+        document.querySelectorAll(".product-card").forEach((card) => {
+          observer.observe(card);
+        });
+      }, 100);
+
+      // Initialize on load
+      document.addEventListener("DOMContentLoaded", () => {
+         // Initialize Products Grid
+         const grid = document.getElementById("productsGrid");
+         products.forEach((product, index) => {
+           const card = document.createElement("div");
+           card.className = "product-card";
+           card.style.animationDelay = `${index * 0.1}s`;
+           card.onclick = () => showProductDetail(product);
+
+           card.innerHTML = `
+                     ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ""}
+                     <div class="product-image">${product.emoji}</div>
+                     <div class="product-info">
+                         <h3>${product.name}</h3>
+                         <p>${product.style}</p>
+                         <div class="product-price">${product.price}</div>
+                     </div>
+                 `;
+
+           grid.appendChild(card);
+           observer.observe(card);
+         });
+      });
+
+      // --- Custom Designer Logic ---
+      const canvas = document.getElementById('designCanvas');
+      const ctx = canvas.getContext('2d');
+      let uploadedImage = null;
+      let userText = "";
+      let bgColor = "#ffffff";
+
+      // Initialize Canvas
+      function initCanvas() {
+        if (!canvas) return;
+        ctx.fillStyle = bgColor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        if (uploadedImage) {
+            // Draw image maintaining aspect ratio cover
+            const ratio = Math.max(canvas.width / uploadedImage.width, canvas.height / uploadedImage.height);
+            const centerShift_x = (canvas.width - uploadedImage.width * ratio) / 2;
+            const centerShift_y = (canvas.height - uploadedImage.height * ratio) / 2;
+            ctx.drawImage(uploadedImage, 0, 0, uploadedImage.width, uploadedImage.height,
+                            centerShift_x, centerShift_y, uploadedImage.width * ratio, uploadedImage.height * ratio);
+        }
+
+        if (userText) {
+            ctx.fillStyle = bgColor === '#000000' || bgColor === '#1a1a1a' ? 'white' : 'black';
+            ctx.font = "bold 40px Inter";
+            ctx.textAlign = "center";
+            ctx.fillText(userText, canvas.width / 2, canvas.height / 2);
+        }
+      }
+
+      // Handle Image Upload
+      const imageUpload = document.getElementById('imageUpload');
+      if (imageUpload) {
+          imageUpload.addEventListener('change', function(e) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = new Image();
+                img.onload = function() {
+                    uploadedImage = img;
+                    initCanvas();
+                }
+                img.src = event.target.result;
+            }
+            reader.readAsDataURL(e.target.files[0]);
+          });
+      }
+
+      // Handle Text
+      function addText() {
+        const textInput = document.getElementById('textInput');
+        if (textInput) {
+            userText = textInput.value;
+            initCanvas();
+        }
+      }
+
+      // Handle Color
+      function setBgColor(color) {
+        bgColor = color;
+        initCanvas();
+      }
+
+      // Finish Design
+      function finishDesign() {
+          if (!canvas) return;
+          const dataUrl = canvas.toDataURL("image/png");
+          
+          const styleSelect = document.getElementById('notebookStyle');
+          const style = styleSelect ? styleSelect.value : 'Belirtilmedi';
+
+          const coverSelect = document.getElementById('coverDesign');
+          const selectedCover = coverSelect ? coverSelect.value : '';
+          const coverText = selectedCover ? `Seçilen Tasarım: ${selectedCover}` : 'Özel (Kendi Görselim)';
+
+          // Open WhatsApp with a pre-filled message
+          const text = `Merhaba! Kendi tasarımım olan bir defter sipariş etmek istiyorum. \n\nDetaylar:\n- Kapak: ${coverText}\n- Sayfa Düzeni: ${style}\n- Renk Kodu: ${bgColor}\n- Eklenen Metin: ${userText || 'Yok'}\n\n(Tasarım görselini bu sohbetten göndereceğim)`;
+          window.open(`https://wa.me/905359287488?text=${encodeURIComponent(text)}`, '_blank');
+          
+          // Download image
+          const link = document.createElement('a');
+          link.download = 'dot-note-tasarimim.png';
+          link.href = dataUrl;
+          link.click();
+      }
+
+      function openDesigner() {
+          document.getElementById('designerModal').style.display = 'block';
+          
+          // Populate product options if not already done
+          const coverSelect = document.getElementById('coverDesign');
+          if(coverSelect && coverSelect.options.length <= 1) { // Only default exists
+             products.forEach(p => {
+                 const opt = document.createElement('option');
+                 opt.value = p.name;
+                 opt.textContent = p.name;
+                 coverSelect.appendChild(opt);
+             });
+          }
+
+          // Re-init canvas just in case context size needs update or such
+          setTimeout(initCanvas, 100);
+          document.body.style.overflow = 'hidden'; // Prevent scrolling bg
+      }
+
+      function closeDesigner() {
+          document.getElementById('designerModal').style.display = 'none';
+          document.body.style.overflow = 'auto';
+      }
+
+      // Close modal on click outside
+      window.onclick = function(event) {
+          const modal = document.getElementById('designerModal');
+          if (event.target == modal) {
+              closeDesigner();
+          }
+      }
+
+      // Initial draw
+      setTimeout(initCanvas, 500);
+
+      // Header scroll effect
+      let lastScroll = 0;
+      window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        const header = document.querySelector('header');
+        
+        if (currentScroll > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+        
+        lastScroll = currentScroll;
+      });
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          const href = this.getAttribute("href");
+          if (href !== "#") {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+              target.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
