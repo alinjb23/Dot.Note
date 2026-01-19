@@ -317,46 +317,61 @@
       /* Stats Section */
       .stats {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: var(--spacing-md);
-        padding: var(--spacing-lg) var(--spacing-md);
-        max-width: 1400px;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        padding: 2rem var(--spacing-md);
+        max-width: 1200px;
         margin: 0 auto;
       }
 
       .stat-item {
-        padding: var(--spacing-lg) var(--spacing-md);
-        text-align: center;
-        background: var(--bg-primary);
-        border-radius: var(--radius-lg);
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+        padding: 1.5rem;
+        background: #ffffff;
+        border-radius: var(--radius-md);
         border: 1px solid var(--border-color);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: var(--shadow-sm);
+        transition: all 0.3s ease;
+        text-align: left;
       }
 
       .stat-item:hover {
-        transform: translateY(-8px);
-        box-shadow: var(--shadow-xl);
-        border-color: var(--accent-color);
-        background: linear-gradient(135deg, rgba(11, 27, 77, 0.05) 0%, rgba(26, 61, 143, 0.05) 100%);
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-md);
+        border-color: var(--accent-light);
+      }
+
+      .stat-icon {
+        width: 50px;
+        height: 50px;
+        background: var(--bg-secondary);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        flex-shrink: 0;
+      }
+
+      .stat-content {
+        display: flex;
+        flex-direction: column;
       }
 
       .stat-item h3 {
-        font-size: clamp(1.5rem, 3vw, 2rem);
-        margin-bottom: 0.5rem;
-        background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        font-size: 1rem;
+        font-weight: 800;
+        margin-bottom: 0;
+        letter-spacing: 0.5px;
+        color: var(--primary-color);
+        text-transform: uppercase;
       }
 
       .stat-item p {
-        font-size: 2rem;
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      .stat-item:hover p {
-        transform: scale(1.2);
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        margin: 0;
       }
 
       /* Products Grid */
@@ -729,6 +744,94 @@
       .color-option:hover {
         transform: scale(1.1);
         border-color: #000;
+      }
+
+      .color-option.active {
+        transform: scale(1.2);
+        box-shadow: 0 0 0 2px white, 0 0 0 4px #000;
+        z-index: 1;
+      }
+
+      /* Radio Cards */
+      .selection-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.8rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .selection-card {
+        border: 1px solid #E2E8F0;
+        border-radius: var(--radius-sm);
+        padding: 0.8rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        background: #F8FAFC;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+      }
+
+      .selection-card:hover {
+        border-color: #000;
+        background: #fff;
+      }
+
+      .selection-card.active {
+        background: #000;
+        color: #fff;
+        border-color: #000;
+        box-shadow: var(--shadow-md);
+      }
+
+      /* Fixed Info */
+      .fixed-info {
+        background: #F1F5F9;
+        padding: 0.8rem;
+        border-radius: var(--radius-sm);
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--primary-color);
+        border: 1px dashed #CBD5E1;
+        margin-bottom: 1rem;
+      }
+
+      /* Summary Box */
+      .order-summary-box {
+        margin-top: 1.5rem;
+        padding: 1.2rem;
+        background: #F8FAFC;
+        border: 1px solid #E2E8F0;
+        border-radius: var(--radius-sm);
+        text-align: left;
+      }
+
+      .summary-title {
+        font-size: 0.75rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 0.8rem;
+        color: #64748B;
+        border-bottom: 1px solid #E2E8F0;
+        padding-bottom: 0.4rem;
+      }
+
+      .summary-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.4rem;
+        font-size: 0.85rem;
+      }
+
+      .summary-label {
+        color: #64748B;
+      }
+
+      .summary-value {
+        font-weight: 600;
+        color: var(--primary-color);
       }
 
       .designer-note {
@@ -1263,16 +1366,25 @@
       <!-- Stats Section -->
       <section class="stats">
         <div class="stat-item">
-          <h3>100% EL YAPIMI</h3>
-          <p>✨</p>
+          <div class="stat-icon">✨</div>
+          <div class="stat-content">
+            <h3>100% EL YAPIMI</h3>
+            <p>Özenle Hazırlanır</p>
+          </div>
         </div>
         <div class="stat-item">
-          <h3>2 HAFTADAN KISA SÜREDE</h3>
-          <p>📦</p>
+          <div class="stat-icon">📦</div>
+          <div class="stat-content">
+            <h3>HIZLI TESLİMAT</h3>
+            <p>2 Haftada Kapınızda</p>
+          </div>
         </div>
         <div class="stat-item">
-          <h3>10+ FARKLI TASARIM</h3>
-          <p>💎</p>
+          <div class="stat-icon">💎</div>
+          <div class="stat-content">
+            <h3>ÖZEL TASARIM</h3>
+            <p>Size Özel 10+ Seçenek</p>
+          </div>
         </div>
       </section>
 
@@ -1343,48 +1455,85 @@
             
               <div class="tool-group">
                 <label>Sayfa Düzeni</label>
-                <select id="notebookStyle" class="text-input">
-                  <option value="Cizgili">Çizgili</option>
-                  <option value="Kareli">Kareli</option>
-                  <option value="Noktali">Noktalı</option>
-                  <option value="Duz">Düz</option>
-                </select>
+                <div class="selection-grid" id="layoutSelector">
+                  <div class="selection-card active" data-value="Cizgili">Çizgili</div>
+                  <div class="selection-card" data-value="Noktali">Noktalı</div>
+                  <div class="selection-card" data-value="Bos">Boş</div>
+                </div>
               </div>
 
               <div class="tool-group">
-                <label>Kapak Tasarımı (Opsiyonel)</label>
-                <select id="coverDesign" class="text-input">
-                  <option value="">Kendi Görselimi Yükleyeceğim</option>
-                </select>
+                <label>Notebook Size</label>
+                <div class="fixed-info">Notebook Size: A5 (Standard)</div>
               </div>
 
               <div class="tool-group">
-                <label>Veya Fotoğraf Yükle</label>
+                <label>Sayfa Sayısı / Kalınlık</label>
+                <div class="selection-grid" id="pageCountSelector">
+                  <div class="selection-card active" data-value="80 Sayfa">80 Sayfa</div>
+                  <div class="selection-card" data-value="100 Sayfa">100 Sayfa</div>
+                  <div class="selection-card" data-value="120 Sayfa">120 Sayfa</div>
+                </div>
+              </div>
+
+              <div class="tool-group">
+                <label>Kapak Görseli Yükle (Opsiyonel)</label>
                 <input type="file" id="imageUpload" accept="image/*" class="file-input">
                 <label for="imageUpload" class="upload-btn">
                   <span>📷</span> Fotoğraf Yükle
                 </label>
+                <div id="imagePreviewContainer" style="margin-top: 10px; display: none;">
+                  <img id="imagePreview" src="" style="max-width: 100%; border-radius: 8px; border: 1px solid #ddd;">
+                </div>
               </div>
 
               <div class="tool-group">
-                <label>Metin Ekle</label>
-                <input type="text" id="textInput" placeholder="İsim veya Söz Yazın" class="text-input">
-                <button class="tool-btn" onclick="addText()">Metni Ekle</button>
+                <label>Metin Ekle (Opsiyonel)</label>
+                <input type="text" id="textInput" placeholder="İsim veya kısa bir söz yazın" class="text-input" oninput="updateTextFromInput()">
               </div>
 
               <div class="tool-group">
                 <label>Kapak Rengi</label>
-                <div class="color-picker">
-                  <div class="color-option" style="background: #ffffff" onclick="setBgColor('#ffffff')"></div>
-                  <div class="color-option" style="background: #000000" onclick="setBgColor('#000000')"></div>
-                  <div class="color-option" style="background: #1a1a1a" onclick="setBgColor('#1a1a1a')"></div>
-                  <div class="color-option" style="background: #f4f1ea" onclick="setBgColor('#f4f1ea')"></div>
-                  <div class="color-option" style="background: #e2e8f0" onclick="setBgColor('#e2e8f0')"></div>
-                  <div class="color-option" style="background: #ffb7b2" onclick="setBgColor('#ffb7b2')"></div>
+                <div class="color-picker" id="colorPicker">
+                  <div class="color-option active" style="background: #ffffff" data-color="#ffffff"></div>
+                  <div class="color-option" style="background: #000000" data-color="#000000"></div>
+                  <div class="color-option" style="background: #1a1a1a" data-color="#1a1a1a"></div>
+                  <div class="color-option" style="background: #f4f1ea" data-color="#f4f1ea"></div>
+                  <div class="color-option" style="background: #e2e8f0" data-color="#e2e8f0"></div>
+                  <div class="color-option" style="background: #ffb7b2" data-color="#ffb7b2"></div>
                 </div>
               </div>
 
-               <button class="order-button" onclick="finishDesign()">TASARIMI TAMAMLA</button>
+              <!-- Live Summary Section -->
+              <div class="order-summary-box">
+                <div class="summary-title">Sipariş Özeti</div>
+                <div class="summary-row">
+                  <span class="summary-label">Notebook Size:</span>
+                  <span class="summary-value">A5</span>
+                </div>
+                <div class="summary-row">
+                  <span class="summary-label">Sayfa Düzeni:</span>
+                  <span class="summary-value" id="summaryLayout">Çizgili</span>
+                </div>
+                <div class="summary-row">
+                  <span class="summary-label">Sayfa Sayısı:</span>
+                  <span class="summary-value" id="summaryPages">80 Sayfa</span>
+                </div>
+                <div class="summary-row">
+                  <span class="summary-label">Kapak Rengi:</span>
+                  <span class="summary-value" id="summaryColor">Beyaz</span>
+                </div>
+                <div class="summary-row">
+                  <span class="summary-label">Kapak Görseli:</span>
+                  <span class="summary-value" id="summaryImage">Yüklenmedi</span>
+                </div>
+                <div class="summary-row">
+                  <span class="summary-label">Kapak Metni:</span>
+                  <span class="summary-value" id="summaryText">-</span>
+                </div>
+              </div>
+
+               <button class="order-button" style="margin-top: 1.5rem;" onclick="finishDesign()">TASARIMI TAMAMLA & WHATSAPP’TAN SİPARİŞ VER</button>
                <p class="designer-note">* Tasarımınız WhatsApp üzerinden bize iletilecektir.</p>
             </div>
           </div>
@@ -1756,6 +1905,76 @@
       let uploadedImage = null;
       let userText = "";
       let bgColor = "#ffffff";
+      let selectedLayout = "Cizgili";
+      let selectedPageCount = "80 Sayfa";
+
+      // Initialize Selection Logic
+      function initDesignerSelectors() {
+        // Layout Selector
+        const layoutSelector = document.getElementById('layoutSelector');
+        if (layoutSelector) {
+          layoutSelector.querySelectorAll('.selection-card').forEach(card => {
+            card.addEventListener('click', () => {
+              layoutSelector.querySelectorAll('.selection-card').forEach(c => c.classList.remove('active'));
+              card.classList.add('active');
+              selectedLayout = card.dataset.value;
+              updateSummary();
+            });
+          });
+        }
+
+        // Page Count Selector
+        const pageCountSelector = document.getElementById('pageCountSelector');
+        if (pageCountSelector) {
+          pageCountSelector.querySelectorAll('.selection-card').forEach(card => {
+            card.addEventListener('click', () => {
+              pageCountSelector.querySelectorAll('.selection-card').forEach(c => c.classList.remove('active'));
+              card.classList.add('active');
+              selectedPageCount = card.dataset.value;
+              updateSummary();
+            });
+          });
+        }
+
+        // Color Picker
+        const colorPicker = document.getElementById('colorPicker');
+        if (colorPicker) {
+          colorPicker.querySelectorAll('.color-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+              colorPicker.querySelectorAll('.color-option').forEach(o => o.classList.remove('active'));
+              opt.classList.add('active');
+              bgColor = opt.dataset.color;
+              initCanvas();
+              updateSummary();
+            });
+          });
+        }
+      }
+
+      function updateTextFromInput() {
+        const textInput = document.getElementById('textInput');
+        userText = textInput.value;
+        initCanvas();
+        updateSummary();
+      }
+
+      function updateSummary() {
+        document.getElementById('summaryLayout').textContent = selectedLayout;
+        document.getElementById('summaryPages').textContent = selectedPageCount;
+        document.getElementById('summaryText').textContent = userText || "-";
+        
+        // Color Translate
+        const colorMap = {
+          "#ffffff": "Beyaz",
+          "#000000": "Siyah",
+          "#1a1a1a": "Antrasit",
+          "#f4f1ea": "Krem",
+          "#e2e8f0": "Gri",
+          "#ffb7b2": "Pembe"
+        };
+        document.getElementById('summaryColor').textContent = colorMap[bgColor] || bgColor;
+        document.getElementById('summaryImage').textContent = uploadedImage ? "Yüklendi" : "Yüklenmedi";
+      }
 
       // Initialize Canvas
       function initCanvas() {
@@ -1764,7 +1983,6 @@
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
         if (uploadedImage) {
-            // Draw image maintaining aspect ratio cover
             const ratio = Math.max(canvas.width / uploadedImage.width, canvas.height / uploadedImage.height);
             const centerShift_x = (canvas.width - uploadedImage.width * ratio) / 2;
             const centerShift_y = (canvas.height - uploadedImage.height * ratio) / 2;
@@ -1784,78 +2002,73 @@
       const imageUpload = document.getElementById('imageUpload');
       if (imageUpload) {
           imageUpload.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
             const reader = new FileReader();
             reader.onload = function(event) {
                 const img = new Image();
                 img.onload = function() {
                     uploadedImage = img;
+                    document.getElementById('imagePreview').src = event.target.result;
+                    document.getElementById('imagePreviewContainer').style.display = 'block';
                     initCanvas();
+                    updateSummary();
                 }
                 img.src = event.target.result;
             }
-            reader.readAsDataURL(e.target.files[0]);
+            reader.readAsDataURL(file);
           });
       }
 
-      // Handle Text
-      function addText() {
-        const textInput = document.getElementById('textInput');
-        if (textInput) {
-            userText = textInput.value;
-            initCanvas();
-        }
-      }
-
-      // Handle Color
-      function setBgColor(color) {
-        bgColor = color;
-        initCanvas();
-      }
-
-      // Finish Design
+      // Updated Finish Design with Direct Share Focus
       async function finishDesign() {
           if (!canvas) return;
-          const dataUrl = canvas.toDataURL("image/png");
           
-          const styleSelect = document.getElementById('notebookStyle');
-          const style = styleSelect ? styleSelect.value : 'Belirtilmedi';
+          const messageText = `*YENİ DEFTER SİPARİŞİ (ÖZEL TASARIM)*\n\n` +
+                              `• Boyut: A5 (Standard)\n` +
+                              `• Sayfa Düzeni: ${selectedLayout}\n` +
+                              `• Sayfa Sayısı: ${selectedPageCount}\n` +
+                              `• Kapak Rengi: ${document.getElementById('summaryColor').textContent}\n` +
+                              `• Kapak Metni: ${userText || 'Yok'}\n` +
+                              `• Kapak Görseli: ${uploadedImage ? 'Yüklendi' : 'Yüklenmedi'}\n\n` +
+                              `Lütfen bu mesajı ve ekindeki görseli bize ileterek siparişinizi tamamlayın.`;
 
-          const coverSelect = document.getElementById('coverDesign');
-          const selectedCover = coverSelect ? coverSelect.value : '';
-          const coverText = selectedCover ? `Seçilen Tasarım: ${selectedCover}` : 'Özel (Kendi Görselim)';
+          const dataUrl = canvas.toDataURL("image/png");
 
-          const messageText = `Merhaba! Kendi tasarımım olan bir defter sipariş etmek istiyorum. \n\nDetaylar:\n- Kapak: ${coverText}\n- Sayfa Düzeni: ${style}\n- Arka Plan Rengi: ${bgColor}\n- Eklenen Metin: ${userText || 'Yok'}\n\n(Tasarım görselini şimdi size iletiyorum.)`;
+          // Always try to use Web Share API for mobile first
+          if (navigator.share && navigator.canShare) {
+              try {
+                  const blob = await (await fetch(dataUrl)).blob();
+                  const file = new File([blob], 'defter-tasarimim.png', { type: 'image/png' });
+                  
+                  if (navigator.canShare({ files: [file] })) {
+                      await navigator.share({
+                          files: [file],
+                          title: 'Dot Note Defter Siparişim',
+                          text: messageText
+                      });
+                      return;
+                  }
+              } catch (e) { 
+                  console.warn("Navigator share failed, using fallback", e);
+              }
+          }
 
-          // Download image immediately
+          // FALLBACK Logic: Download + WhatsApp Link
           const link = document.createElement('a');
           link.download = 'dot-note-tasarimim.png';
           link.href = dataUrl;
           link.click();
           
-          // Enhanced sharing for mobile
-          if (navigator.share && navigator.canShare) {
-              try {
-                  const blob = await (await fetch(dataUrl)).blob();
-                  const file = new File([blob], 'dot-note-tasarim.png', { type: 'image/png' });
-                  
-                  if (navigator.canShare({ files: [file] })) {
-                      await navigator.share({
-                          files: [file],
-                          title: 'Dot Note Tasarımım',
-                          text: messageText
-                      });
-                      return;
-                  }
-              } catch (e) { console.error("Share failed", e); }
-          }
-
-          // Fallback with instruction
-          alert("Tasarımınız cihazınıza indirildi! Lütfen açılan WhatsApp sohbetine bu görseli ekleyerek bize gönderin.");
+          alert("Tasarımınız cihazınıza indirildi! Şimdi açılacak olan WhatsApp ekranına bu görseli ekleyerek bize gönderin.");
           window.open(`https://wa.me/905359287488?text=${encodeURIComponent(messageText)}`, '_blank');
       }
 
       function openDesigner() {
           document.getElementById('designerModal').style.display = 'block';
+          initDesignerSelectors();
+          updateSummary();
           
           // Populate product options if not already done
           const coverSelect = document.getElementById('coverDesign');
