@@ -1496,16 +1496,20 @@
     </a>
 
     <script>
-      // Loading Screen
-      window.addEventListener('load', () => {
+      // Loading Screen Management
+      function hideLoader() {
         const loader = document.getElementById('loader');
-        setTimeout(() => {
+        if (loader && !loader.classList.contains('fade-out')) {
           loader.classList.add('fade-out');
           setTimeout(() => {
             loader.style.display = 'none';
           }, 500);
-        }, 1500); 
-      });
+        }
+      }
+
+      // Hide loader after load or 5s max
+      window.addEventListener('load', hideLoader);
+      setTimeout(hideLoader, 5000); 
 
       // Products Data
       // Products Data
@@ -1570,7 +1574,7 @@
           style: "Professional Leather Look",
           price: "₺580",
           badge: "",
-          emoji: "�️",
+          emoji: "📓",
           category: "business"
         },
         {
@@ -1606,7 +1610,7 @@
           style: "Entrepreneur Style",
           price: "₺470",
           badge: "",
-          emoji: "�",
+          emoji: "🚀",
           category: "business"
         },
         {
@@ -1615,7 +1619,7 @@
           style: "Fairytale Romance",
           price: "₺510",
           badge: "POPÜLER",
-          emoji: "�",
+          emoji: "🧚",
           category: "romantic"
         },
       ];
@@ -1849,8 +1853,6 @@
           alert("Tasarımınız cihazınıza indirildi! Lütfen açılan WhatsApp sohbetine bu görseli ekleyerek bize gönderin.");
           window.open(`https://wa.me/905359287488?text=${encodeURIComponent(messageText)}`, '_blank');
       }
-      }
-
 
       function openDesigner() {
           document.getElementById('designerModal').style.display = 'block';
