@@ -834,6 +834,50 @@
         color: var(--primary-color);
       }
 
+      /* Style Selection */
+      .style-category {
+        margin-bottom: 1.5rem;
+      }
+
+      .category-label {
+        font-size: 0.75rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #94A3B8;
+        margin-bottom: 0.5rem;
+        display: block;
+      }
+
+      .style-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+      }
+
+      .style-card {
+        border: 1px solid #E2E8F0;
+        border-radius: var(--radius-sm);
+        padding: 0.6rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        background: #fff;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+      }
+
+      .style-card:hover {
+        border-color: #000;
+      }
+
+      .style-card.active {
+        background: #000;
+        color: #fff;
+        border-color: #000;
+      }
+
       .designer-note {
         font-size: 0.8rem;
         color: var(--text-secondary);
@@ -1440,17 +1484,10 @@
           <span class="close-modal" onclick="closeDesigner()">&times;</span>
           <h2 class="modal-title">KENDİN TASARLA</h2>
           
-          <div class="designer-container-modal">
-            <!-- Canvas Area -->
-            <div class="designer-preview">
-              <div class="canvas-wrapper">
-                <canvas id="designCanvas" width="400" height="560"></canvas>
-                <div class="notebook-overlay"></div>
-              </div>
-            </div>
+          <div class="designer-container-modal" style="display: block; max-width: 600px; margin: 0 auto; padding: 1rem;">
           
             <!-- Tools Area -->
-            <div class="designer-tools">
+            <div class="designer-tools" style="padding: 0;">
               <h3>Dizayn Araçları</h3>
             
               <div class="tool-group">
@@ -1463,12 +1500,7 @@
               </div>
 
               <div class="tool-group">
-                <label>Notebook Size</label>
-                <div class="fixed-info">Notebook Size: A5 (Standard)</div>
-              </div>
-
-              <div class="tool-group">
-                <label>Sayfa Sayısı / Kalınlık</label>
+                <label>Sayfa Sayısı</label>
                 <div class="selection-grid" id="pageCountSelector">
                   <div class="selection-card active" data-value="80 Sayfa">80 Sayfa</div>
                   <div class="selection-card" data-value="100 Sayfa">100 Sayfa</div>
@@ -1477,19 +1509,44 @@
               </div>
 
               <div class="tool-group">
-                <label>Kapak Görseli Yükle (Opsiyonel)</label>
-                <input type="file" id="imageUpload" accept="image/*" class="file-input">
-                <label for="imageUpload" class="upload-btn">
-                  <span>📷</span> Fotoğraf Yükle
-                </label>
-                <div id="imagePreviewContainer" style="margin-top: 10px; display: none;">
-                  <img id="imagePreview" src="" style="max-width: 100%; border-radius: 8px; border: 1px solid #ddd;">
+                <label>Kapak Tasarım Stili</label>
+                
+                <div class="style-category">
+                  <span class="category-label">🌹 ROMANTİK / ÇİFT</span>
+                  <div class="style-grid" id="romanticStyles">
+                    <div class="style-card active" data-value="Disney Pixar (Romantik)">Disney Pixar</div>
+                    <div class="style-card" data-value="Anime (Makoto Shinkai)">Romantic Anime</div>
+                    <div class="style-card" data-value="Studio Ghibli">Studio Ghibli</div>
+                    <div class="style-card" data-value="Yarı-Gerçekçi">Semi-realistic</div>
+                  </div>
                 </div>
-              </div>
 
-              <div class="tool-group">
-                <label>Metin Ekle (Opsiyonel)</label>
-                <input type="text" id="textInput" placeholder="İsim veya kısa bir söz yazın" class="text-input" oninput="updateTextFromInput()">
+                <div class="style-category">
+                  <span class="category-label">🎬 SİNEMATİK & DRAMATİK</span>
+                  <div class="style-grid" id="cinematicStyles">
+                    <div class="style-card" data-value="Arcane Stili">Arcane Style</div>
+                    <div class="style-card" data-value="DreamWorks">DreamWorks</div>
+                    <div class="style-card" data-value="Sinematik Konsept Sanatı">Painterly Art</div>
+                  </div>
+                </div>
+
+                <div class="style-category">
+                  <span class="category-label">✨ MODERN & ZARİF</span>
+                  <div class="style-grid" id="modernStyles">
+                    <div class="style-card" data-value="Minimalist İllüstrasyon">Minimalist</div>
+                    <div class="style-card" data-value="Yüksek Kalite Editoryal">High-end Editorial</div>
+                    <div class="style-card" data-value="Sulu Boya">Soft Watercolor</div>
+                  </div>
+                </div>
+
+                <div class="style-category">
+                  <span class="category-label">🌌 FANTASTİK / MASALSI</span>
+                  <div class="style-grid" id="fantasyStyles">
+                    <div class="style-card" data-value="Masalsı İllüstrasyon">Fairytale Illustration</div>
+                    <div class="style-card" data-value="Ethereal Fantasy">Ethereal Fantasy</div>
+                    <div class="style-card" data-value="Modern Hikaye Kitabı">Storybook Style</div>
+                  </div>
+                </div>
               </div>
 
               <div class="tool-group">
@@ -1504,12 +1561,17 @@
                 </div>
               </div>
 
+              <div class="tool-group">
+                <label>Metin Ekle (Opsiyonel)</label>
+                <input type="text" id="textInput" placeholder="İsim veya kısa bir söz yazın" class="text-input" oninput="updateTextFromInput()">
+              </div>
+
               <!-- Live Summary Section -->
               <div class="order-summary-box">
                 <div class="summary-title">Sipariş Özeti</div>
                 <div class="summary-row">
-                  <span class="summary-label">Notebook Size:</span>
-                  <span class="summary-value">A5</span>
+                  <span class="summary-label">Boyut:</span>
+                  <span class="summary-value">A5 (Standard)</span>
                 </div>
                 <div class="summary-row">
                   <span class="summary-label">Sayfa Düzeni:</span>
@@ -1520,12 +1582,12 @@
                   <span class="summary-value" id="summaryPages">80 Sayfa</span>
                 </div>
                 <div class="summary-row">
-                  <span class="summary-label">Kapak Rengi:</span>
-                  <span class="summary-value" id="summaryColor">Beyaz</span>
+                  <span class="summary-label">Tasarım Stili:</span>
+                  <span class="summary-value" id="summaryStyle">Disney Pixar (Romantik)</span>
                 </div>
                 <div class="summary-row">
-                  <span class="summary-label">Kapak Görseli:</span>
-                  <span class="summary-value" id="summaryImage">Yüklenmedi</span>
+                  <span class="summary-label">Kapak Rengi:</span>
+                  <span class="summary-value" id="summaryColor">Beyaz</span>
                 </div>
                 <div class="summary-row">
                   <span class="summary-label">Kapak Metni:</span>
@@ -1533,8 +1595,8 @@
                 </div>
               </div>
 
-               <button class="order-button" style="margin-top: 1.5rem;" onclick="finishDesign()">TASARIMI TAMAMLA & WHATSAPP’TAN SİPARİŞ VER</button>
-               <p class="designer-note">* Tasarımınız WhatsApp üzerinden bize iletilecektir.</p>
+               <button class="order-button" style="margin-top: 1.5rem;" onclick="finishDesign()">TASARIMI TAMAMLA & SİPARİŞ VER</button>
+               <p class="designer-note">* Siparişiniz doğrudan WhatsApp üzerinden telefonumuza iletilecektir.</p>
             </div>
           </div>
         </div>
@@ -1900,13 +1962,11 @@
       });
 
       // --- Custom Designer Logic ---
-      const canvas = document.getElementById('designCanvas');
-      const ctx = canvas.getContext('2d');
-      let uploadedImage = null;
       let userText = "";
       let bgColor = "#ffffff";
       let selectedLayout = "Cizgili";
       let selectedPageCount = "80 Sayfa";
+      let selectedStyle = "Disney Pixar (Romantik)";
 
       // Initialize Selection Logic
       function initDesignerSelectors() {
@@ -1936,6 +1996,16 @@
           });
         }
 
+        // Style Selector (Across all categories)
+        document.querySelectorAll('.style-card').forEach(card => {
+          card.addEventListener('click', () => {
+            document.querySelectorAll('.style-card').forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+            selectedStyle = card.dataset.value;
+            updateSummary();
+          });
+        });
+
         // Color Picker
         const colorPicker = document.getElementById('colorPicker');
         if (colorPicker) {
@@ -1944,7 +2014,6 @@
               colorPicker.querySelectorAll('.color-option').forEach(o => o.classList.remove('active'));
               opt.classList.add('active');
               bgColor = opt.dataset.color;
-              initCanvas();
               updateSummary();
             });
           });
@@ -1954,14 +2023,14 @@
       function updateTextFromInput() {
         const textInput = document.getElementById('textInput');
         userText = textInput.value;
-        initCanvas();
         updateSummary();
       }
 
       function updateSummary() {
-        document.getElementById('summaryLayout').textContent = selectedLayout;
-        document.getElementById('summaryPages').textContent = selectedPageCount;
-        document.getElementById('summaryText').textContent = userText || "-";
+        if (document.getElementById('summaryLayout')) document.getElementById('summaryLayout').textContent = selectedLayout;
+        if (document.getElementById('summaryPages')) document.getElementById('summaryPages').textContent = selectedPageCount;
+        if (document.getElementById('summaryStyle')) document.getElementById('summaryStyle').textContent = selectedStyle;
+        if (document.getElementById('summaryText')) document.getElementById('summaryText').textContent = userText || "-";
         
         // Color Translate
         const colorMap = {
@@ -1972,135 +2041,32 @@
           "#e2e8f0": "Gri",
           "#ffb7b2": "Pembe"
         };
-        document.getElementById('summaryColor').textContent = colorMap[bgColor] || bgColor;
-        document.getElementById('summaryImage').textContent = uploadedImage ? "Yüklendi" : "Yüklenmedi";
-      }
-
-      // Initialize Canvas
-      function initCanvas() {
-        if (!canvas) return;
-        ctx.fillStyle = bgColor;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        if (uploadedImage) {
-            const ratio = Math.max(canvas.width / uploadedImage.width, canvas.height / uploadedImage.height);
-            const centerShift_x = (canvas.width - uploadedImage.width * ratio) / 2;
-            const centerShift_y = (canvas.height - uploadedImage.height * ratio) / 2;
-            ctx.drawImage(uploadedImage, 0, 0, uploadedImage.width, uploadedImage.height,
-                            centerShift_x, centerShift_y, uploadedImage.width * ratio, uploadedImage.height * ratio);
-        }
-
-        if (userText) {
-            ctx.fillStyle = bgColor === '#000000' || bgColor === '#1a1a1a' ? 'white' : 'black';
-            ctx.font = "bold 40px Inter";
-            ctx.textAlign = "center";
-            ctx.fillText(userText, canvas.width / 2, canvas.height / 2);
+        if (document.getElementById('summaryColor')) {
+          document.getElementById('summaryColor').textContent = colorMap[bgColor] || bgColor;
         }
       }
 
-      // Handle Image Upload
-      const imageUpload = document.getElementById('imageUpload');
-      if (imageUpload) {
-          imageUpload.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                const img = new Image();
-                img.onload = function() {
-                    uploadedImage = img;
-                    document.getElementById('imagePreview').src = event.target.result;
-                    document.getElementById('imagePreviewContainer').style.display = 'block';
-                    initCanvas();
-                    updateSummary();
-                }
-                img.src = event.target.result;
-            }
-            reader.readAsDataURL(file);
-          });
-      }
-
-      // Convert DataURL to File (Synchronous to preserve user gesture)
-      function dataURLtoFile(dataurl, filename) {
-        var arr = dataurl.split(','), 
-            mime = arr[0].match(/:(.*?);/)[1],
-            bstr = atob(arr[1]), 
-            n = bstr.length, 
-            u8arr = new Uint8Array(n);
-        while(n--){
-            u8arr[n] = bstr.charCodeAt(n);
-        }
-        return new File([u8arr], filename, {type:mime});
-      }
-
-      // Updated Finish Design with Direct Share Focus
-      async function finishDesign() {
-          if (!canvas) return;
-          
+      // Updated Finish Design - DIRECT WhatsApp Link
+      function finishDesign() {
+          const colorName = document.getElementById('summaryColor').textContent;
           const messageText = `*YENİ DEFTER SİPARİŞİ (ÖZEL TASARIM)*\n\n` +
                               `• Boyut: A5 (Standard)\n` +
                               `• Sayfa Düzeni: ${selectedLayout}\n` +
                               `• Sayfa Sayısı: ${selectedPageCount}\n` +
-                              `• Kapak Rengi: ${document.getElementById('summaryColor').textContent}\n` +
-                              `• Kapak Metni: ${userText || 'Yok'}\n` +
-                              `• Kapak Görseli: ${uploadedImage ? 'Yüklendi' : 'Yüklenmedi'}\n\n` +
-                              `Lütfen bu mesajı ve ekindeki görseli bize ileterek siparişinizi tamamlayın.`;
+                              `• Tasarım Stili: ${selectedStyle}\n` +
+                              `• Kapak Rengi: ${colorName}\n` +
+                              `• Kapak Metni: ${userText || 'Yok'}\n\n` +
+                              `Merhaba! Yukarıdaki detaylara sahip özel tasarım defterimi sipariş etmek istiyorum.`;
 
-          const dataUrl = canvas.toDataURL("image/png");
-          const file = dataURLtoFile(dataUrl, 'defter-tasarimim.png');
-
-          // Modern Sharing (Mobile) - MUST BE SYNCHRONOUS WITH CLICK
-          if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
-              try {
-                  await navigator.share({
-                      files: [file],
-                      title: 'Dot Note Defter Siparişim',
-                      text: messageText
-                  });
-                  return; // Successfully opened share sheet
-              } catch (e) {
-                  console.warn("Share failed or cancelled", e);
-                  // If it's not a cancel, try fallback
-                  if (e.name !== 'AbortError') {
-                      fallbackOrder(messageText, dataUrl);
-                  }
-              }
-          } else {
-              fallbackOrder(messageText, dataUrl);
-          }
-      }
-
-      function fallbackOrder(messageText, dataUrl) {
-          // Download for Desktop/Unsupported
-          const link = document.createElement('a');
-          link.download = 'dot-note-tasarimim.png';
-          link.href = dataUrl;
-          link.click();
-          
-          alert("Tasarımınız cihazınıza indirildi! Şimdi açılacak olan WhatsApp ekranına bu görseli ekleyerek bize (+90 535 928 74 88) gönderin.");
-          window.open(`https://wa.me/905359287488?text=${encodeURIComponent(messageText)}`, '_blank');
+          const waUrl = `https://wa.me/905359287488?text=${encodeURIComponent(messageText)}`;
+          window.open(waUrl, '_blank');
       }
 
       function openDesigner() {
           document.getElementById('designerModal').style.display = 'block';
           initDesignerSelectors();
           updateSummary();
-          
-          // Populate product options if not already done
-          const coverSelect = document.getElementById('coverDesign');
-          if(coverSelect && coverSelect.options.length <= 1) { // Only default exists
-             products.forEach(p => {
-                 const opt = document.createElement('option');
-                 opt.value = p.name;
-                 opt.textContent = p.name;
-                 coverSelect.appendChild(opt);
-             });
-          }
-
-          // Re-init canvas just in case context size needs update or such
-          setTimeout(initCanvas, 100);
-          document.body.style.overflow = 'hidden'; // Prevent scrolling bg
+          document.body.style.overflow = 'hidden'; 
       }
 
       function closeDesigner() {
@@ -2115,9 +2081,6 @@
               closeDesigner();
           }
       }
-
-      // Initial draw
-      setTimeout(initCanvas, 500);
 
       // Header scroll effect
       let lastScroll = 0;
