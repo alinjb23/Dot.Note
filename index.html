@@ -1849,26 +1849,8 @@
           alert("Tasarımınız cihazınıza indirildi! Lütfen açılan WhatsApp sohbetine bu görseli ekleyerek bize gönderin.");
           window.open(`https://wa.me/905359287488?text=${encodeURIComponent(messageText)}`, '_blank');
       }
-          if (!canvas) return;
-          const dataUrl = canvas.toDataURL("image/png");
-          
-          const styleSelect = document.getElementById('notebookStyle');
-          const style = styleSelect ? styleSelect.value : 'Belirtilmedi';
-
-          const coverSelect = document.getElementById('coverDesign');
-          const selectedCover = coverSelect ? coverSelect.value : '';
-          const coverText = selectedCover ? `Seçilen Tasarım: ${selectedCover}` : 'Özel (Kendi Görselim)';
-
-          // Open WhatsApp with a pre-filled message
-          const text = `Merhaba! Kendi tasarımım olan bir defter sipariş etmek istiyorum. \n\nDetaylar:\n- Kapak: ${coverText}\n- Sayfa Düzeni: ${style}\n- Renk Kodu: ${bgColor}\n- Eklenen Metin: ${userText || 'Yok'}\n\n(Tasarım görselini bu sohbetten göndereceğim)`;
-          window.open(`https://wa.me/905359287488?text=${encodeURIComponent(text)}`, '_blank');
-          
-          // Download image
-          const link = document.createElement('a');
-          link.download = 'dot-note-tasarimim.png';
-          link.href = dataUrl;
-          link.click();
       }
+
 
       function openDesigner() {
           document.getElementById('designerModal').style.display = 'block';
