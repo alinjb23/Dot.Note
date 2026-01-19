@@ -2021,6 +2021,19 @@
           });
       }
 
+      // Convert DataURL to File (Synchronous to preserve user gesture)
+      function dataURLtoFile(dataurl, filename) {
+        var arr = dataurl.split(','), 
+            mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), 
+            n = bstr.length, 
+            u8arr = new Uint8Array(n);
+        while(n--){
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new File([u8arr], filename, {type:mime});
+      }
+
       // Updated Finish Design with Direct Share Focus
       async function finishDesign() {
           if (!canvas) return;
@@ -2034,39 +2047,38 @@
                               `• Kapak Görseli: ${uploadedImage ? 'Yüklendi' : 'Yüklenmedi'}\n\n` +
                               `Lütfen bu mesajı ve ekindeki görseli bize ileterek siparişinizi tamamlayın.`;
 
-          // Modern Sharing (Mobile)
-          if (navigator.share && navigator.canShare) {
-              canvas.toBlob(async (blob) => {
-                  const file = new File([blob], 'defter-tasarimim.png', { type: 'image/png' });
-                  if (navigator.canShare({ files: [file] })) {
-                      try {
-                          await navigator.share({
-                              files: [file],
-                              title: 'Dot Note Defter Siparişim',
-                              text: messageText
-                          });
-                          return;
-                      } catch (e) {
-                          console.warn("Share failed", e);
-                          fallbackOrder(messageText);
-                      }
-                  } else {
-                      fallbackOrder(messageText);
+          const dataUrl = canvas.toDataURL("image/png");
+          const file = dataURLtoFile(dataUrl, 'defter-tasarimim.png');
+
+          // Modern Sharing (Mobile) - MUST BE SYNCHRONOUS WITH CLICK
+          if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+              try {
+                  await navigator.share({
+                      files: [file],
+                      title: 'Dot Note Defter Siparişim',
+                      text: messageText
+                  });
+                  return; // Successfully opened share sheet
+              } catch (e) {
+                  console.warn("Share failed or cancelled", e);
+                  // If it's not a cancel, try fallback
+                  if (e.name !== 'AbortError') {
+                      fallbackOrder(messageText, dataUrl);
                   }
-              }, 'image/png');
+              }
           } else {
-              fallbackOrder(messageText);
+              fallbackOrder(messageText, dataUrl);
           }
       }
 
-      function fallbackOrder(messageText) {
-          const dataUrl = canvas.toDataURL("image/png");
+      function fallbackOrder(messageText, dataUrl) {
+          // Download for Desktop/Unsupported
           const link = document.createElement('a');
           link.download = 'dot-note-tasarimim.png';
           link.href = dataUrl;
           link.click();
           
-          alert("Tasarımınız cihazınıza indirildi! Şimdi açılacak olan WhatsApp ekranına bu görseli ekleyerek bize gönderin.");
+          alert("Tasarımınız cihazınıza indirildi! Şimdi açılacak olan WhatsApp ekranına bu görseli ekleyerek bize (+90 535 928 74 88) gönderin.");
           window.open(`https://wa.me/905359287488?text=${encodeURIComponent(messageText)}`, '_blank');
       }
 
