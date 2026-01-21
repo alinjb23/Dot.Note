@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="logo.png">
     <style>
       * {
         margin: 0;
@@ -111,7 +112,9 @@
 
       .logo img {
         height: 60px;
-        width: auto;
+        width: 60px;
+        object-fit: cover;
+        border-radius: 50%;
         transition: transform 0.3s ease;
       }
 
@@ -137,6 +140,101 @@
         position: relative;
         padding-bottom: 4px;
       }
+
+      /* Category Selection Styles */
+      .category-selection-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .category-selection-card {
+        background: #F8FAFC;
+        border: 2px solid #E2E8F0;
+        border-radius: var(--radius-md);
+        padding: 2rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 200px;
+      }
+
+      .category-selection-card:hover {
+        border-color: #000;
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+        background: #fff;
+      }
+
+      .cat-icon {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        transition: transform 0.3s ease;
+      }
+
+      .category-selection-card:hover .cat-icon {
+        transform: scale(1.1);
+      }
+
+      .category-selection-card h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        color: var(--primary-color);
+      }
+
+      .category-selection-card p {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+      }
+
+      .back-button-small {
+        background: none;
+        border: none;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        transition: color 0.2s;
+      }
+
+      .back-button-small:hover {
+        color: #000;
+        text-decoration: underline;
+      }
+
+      @media (max-width: 768px) {
+        .category-selection-container {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+        
+        .category-selection-card {
+          min-height: 150px;
+          flex-direction: row;
+          justify-content: flex-start;
+          text-align: left;
+           padding: 1.5rem;
+           gap: 1.5rem;
+        }
+
+        .cat-icon {
+          font-size: 2.5rem;
+          margin-bottom: 0;
+        }
+
+        .category-selection-card h3 {
+           margin-bottom: 0.2rem;
+        }
+      }
+
 
       .nav-cta {
         color: var(--text-primary);
@@ -401,6 +499,30 @@
         .header-content .logo-text {
           font-size: 1.2rem;
         }
+      }
+
+      /* Filter Buttons */
+      .filter-btn {
+        padding: 0.8rem 1.5rem;
+        background: transparent;
+        border: 2px solid #E2E8F0;
+        border-radius: var(--radius-sm);
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+      }
+
+      .filter-btn:hover {
+        border-color: #000;
+        color: #000;
+      }
+
+      .filter-btn.active {
+        background: #000;
+        color: #fff;
+        border-color: #000;
       }
 
       .product-card {
@@ -1438,7 +1560,12 @@
       <section class="products-section" id="products">
         <h2 class="section-title">TASARIMLARIMIZ</h2>
         
-
+        <div class="product-filters" style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
+          <button class="filter-btn active" data-filter="all" onclick="filterProducts('all')">TÜMÜ</button>
+          <button class="filter-btn" data-filter="couple" onclick="filterProducts('couple')">🌹 SEVGİLİ / ÇİFT</button>
+          <button class="filter-btn" data-filter="friends" onclick="filterProducts('friends')">👯‍♀️ ARKADAŞ</button>
+          <button class="filter-btn" data-filter="alone" onclick="filterProducts('alone')">✨ KİŞİSEL</button>
+        </div>
 
         <div class="products-grid" id="productsGrid"></div>
       </section>
@@ -1449,20 +1576,32 @@
         <div class="steps-container">
           <div class="step-item">
             <div class="step-icon">🎨</div>
-            <h3>1. Tasarımı Seç</h3>
-            <p>Koleksiyonumuzdan beğendiğin defter tasarımını seç. Kapak tasarımı 1-2 gün sürer.</p>
+            <h3>1. Kendin Tasarla</h3>
+            <p>Kendin Tasarla’ butonuna tıklayın, istediğiniz detayları seçin ve tasarımı tamamlayın</p>
           </div>
           <div class="step-arrow">→</div>
           <div class="step-item">
-            <div class="step-icon">💬</div>
-            <h3>2. WhatsApp'tan Yaz</h3>
-            <p>Sipariş butonuna tıkla ve WhatsApp üzerinden bizimle iletişime geç.</p>
+            <div class="step-icon">📸</div>
+            <h3>2. Kapak Fotoğrafını Gönder</h3>
+            <p>Kullanıcı, defter kapağında kullanılmasını istediği fotoğrafı WhatsApp üzerinden gönderir.</p>
+          </div>
+          <div class="step-arrow">→</div>
+          <div class="step-item">
+            <div class="step-icon">✨</div>
+            <h3>3. Kapak Tasarımları Hazırlanır</h3>
+            <p>Paylaşılan bilgiler ve fotoğrafa göre 3 farklı kapak tasarımı hazırlanır. Tasarım önizlemeleri WhatsApp üzerinden kullanıcıya gönderilir.</p>
+          </div>
+          <div class="step-arrow">→</div>
+           <div class="step-item">
+            <div class="step-icon">✅</div>
+            <h3>4. Seçim & Ödeme</h3>
+            <p>Kullanıcı beğendiği tasarımı seçer. Ödeme bilgileri paylaşılır.</p>
           </div>
           <div class="step-arrow">→</div>
           <div class="step-item">
             <div class="step-icon">📦</div>
-            <h3>3. Kapına Gelsin</h3>
-            <p>Siparişin özenle hazırlansın. Kargo 10 günden kısa sürede adresine teslim edilir.</p>
+            <h3>5. Üretim & Teslimat</h3>
+            <p>Ödeme sonrası defter üretime alınır. Sipariş özenle hazırlanır ve yaklaşık 2 hafta içinde adresine teslim edilir.</p>
           </div>
         </div>
       </section>
@@ -1484,10 +1623,36 @@
           <span class="close-modal" onclick="closeDesigner()">&times;</span>
           <h2 class="modal-title">KENDİN TASARLA</h2>
           
-          <div class="designer-container-modal" style="display: block; max-width: 600px; margin: 0 auto; padding: 1rem;">
+          <div class="designer-container-modal" style="display: block; max-width: 800px; margin: 0 auto; padding: 1rem;">
+
+            <!-- 1. Category Selector Phase -->
+            <div id="designCategorySelector" class="category-phase">
+              <h3 style="text-align: center; margin-bottom: 2rem;">Kimin İçin Tasarlıyorsun?</h3>
+              <div class="category-selection-container">
+                <div class="category-selection-card" onclick="selectCategory('couple')">
+                  <div class="cat-icon">🌹</div>
+                  <h3>Sevgili / Çift</h3>
+                  <p>Romantik anılarınız için</p>
+                </div>
+                <div class="category-selection-card" onclick="selectCategory('friends')">
+                  <div class="cat-icon">👯‍♀️</div>
+                  <h3>Arkadaş</h3>
+                  <p>En yakın dostlarınız için</p>
+                </div>
+                <div class="category-selection-card" onclick="selectCategory('alone')">
+                  <div class="cat-icon">✨</div>
+                  <h3>Kişisel</h3>
+                  <p>Kendiniz veya tek kişi için</p>
+                </div>
+              </div>
+            </div>
           
-            <!-- Tools Area -->
-            <div class="designer-tools" style="padding: 0;">
+            <!-- 2. Tools Area (Hidden initially) -->
+            <div id="designToolsWrapper" class="designer-tools" style="padding: 0; display: none;">
+              <div style="margin-bottom: 1rem;">
+                 <button onclick="resetCategorySelection()" class="back-button-small">← Kategori Seçimine Dön</button>
+              </div>
+
               <h3>Dizayn Araçları</h3>
             
               <div class="tool-group">
@@ -1511,9 +1676,9 @@
               <div class="tool-group">
                 <label>Kapak Tasarım Stili</label>
                 
-                <div class="style-category">
+                <div class="style-category" id="romanticStyles">
                   <span class="category-label">🌹 ROMANTİK / ÇİFT</span>
-                  <div class="style-grid" id="romanticStyles">
+                  <div class="style-grid">
                     <div class="style-card active" data-value="Disney Pixar (Romantik)">Disney Pixar</div>
                     <div class="style-card" data-value="Anime (Makoto Shinkai)">Romantic Anime</div>
                     <div class="style-card" data-value="Studio Ghibli">Studio Ghibli</div>
@@ -1521,27 +1686,37 @@
                   </div>
                 </div>
 
-                <div class="style-category">
+                <div class="style-category" id="friendsStyles">
+                  <span class="category-label">👯‍♀️ ARKADAŞ / DOST</span>
+                  <div class="style-grid">
+                    <div class="style-card" data-value="Best Friends Illustrated">Best Friends Illustrated</div>
+                    <div class="style-card" data-value="Sonsuz Dostluk">Friends Forever</div>
+                    <div class="style-card" data-value="Suluboya Anılar">Watercolor Memories</div>
+                    <div class="style-card" data-value="Eğlenceli Çizimler">Fun Doodles</div>
+                  </div>
+                </div>
+
+                <div class="style-category" id="cinematicStyles">
                   <span class="category-label">🎬 SİNEMATİK & DRAMATİK</span>
-                  <div class="style-grid" id="cinematicStyles">
+                  <div class="style-grid">
                     <div class="style-card" data-value="Arcane Stili">Arcane Style</div>
                     <div class="style-card" data-value="DreamWorks">DreamWorks</div>
                     <div class="style-card" data-value="Sinematik Konsept Sanatı">Painterly Art</div>
                   </div>
                 </div>
 
-                <div class="style-category">
+                <div class="style-category" id="modernStyles">
                   <span class="category-label">✨ MODERN & ZARİF</span>
-                  <div class="style-grid" id="modernStyles">
+                  <div class="style-grid">
                     <div class="style-card" data-value="Minimalist İllüstrasyon">Minimalist</div>
                     <div class="style-card" data-value="Yüksek Kalite Editoryal">High-end Editorial</div>
                     <div class="style-card" data-value="Sulu Boya">Soft Watercolor</div>
                   </div>
                 </div>
 
-                <div class="style-category">
+                <div class="style-category" id="fantasyStyles">
                   <span class="category-label">🌌 FANTASTİK / MASALSI</span>
-                  <div class="style-grid" id="fantasyStyles">
+                  <div class="style-grid">
                     <div class="style-card" data-value="Masalsı İllüstrasyon">Fairytale Illustration</div>
                     <div class="style-card" data-value="Ethereal Fantasy">Ethereal Fantasy</div>
                     <div class="style-card" data-value="Modern Hikaye Kitabı">Storybook Style</div>
@@ -1736,7 +1911,7 @@
           price: "₺450",
           badge: "POPÜLER",
           emoji: "🎨",
-          category: "romantic"
+          category: "couple"
         },
         {
           id: 2,
@@ -1745,7 +1920,7 @@
           price: "₺480",
           badge: "",
           emoji: "🌸",
-          category: "romantic"
+          category: "couple"
         },
         {
           id: 3,
@@ -1754,7 +1929,7 @@
           price: "₺470",
           badge: "YENİ",
           emoji: "🍃",
-          category: "collection"
+          category: "couple"
         },
         {
           id: 4,
@@ -1763,7 +1938,7 @@
           price: "₺520",
           badge: "",
           emoji: "👯‍♀️",
-          category: "friend"
+          category: "friends"
         },
         {
           id: 5,
@@ -1772,7 +1947,7 @@
           price: "₺590",
           badge: "POPÜLER",
           emoji: "⚡",
-          category: "romantic"
+          category: "alone"
         },
         {
           id: 6,
@@ -1781,7 +1956,7 @@
           price: "₺550",
           badge: "",
           emoji: "💼",
-          category: "business"
+          category: "alone"
         },
         {
           id: 7,
@@ -1790,7 +1965,7 @@
           price: "₺580",
           badge: "",
           emoji: "📓",
-          category: "business"
+          category: "alone"
         },
         {
           id: 8,
@@ -1799,7 +1974,7 @@
           price: "₺440",
           badge: "",
           emoji: "⚪",
-          category: "collection"
+          category: "alone"
         },
         {
           id: 9,
@@ -1808,7 +1983,7 @@
           price: "₺490",
           badge: "YENİ",
           emoji: "🤝",
-          category: "friend"
+          category: "friends"
         },
         {
           id: 10,
@@ -1817,7 +1992,7 @@
           price: "₺460",
           badge: "",
           emoji: "🎨",
-          category: "friend"
+          category: "friends"
         },
         {
           id: 11,
@@ -1826,7 +2001,7 @@
           price: "₺470",
           badge: "",
           emoji: "🚀",
-          category: "business"
+          category: "alone"
         },
         {
           id: 12,
@@ -1835,12 +2010,76 @@
           price: "₺510",
           badge: "POPÜLER",
           emoji: "🧚",
-          category: "romantic"
+          category: "alone"
         },
       ];
 
       const views = ["📕", "📔", "📖", "📓"];
       let currentProduct = null;
+
+      // Filter Products Logic
+      function filterProducts(category) {
+        // Update Buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+           if(btn.dataset.filter === category) {
+             btn.classList.add('active');
+           } else {
+             btn.classList.remove('active');
+           }
+        });
+
+        // Filter Data
+        const filtered = category === 'all' 
+          ? products 
+          : products.filter(p => p.category === category);
+        
+        // Re-render
+        renderProducts(filtered);
+      }
+      
+      function renderProducts(items) {
+          const grid = document.getElementById("productsGrid");
+          grid.innerHTML = ""; // Clear existing
+
+          // Observer needs to be re-attached to new elements
+          const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px",
+          };
+
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.style.opacity = "1";
+                entry.target.style.transform = "translateY(0)";
+              }
+            });
+          }, observerOptions);
+
+          items.forEach((product, index) => {
+            const card = document.createElement("div");
+            card.className = "product-card";
+            card.style.animationDelay = `${index * 0.1}s`;
+            card.onclick = () => showProductDetail(product);
+ 
+            card.innerHTML = `
+                      ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ""}
+                      <div class="product-image">
+                        ${product.image ? `<img src="${product.image}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover;">` : product.emoji}
+                      </div>
+                      <div class="product-info">
+                          <h3>${product.name}</h3>
+                          <p>${product.style}</p>
+                          <div class="product-price">${product.price}</div>
+                      </div>
+                  `;
+ 
+            grid.appendChild(card);
+            observer.observe(card);
+          });
+      }
+
+
 
 
 
@@ -1849,7 +2088,13 @@
         currentProduct = product;
         document.getElementById("detailTitle").textContent = product.name;
         document.getElementById("detailPrice").textContent = product.price;
-        document.getElementById("mainImage").textContent = views[0];
+
+        const mainImage = document.getElementById("mainImage");
+        if (product.image) {
+          mainImage.innerHTML = `<img src="${product.image}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: contain;">`;
+        } else {
+          mainImage.textContent = views[0];
+        }
 
         // Update order button
         const orderBtn = document.getElementById("orderButton");
@@ -1875,7 +2120,12 @@
 
       // Change Product View
       function changeView(index) {
-        document.getElementById("mainImage").textContent = views[index];
+        const mainImage = document.getElementById("mainImage");
+        if (currentProduct && currentProduct.image && index === 0) {
+          mainImage.innerHTML = `<img src="${currentProduct.image}" alt="${currentProduct.name}" style="width: 100%; height: 100%; object-fit: contain;">`;
+        } else {
+          mainImage.textContent = views[index];
+        }
         document.querySelectorAll(".thumbnail").forEach((thumb, idx) => {
           thumb.classList.toggle("active", idx === index);
         });
@@ -1943,26 +2193,8 @@
         }
 
          // Initialize Products Grid
-         const grid = document.getElementById("productsGrid");
-         products.forEach((product, index) => {
-           const card = document.createElement("div");
-           card.className = "product-card";
-           card.style.animationDelay = `${index * 0.1}s`;
-           card.onclick = () => showProductDetail(product);
-
-           card.innerHTML = `
-                     ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ""}
-                     <div class="product-image">${product.emoji}</div>
-                     <div class="product-info">
-                         <h3>${product.name}</h3>
-                         <p>${product.style}</p>
-                         <div class="product-price">${product.price}</div>
-                     </div>
-                 `;
-
-           grid.appendChild(card);
-           observer.observe(card);
-         });
+         // Replaced custom loop with filterProducts('all') to init the grid
+         filterProducts('all');
       });
 
       // --- Custom Designer Logic ---
@@ -1971,6 +2203,7 @@
       let selectedLayout = "Cizgili";
       let selectedPageCount = "80 Sayfa";
       let selectedStyle = "Disney Pixar (Romantik)";
+      let selectedCategory = ""; // New Variable
 
       // Initialize Selection Logic
       function initDesignerSelectors() {
@@ -2050,10 +2283,69 @@
         }
       }
 
+      // New: Select Category Logic
+      function selectCategory(category) {
+        selectedCategory = category;
+        
+        // Hide Category Selector, Show Tools
+        document.getElementById('designCategorySelector').style.display = 'none';
+        document.getElementById('designToolsWrapper').style.display = 'block';
+
+        // Filter Styles
+        const romanticStyles = document.getElementById('romanticStyles');
+        const friendsStyles = document.getElementById('friendsStyles');
+        const cinematicStyles = document.getElementById('cinematicStyles');
+        const modernStyles = document.getElementById('modernStyles');
+        const fantasyStyles = document.getElementById('fantasyStyles');
+
+        // Hide all first
+        romanticStyles.style.display = 'none';
+        friendsStyles.style.display = 'none';
+        cinematicStyles.style.display = 'none';
+        modernStyles.style.display = 'none';
+        fantasyStyles.style.display = 'none';
+
+        // Show relevant ones
+        if (category === 'couple') {
+          romanticStyles.style.display = 'block';
+          // Set default style for this category
+          setDefaultStyle('Disney Pixar (Romantik)');
+        } else if (category === 'friends') {
+          friendsStyles.style.display = 'block';
+          setDefaultStyle('Best Friends Illustrated');
+        } else if (category === 'alone') {
+          cinematicStyles.style.display = 'block';
+          modernStyles.style.display = 'block';
+          fantasyStyles.style.display = 'block';
+          setDefaultStyle('Arcane Stili');
+        }
+      }
+
+      function setDefaultStyle(styleName) {
+        selectedStyle = styleName;
+        // Visual update for active class
+        document.querySelectorAll('.style-card').forEach(c => c.classList.remove('active'));
+        const targetCard = document.querySelector(`.style-card[data-value="${styleName}"]`);
+        if(targetCard) targetCard.classList.add('active');
+        updateSummary();
+      }
+
+      function resetCategorySelection() {
+        document.getElementById('designCategorySelector').style.display = 'block';
+        document.getElementById('designToolsWrapper').style.display = 'none';
+      }
+
       // Updated Finish Design - DIRECT WhatsApp Link
       function finishDesign() {
           const colorName = document.getElementById('summaryColor').textContent;
+          
+          let categoryLabel = "Belirtilmedi";
+          if (selectedCategory === 'couple') categoryLabel = "Sevgili / Çift";
+          if (selectedCategory === 'friends') categoryLabel = "Arkadaş";
+          if (selectedCategory === 'alone') categoryLabel = "Kişisel";
+
           const messageText = `*YENİ DEFTER SİPARİŞİ (ÖZEL TASARIM)*\n\n` +
+                              `• Kategori: ${categoryLabel}\n` +
                               `• Boyut: A5 (Standard)\n` +
                               `• Sayfa Düzeni: ${selectedLayout}\n` +
                               `• Sayfa Sayısı: ${selectedPageCount}\n` +
@@ -2069,7 +2361,7 @@
       function openDesigner() {
           document.getElementById('designerModal').style.display = 'block';
           initDesignerSelectors();
-          updateSummary();
+          resetCategorySelection(); // Ensure we start at category selection
           document.body.style.overflow = 'hidden'; 
       }
 
