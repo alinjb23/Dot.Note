@@ -16,7 +16,7 @@ setTimeout(hideLoader, 5000);
 
 // Example Designs Data
 const exampleDesigns = {
-  'animation-1': { id: 'animation-1', name: "Cinematic Romance", category: 'animation', desc: "Film posteri tarzında romantik çiftler", images: ['🎬', '🎥', '✨'] },
+  'animation-1': { id: 'animation-1', name: "Cinematic Romance", category: 'animation', desc: "Film posteri tarzında romantik çiftler", images: ['cinematic-romance-1.png', 'cinematic-romance-2.jpg', 'cinematic-romance-3.png'] },
   'animation-2': { id: 'animation-2', name: "Kawaii Love", category: 'animation', desc: "Sevimli anime tarzı karakterler", images: ['💕', '🧸', '🍭'] },
   'animation-3': { id: 'animation-3', name: "Watercolor Dreams", category: 'animation', desc: "Suluboya tarzı romantik sahneler", images: ['🌸', '🎨', '🖌️'] },
   'animation-4': { id: 'animation-4', name: "Disney Magic", category: 'animation', desc: "Peri masalı tarzı çift illüstrasyonları", images: ['✨', '🏰', '👑'] },
@@ -265,16 +265,29 @@ function showExampleDetail(id) {
     orderBtn.href = `https://wa.me/905359287488?text=Merhaba! '${design.name}' tasarım örneği hakkında bilgi almak istiyorum.`;
 
     const mainImage = document.getElementById("mainImage");
-    mainImage.textContent = design.images[0];
-    mainImage.style.fontSize = "5rem";
+    const firstImg = design.images[0];
+    
+    if (firstImg.endsWith('.png') || firstImg.endsWith('.jpg') || firstImg.endsWith('.jpeg') || firstImg.endsWith('.webp')) {
+      mainImage.innerHTML = `<img src="${firstImg}" alt="${design.name}" style="width: 100%; height: 100%; object-fit: contain;">`;
+      mainImage.style.fontSize = "initial";
+    } else {
+      mainImage.textContent = firstImg;
+      mainImage.style.fontSize = "5rem";
+    }
 
     // Setup thumbnails for example designs
     const thumbGrid = document.getElementById('thumbnailGrid');
-    thumbGrid.innerHTML = design.images.map((img, idx) => `
-      <div class="thumbnail ${idx === 0 ? 'active' : ''}" onclick="changeGalleryView(${idx}, 'example', '${id}')">
-        Görünüm ${idx + 1}<br />${img}
-      </div>
-    `).join('');
+    thumbGrid.innerHTML = design.images.map((img, idx) => {
+      let thumbContent = img;
+      if (img.endsWith('.png') || img.endsWith('.jpg') || img.endsWith('.jpeg') || img.endsWith('.webp')) {
+        thumbContent = `<img src="${img}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">`;
+      }
+      return `
+        <div class="thumbnail ${idx === 0 ? 'active' : ''}" onclick="changeGalleryView(${idx}, 'example', '${id}')">
+          Görünüm ${idx + 1}<br />${thumbContent}
+        </div>
+      `;
+    }).join('');
 
     // Hide categories and show detail
     document.querySelectorAll('.category-page').forEach(page => page.classList.add('hidden'));
@@ -287,7 +300,14 @@ function changeGalleryView(index, type, id) {
     const mainImage = document.getElementById("mainImage");
     if (type === 'example') {
         const design = exampleDesigns[id];
-        mainImage.textContent = design.images[index];
+        const selectedImg = design.images[index];
+        if (selectedImg.endsWith('.png') || selectedImg.endsWith('.jpg') || selectedImg.endsWith('.jpeg') || selectedImg.endsWith('.webp')) {
+            mainImage.innerHTML = `<img src="${selectedImg}" alt="${design.name}" style="width: 100%; height: 100%; object-fit: contain;">`;
+            mainImage.style.fontSize = "initial";
+        } else {
+            mainImage.textContent = selectedImg;
+            mainImage.style.fontSize = "5rem";
+        }
     } else {
         if (currentProduct && currentProduct.image && index === 0) {
             mainImage.innerHTML = `<img src="${currentProduct.image}" alt="${currentProduct.name}" style="width: 100%; height: 100%; object-fit: contain;">`;
