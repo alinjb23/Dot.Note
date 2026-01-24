@@ -106,11 +106,11 @@
             <div class="category-card-arrow">→</div>
           </div>
           
-          <div class="category-nav-card" onclick="navigateToCategory('album')" data-category="album">
+          <div class="category-nav-card" onclick="navigateToCategory('magazin')" data-category="magazin">
             <div class="category-card-icon" style="height: 120px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
-              <img src="album-card.png" alt="Album" style="max-height: 100%; border-radius: 8px;">
+              <img src="album-card.png" alt="Magazin" style="max-height: 100%; border-radius: 8px;">
             </div>
-            <h3>Album Style</h3>
+            <h3>Magazin Style</h3>
             <p>Polaroid ve fotoğraf albümü tarzı</p>
             <div class="category-card-arrow">→</div>
           </div>
@@ -165,14 +165,7 @@
 
 
 
-      <!-- Custom Design CTA Section -->
-      <section class="custom-cta-section">
-          <div class="custom-cta-content">
-              <h2>KENDİ DEFTERİNİ YARAT</h2>
-              <p>Hayalindeki tasarımı gerçeğe dönüştür. Kapak görselini seç, ismini yaz ve iç sayfa düzenini belirle.</p>
-              <button class="cta-button large" onclick="openDesigner()">KENDİN TASARLA</button>
-          </div>
-      </section>
+
 
       <!-- Custom Designer Modal -->
       <div id="designerModal" class="designer-modal">
@@ -191,9 +184,9 @@
                   <h3>Animation Style</h3>
                   <p>Romantik anime ve sinematik tasarımlar</p>
                 </div>
-                <div class="category-selection-card" onclick="selectCategory('album')">
+                <div class="category-selection-card" onclick="selectCategory('magazin')">
                   <div class="cat-icon">�</div>
-                  <h3>Album Style</h3>
+                  <h3>Magazin Style</h3>
                   <p>Polaroid ve fotoğraf albümü tarzı</p>
                 </div>
                 <div class="category-selection-card" onclick="selectCategory('kisisel')">
@@ -207,7 +200,7 @@
             <!-- 2. Tools Area (Hidden initially) -->
             <div id="designToolsWrapper" class="designer-tools" style="padding: 0; display: none;">
               <div style="margin-bottom: 1rem;">
-                 <button onclick="resetCategorySelection()" class="back-button-small">← Kategori Seçimine Dön</button>
+                 <button id="backToCategoryBtn" onclick="resetCategorySelection()" class="back-button-small">← Kategori Seçimine Dön</button>
               </div>
 
               <h3>Dizayn Araçları</h3>
@@ -224,13 +217,13 @@
               <div class="tool-group">
                 <label>Sayfa Sayısı</label>
                 <div class="selection-grid" id="pageCountSelector">
-                  <div class="selection-card active" data-value="80 Sayfa">80 Sayfa</div>
-                  <div class="selection-card" data-value="100 Sayfa">100 Sayfa</div>
-                  <div class="selection-card" data-value="120 Sayfa">120 Sayfa</div>
+                  <div class="selection-card active" data-value="100 Sayfa">100 Sayfa</div>
+                  <div class="selection-card" data-value="150 Sayfa">150 Sayfa</div>
+                  <div class="selection-card" data-value="200 Sayfa">200 Sayfa</div>
                 </div>
               </div>
 
-              <div class="tool-group">
+              <div class="tool-group" id="styleSelectionGroup">
                 <label>Kapak Tasarım Stili</label>
                 
                 <div class="style-category" id="romanticStyles">
@@ -284,18 +277,25 @@
               <div class="tool-group">
                 <label>Kapak Rengi</label>
                 <div class="color-picker" id="colorPicker">
-                  <div class="color-option active" style="background: #ffffff" data-color="#ffffff"></div>
+                  <div class="color-option active" style="background: #1a1a1a" data-color="#1a1a1a"></div>
                   <div class="color-option" style="background: #000000" data-color="#000000"></div>
-                  <div class="color-option" style="background: #1a1a1a" data-color="#1a1a1a"></div>
                   <div class="color-option" style="background: #f4f1ea" data-color="#f4f1ea"></div>
-                  <div class="color-option" style="background: #e2e8f0" data-color="#e2e8f0"></div>
-                  <div class="color-option" style="background: #ffb7b2" data-color="#ffb7b2"></div>
+                  <div class="color-option" style="background: #4a1010" data-color="#4a1010"></div>
+                  <div class="color-option" style="background: #2d342d" data-color="#2d342d"></div>
                 </div>
               </div>
 
               <div class="tool-group">
-                <label>Metin Ekle (Opsiyonel)</label>
-                <input type="text" id="textInput" placeholder="İsim veya kısa bir söz yazın" class="text-input" oninput="updateTextFromInput()">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                  <div>
+                    <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Kapak Başlığı</label>
+                    <input type="text" id="titleInput" placeholder="Örn: Our Story" class="text-input" oninput="updateTextFromInput()">
+                  </div>
+                  <div>
+                    <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">İsimler</label>
+                    <input type="text" id="namesInput" placeholder="Örn: Ali & Ayşe" class="text-input" oninput="updateTextFromInput()">
+                  </div>
+                </div>
               </div>
 
               <!-- Live Summary Section -->
@@ -322,8 +322,12 @@
                   <span class="summary-value" id="summaryColor">Beyaz</span>
                 </div>
                 <div class="summary-row">
-                  <span class="summary-label">Kapak Metni:</span>
-                  <span class="summary-value" id="summaryText">-</span>
+                  <span class="summary-label">Kapak Başlığı:</span>
+                  <span class="summary-value" id="summaryTitle">-</span>
+                </div>
+                <div class="summary-row">
+                  <span class="summary-label">İsimler:</span>
+                  <span class="summary-value" id="summaryNames">-</span>
                 </div>
                 <div class="summary-row" style="margin-top: 5px; border-top: 1px dashed #E2E8F0; padding-top: 5px;">
                   <span class="summary-label" style="color: #64748B; font-weight: 700;">📸 Kapak Fotoğrafı:</span>
@@ -362,6 +366,154 @@
       </footer>
     </div>
 
+    <!-- Customization Modal (Outside homePage so it's always accessible) -->
+    <div id="customizationModal" class="designer-modal">
+      <div class="modal-content">
+        <span class="close-modal" onclick="closeCustomizationModal()">&times;</span>
+        <h2 class="modal-title">DEFTER ÖZELLİKLERİNİ BELİRLE</h2>
+        
+        <div class="designer-container-modal" style="display: block; max-width: 800px; margin: 0 auto; padding: 1rem;">
+          
+          <div class="customization-tools" style="padding: 0;">
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">
+              Seçtiğiniz tasarım için defter özelliklerini belirleyin
+            </p>
+
+            <!-- Selected Design Display -->
+            <div class="tool-group" style="background: var(--bg-secondary); padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 2rem;">
+              <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Seçilen Tasarım</label>
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <div id="customSelectedDesignIcon" style="font-size: 3rem;">🎨</div>
+                <div>
+                  <h3 id="customSelectedDesignName" style="margin: 0; font-size: 1.3rem;">Disney Pixar Style</h3>
+                  <p id="customSelectedDesignDesc" style="margin: 0; color: var(--text-secondary); font-size: 0.9rem;">Film posteri tarzında romantik çiftler</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-group">
+              <label>Sayfa Düzeni</label>
+              <div class="selection-grid" id="customLayoutSelector">
+                <div class="selection-card active" data-value="Cizgili">Çizgili</div>
+                <div class="selection-card" data-value="Noktali">Noktalı</div>
+                <div class="selection-card" data-value="Bos">Boş</div>
+              </div>
+            </div>
+
+            <div class="tool-group">
+              <label>Sayfa Sayısı</label>
+              <div class="selection-grid" id="customPageCountSelector">
+                <div class="selection-card" data-value="50 Sayfa">50 Sayfa</div>
+                <div class="selection-card active" data-value="100 Sayfa">100 Sayfa</div>
+                <div class="selection-card" data-value="150 Sayfa">150 Sayfa</div>
+                <div class="selection-card" data-value="200 Sayfa">200 Sayfa</div>
+              </div>
+            </div>
+
+            <div class="tool-group">
+              <label>Kapak Rengi</label>
+              <div class="color-picker" id="customColorPicker">
+                <div class="color-option active" style="background: #1a1a1a" data-color="#1a1a1a"></div>
+                <div class="color-option" style="background: #000000" data-color="#000000"></div>
+                <div class="color-option" style="background: #f4f1ea" data-color="#f4f1ea"></div>
+                <div class="color-option" style="background: #4a1010" data-color="#4a1010"></div>
+                <div class="color-option" style="background: #2d342d" data-color="#2d342d"></div>
+              </div>
+            </div>
+
+            <div class="tool-group">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div>
+                  <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Kapak Başlığı</label>
+                  <input type="text" id="customTitleInput" placeholder="Örn: Our Story" class="text-input" oninput="updateCustomizationSummary()">
+                </div>
+                <div>
+                  <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">İsimler</label>
+                  <input type="text" id="customNamesInput" placeholder="Örn: Ali & Ayşe" class="text-input" oninput="updateCustomizationSummary()">
+                </div>
+              </div>
+            </div>
+
+            <!-- Live Summary Section -->
+            <div class="order-summary-box">
+              <div class="summary-title">Sipariş Özeti</div>
+              <div class="summary-row">
+                <span class="summary-label">Tasarım:</span>
+                <span class="summary-value" id="customSummaryDesign">-</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-label">Boyut:</span>
+                <span class="summary-value">A5 (Standard)</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-label">Sayfa Düzeni:</span>
+                <span class="summary-value" id="customSummaryLayout">Çizgili</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-label">Sayfa Sayısı:</span>
+                <span class="summary-value" id="customSummaryPages">100 Sayfa</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-label">Kapak Rengi:</span>
+                <span class="summary-value" id="customSummaryColor">Antrasit</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-label">Kapak Başlığı:</span>
+                <span class="summary-value" id="customSummaryTitle">-</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-label">İsimler:</span>
+                <span class="summary-value" id="customSummaryNames">-</span>
+              </div>
+              <div class="summary-row" style="margin-top: 5px; border-top: 1px dashed #E2E8F0; padding-top: 5px;">
+                <span class="summary-label" style="color: #64748B; font-weight: 700;">📸 Kapak Fotoğrafı:</span>
+                <span class="summary-value" style="color: #475569;">WhatsApp'tan Gönderilecek</span>
+              </div>
+            </div>
+
+            <button class="order-button" style="margin-top: 1.5rem;" onclick="submitCustomOrder()">TASARIMI TAMAMLA & WHATSAPP'TAN SİPARİŞ VER</button>
+            <p class="designer-note">* Siparişiniz WhatsApp üzerinden iletilecektir. Lütfen açılacak ekranda kapakta olmasını istediğiniz fotoğrafı da bize göndermeyi unutmayın!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Magazine Designer Modal -->
+    <div id="magazineDesignerModal" class="designer-modal">
+      <div class="modal-content">
+        <span class="close-modal" onclick="closeMagazineDesigner()">&times;</span>
+        <h2 class="modal-title" style="font-family: serif; letter-spacing: -1px;">DOT EDITORIAL DESIGNER</h2>
+        
+        <div class="magazine-designer-container" style="max-width: 800px; margin: 0 auto; padding: 1rem;">
+          <!-- Progress Indicator -->
+          <div class="magazine-progress">
+            <div class="progress-info">
+              <span id="magCurrentPage">Sayfa 1 / 16</span>
+              <span id="magPageType">Kapak & Giriş</span>
+            </div>
+            <div class="progress-bar-container">
+              <div id="magProgressBar" class="progress-bar" style="width: 6.25%;"></div>
+            </div>
+          </div>
+
+          <!-- Page Content Area -->
+          <div id="magPageContent" class="mag-page-content">
+            <!-- Content will be injected by JavaScript -->
+          </div>
+
+          <!-- Navigation Buttons -->
+          <div class="mag-nav-buttons" style="display: flex; justify-content: space-between; margin-top: 2rem; gap: 1rem;">
+            <button id="magPrevBtn" class="back-button-small" onclick="magPrevPage()" style="display: none;">← Geri</button>
+            <div style="flex-grow: 1;"></div>
+            <button id="magNextBtn" class="order-button" onclick="magNextPage()" style="margin: 0;">Sonraki Sayfa →</button>
+          </div>
+          
+          <p class="designer-note" style="margin-top: 1.5rem; text-align: center;">
+            * Her sayfa için fotoğraf ve mesajlarınızı ekleyin. Tamamladığınızda WhatsApp üzerinden bize iletebilirsiniz.
+          </p>
+        </div>
+      </div>
+    </div>
+
     <!-- Category Pages (Outside homePage so they can be shown when homePage is hidden) -->
     
     <!-- Animation Style Category Page -->
@@ -380,108 +532,65 @@
       <div class="examples-grid">
         <div class="example-card" onclick="showExampleDetail('animation-1')" style="cursor: pointer;">
           <div class="example-image">
-            <img src="cinematic-romance-1.png" alt="Cinematic Romance" style="width: 100%; height: 100%; object-fit: cover;">
+            <img src="cinematic-romance-1.png" alt="Disney Pixar Style" style="width: 100%; height: 100%; object-fit: cover;">
           </div>
           <div class="example-info">
-            <h4>Cinematic Romance</h4>
+            <h4>Disney Pixar Style <span class="price-badge">500 ₺</span></h4>
             <p>Film posteri tarzında romantik çiftler</p>
           </div>
         </div>
 
         <div class="example-card" onclick="showExampleDetail('animation-2')" style="cursor: pointer;">
-          <div class="example-image">💕</div>
+          <div class="example-image">
+            <img src="anime-cinema-style.jpg" alt="Anime Cinema Style" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
           <div class="example-info">
-            <h4>Kawaii Love</h4>
+            <h4>Anime Cinema Style <span class="price-badge">500 ₺</span></h4>
             <p>Sevimli anime tarzı karakterler</p>
           </div>
         </div>
 
         <div class="example-card" onclick="showExampleDetail('animation-3')" style="cursor: pointer;">
-          <div class="example-image">🌸</div>
+          <div class="example-image">
+            <img src="ghibli-style-1.jpg" alt="Studio Ghibli Style" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
           <div class="example-info">
-            <h4>Watercolor Dreams</h4>
+            <h4>Studio Ghibli Çizim Stili <span class="price-badge">500 ₺</span></h4>
             <p>Suluboya tarzı romantik sahneler</p>
           </div>
         </div>
 
-        <div class="example-card" onclick="showExampleDetail('animation-4')" style="cursor: pointer;">
-          <div class="example-image">✨</div>
-          <div class="example-info">
-            <h4>Disney Magic</h4>
-            <p>Peri masalı tarzı çift illüstrasyonları</p>
-          </div>
-        </div>
-
-        <div class="example-card" onclick="showExampleDetail('animation-5')" style="cursor: pointer;">
-          <div class="example-image">🎨</div>
-          <div class="example-info">
-            <h4>Comic Book Love</h4>
-            <p>Çizgi roman sanat tarzı</p>
-          </div>
-        </div>
       </div>
 
-      <div class="category-cta-container">
-        <button class="category-cta-button" onclick="openDesignerWithCategory('animation')">
-          Kendin Tasarla - Animation Style
-        </button>
-      </div>
+
     </section>
 
-    <!-- Album Style Category Page -->
-    <section class="category-page album-page hidden" id="album-page">
+    <!-- Magazin Style Category Page -->
+    <section class="category-page magazin-page hidden" id="magazin-page">
       <button class="back-to-categories" onclick="backToCategories()">← Kategorilere Dön</button>
       
       <div class="category-page-header">
-        <h2>📸 Album Style</h2>
-        <p>Polaroid ve fotoğraf albümü tarzında anılarınızı ölümsüzleştirin</p>
+        <h2 style="font-family: serif; letter-spacing: -1px;">VOGUE EDITORIAL</h2>
+        <p>Klasik defterlerin ötesinde, 16 sayfalık size özel bir magazin dergisi.</p>
       </div>
 
-      <div class="examples-grid">
-        <div class="example-card" onclick="showExampleDetail('album-1')" style="cursor: pointer;">
-          <div class="example-image">📸</div>
-          <div class="example-info">
-            <h4>Polaroid Memories</h4>
-            <p>Vintage fotoğraf kolajı</p>
-          </div>
-        </div>
-
-        <div class="example-card" onclick="showExampleDetail('album-2')" style="cursor: pointer;">
-          <div class="example-image">🎵</div>
-          <div class="example-info">
-            <h4>Music Festival</h4>
-            <p>Konser ve etkinlik anıları</p>
-          </div>
-        </div>
-
-        <div class="example-card" onclick="showExampleDetail('album-3')" style="cursor: pointer;">
-          <div class="example-image">🌍</div>
-          <div class="example-info">
-            <h4>Travel Journal</h4>
-            <p>Macera fotoğrafları albümü</p>
-          </div>
-        </div>
-
-        <div class="example-card" onclick="showExampleDetail('album-4')" style="cursor: pointer;">
-          <div class="example-image">🎉</div>
-          <div class="example-info">
-            <h4>Party Time</h4>
-            <p>Kutlama anları</p>
-          </div>
-        </div>
-
-        <div class="example-card" onclick="showExampleDetail('album-5')" style="cursor: pointer;">
-          <div class="example-image">🏖️</div>
-          <div class="example-info">
-            <h4>Summer Vibes</h4>
-            <p>Plaj ve tatil fotoğrafları</p>
+      <div class="magazine-showcase">
+        <div class="magazine-cover-large" onclick="showExampleDetail('magazin-1')">
+          <div class="magazine-badge">16 SAYFA</div>
+          <div class="magazine-content">
+            <span style="font-size: 5rem;">📸</span>
+            <div class="magazine-info-overlay">
+              <h3>Dot Editorial Edition</h3>
+              <p>Minimalist, şık ve tamamen size özel.</p>
+              <span class="price-badge" style="font-size: 1.2rem; padding: 0.5rem 1rem;">450 ₺</span>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="category-cta-container">
-        <button class="category-cta-button" onclick="openDesignerWithCategory('album')">
-          Kendin Tasarla - Album Style
+        <button class="category-cta-button" onclick="openDesignerWithCategory('magazin')">
+          Magazinini Tasarla - 16 Sayfa
         </button>
       </div>
     </section>
@@ -599,8 +708,8 @@
           </div>
 
           <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem;">
-            <a href="#" class="order-button" id="orderButton" style="width: 100%;">SİPARİŞ VER</a>
-            <button class="category-cta-button" id="designThisButton" style="width: 100%; border: none; padding: 1.2rem;">TASARIMI SEÇ & DEVAM ET</button>
+            <button class="order-button" id="orderButton" style="width: 100%; cursor: pointer;">SİPARİŞ VER</button>
+
           </div>
         </div>
       </div>
