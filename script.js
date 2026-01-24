@@ -16,23 +16,17 @@ setTimeout(hideLoader, 5000);
 
 // Example Designs Data
 const exampleDesigns = {
-  'animation-1': { id: 'animation-1', name: "Cinematic Romance", category: 'animation', desc: "Film posteri tarzında romantik çiftler", images: ['cinematic-romance-1.png', 'cinematic-romance-2.jpg', 'cinematic-romance-3.png'] },
-  'animation-2': { id: 'animation-2', name: "Kawaii Love", category: 'animation', desc: "Sevimli anime tarzı karakterler", images: ['💕', '🧸', '🍭'] },
-  'animation-3': { id: 'animation-3', name: "Watercolor Dreams", category: 'animation', desc: "Suluboya tarzı romantik sahneler", images: ['🌸', '🎨', '🖌️'] },
-  'animation-4': { id: 'animation-4', name: "Disney Magic", category: 'animation', desc: "Peri masalı tarzı çift illüstrasyonları", images: ['✨', '🏰', '👑'] },
-  'animation-5': { id: 'animation-5', name: "Comic Book Love", category: 'animation', desc: "Çizgi roman sanat tarzı", images: ['🎨', '💥', '🗯️'] },
+  'animation-1': { id: 'animation-1', name: "Disney Pixar Style", category: 'animation', styleVal: 'Disney Pixar (Romantik)', desc: "Film posteri tarzında romantik çiftler", price: "500 ₺", images: ['cinematic-romance-1.png', 'cinematic-romance-2.jpg', 'cinematic-romance-3.png'] },
+  'animation-2': { id: 'animation-2', name: "Anime Cinema Style", category: 'animation', styleVal: 'Anime (Makoto Shinkai)', desc: "Sevimli anime tarzı karakterler", price: "500 ₺", images: ['anime-cinema-style.jpg', 'anime-cinema-style-2.jpg', 'anime-cinema-style-3.jpg'] },
+  'animation-3': { id: 'animation-3', name: "Studio Ghibli Çizim Stili", category: 'animation', styleVal: 'Studio Ghibli', desc: "Suluboya tarzı romantik sahneler", price: "500 ₺", images: ['ghibli-style-1.jpg', 'ghibli-style-2.jpg', 'ghibli-style-3.jpg'] },
   
-  'album-1': { id: 'album-1', name: "Polaroid Memories", category: 'album', desc: "Vintage fotoğraf kolajı", images: ['📸', '🎞️', '📮'] },
-  'album-2': { id: 'album-2', name: "Music Festival", category: 'album', desc: "Konser ve etkinlik anıları", images: ['🎵', '🎸', '🎟️'] },
-  'album-3': { id: 'album-3', name: "Travel Journal", category: 'album', desc: "Macera fotoğrafları albümü", images: ['🌍', '✈️', '🗺️'] },
-  'album-4': { id: 'album-4', name: "Party Time", category: 'album', desc: "Kutlama anları", images: ['🎉', '🎈', '🍰'] },
-  'album-5': { id: 'album-5', name: "Summer Vibes", category: 'album', desc: "Plaj ve tatil fotoğrafları", images: ['🏖️', '☀️', '🍹'] },
+  'magazin-1': { id: 'magazin-1', name: "Dot Editorial Magazine", category: 'magazin', styleVal: 'Best Friends Illustrated', desc: "16 sayfalık kişiselleştirilmiş magazin dergisi", price: "450 ₺", images: ['📸', '🎞️', '📮'] },
   
-  'kisisel-1': { id: 'kisisel-1', name: "Minimal Moon", category: 'kisisel', desc: "Temiz minimal tasarım", images: ['🌙', '⭐', '🌌'] },
-  'kisisel-2': { id: 'kisisel-2', name: "Nature Serenity", category: 'kisisel', desc: "Botanik minimalizm", images: ['🌿', '🍃', '🌱'] },
-  'kisisel-3': { id: 'kisisel-3', name: "Cosmic Dreams", category: 'kisisel', desc: "Uzay ve galaksi teması", images: ['⭐', '🚀', '🔭'] },
-  'kisisel-4': { id: 'kisisel-4', name: "Goal Getter", category: 'kisisel', desc: "Verimlilik odaklı", images: ['🎯', '📝', '⌛'] },
-  'kisisel-5': { id: 'kisisel-5', name: "Luxury Life", category: 'kisisel', desc: "Premium ve zarif estetik", images: ['💎', '✨', '⚜️'] }
+  'kisisel-1': { id: 'kisisel-1', name: "Minimal Moon", category: 'kisisel', styleVal: 'Minimalist İllüstrasyon', desc: "Temiz minimal tasarım", images: ['🌙', '⭐', '🌌'] },
+  'kisisel-2': { id: 'kisisel-2', name: "Nature Serenity", category: 'kisisel', styleVal: 'Yüksek Kalite Editoryal', desc: "Botanik minimalizm", images: ['🌿', '🍃', '🌱'] },
+  'kisisel-3': { id: 'kisisel-3', name: "Cosmic Dreams", category: 'kisisel', styleVal: 'Masalsı İllüstrasyon', desc: "Uzay ve galaksi teması", images: ['⭐', '🚀', '🔭'] },
+  'kisisel-4': { id: 'kisisel-4', name: "Goal Getter", category: 'kisisel', styleVal: 'Minimalist İllüstrasyon', desc: "Verimlilik odaklı", images: ['🎯', '📝', '⌛'] },
+  'kisisel-5': { id: 'kisisel-5', name: "Luxury Life", category: 'kisisel', styleVal: 'Yüksek Kalite Editoryal', desc: "Premium ve zarif estetik", images: ['💎', '✨', '⚜️'] }
 };
 
 // Products Data
@@ -218,9 +212,14 @@ function showProductDetail(product) {
   document.getElementById("detailTitle").textContent = product.name;
   document.getElementById("detailPrice").textContent = product.price;
 
-  // Hide special design button for regular products
-  document.getElementById('designThisButton').style.display = 'none';
-  document.getElementById('orderButton').style.display = 'block';
+  // Show/setup order button for regular products
+  const orderBtn = document.getElementById('orderButton');
+  if (orderBtn) {
+    orderBtn.style.display = 'block';
+    orderBtn.onclick = () => {
+      window.open(`https://wa.me/905359287488?text=Merhaba! '${product.name}' ürünü hakkında bilgi almak istiyorum.`, '_blank');
+    };
+  }
 
   const mainImage = document.getElementById("mainImage");
   if (product.image) {
@@ -252,17 +251,36 @@ function showExampleDetail(id) {
     lastCategory = design.category;
 
     document.getElementById("detailTitle").textContent = design.name;
-    document.getElementById("detailPrice").textContent = "Özel Tasarım Defter";
+    document.getElementById("detailPrice").textContent = design.price || "Özel Tasarım Defter";
 
     // Show special design button
-    const designBtn = document.getElementById('designThisButton');
-    designBtn.style.display = 'block';
-    designBtn.onclick = () => openDesignerWithCategory(design.category);
-    
+
     // Update order button for example
     const orderBtn = document.getElementById('orderButton');
-    orderBtn.style.display = 'block';
-    orderBtn.href = `https://wa.me/905359287488?text=Merhaba! '${design.name}' tasarım örneği hakkında bilgi almak istiyorum.`;
+    console.log('Setting up order button for example design:', design.name);
+    console.log('Order button element:', orderBtn);
+    
+    if (orderBtn) {
+        orderBtn.style.display = 'block';
+        orderBtn.onclick = (e) => {
+            console.log('===== ORDER BUTTON CLICKED ===');
+            console.log('Design data:', design);
+            if (design.category === 'magazin') {
+                openMagazineDesigner();
+                return;
+            }
+            console.log('About to call openCustomizationModal');
+            try {
+                openCustomizationModal(design);
+                console.log('openCustomizationModal called successfully');
+            } catch (error) {
+                console.error('Error calling openCustomizationModal:', error);
+            }
+        };
+        console.log('Order button onclick handler set');
+    } else {
+        console.error('Order button not found');
+    }
 
     const mainImage = document.getElementById("mainImage");
     const firstImg = design.images[0];
@@ -406,11 +424,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // --- Custom Designer Logic ---
 let userText = "";
-let bgColor = "#ffffff";
+let bgColor = "#1a1a1a";
 let selectedLayout = "Cizgili";
-let selectedPageCount = "80 Sayfa";
+let selectedPageCount = "100 Sayfa";
 let selectedStyle = "Disney Pixar (Romantik)";
 let selectedCategory = ""; // New Variable
+let preselectedStyle = null;
+let userTitle = ""; // New Variable for title
+let userNames = ""; // New Variable for names
+
 
 // Initialize Selection Logic
 function initDesignerSelectors() {
@@ -465,30 +487,34 @@ function initDesignerSelectors() {
 }
 
 function updateTextFromInput() {
-  const textInput = document.getElementById('textInput');
-  userText = textInput.value;
+  const titleInput = document.getElementById('titleInput');
+  const namesInput = document.getElementById('namesInput');
+  userTitle = titleInput ? titleInput.value : "";
+  userNames = namesInput ? namesInput.value : "";
   updateSummary();
 }
+
 
 function updateSummary() {
   if (document.getElementById('summaryLayout')) document.getElementById('summaryLayout').textContent = selectedLayout;
   if (document.getElementById('summaryPages')) document.getElementById('summaryPages').textContent = selectedPageCount;
   if (document.getElementById('summaryStyle')) document.getElementById('summaryStyle').textContent = selectedStyle;
-  if (document.getElementById('summaryText')) document.getElementById('summaryText').textContent = userText || "-";
+  if (document.getElementById('summaryTitle')) document.getElementById('summaryTitle').textContent = userTitle || "-";
+  if (document.getElementById('summaryNames')) document.getElementById('summaryNames').textContent = userNames || "-";
   
   // Color Translate
   const colorMap = {
-    "#ffffff": "Beyaz",
-    "#000000": "Siyah",
     "#1a1a1a": "Antrasit",
+    "#000000": "Siyah",
     "#f4f1ea": "Krem",
-    "#e2e8f0": "Gri",
-    "#ffb7b2": "Pembe"
+    "#4a1010": "Bordo",
+    "#2d342d": "Haki"
   };
   if (document.getElementById('summaryColor')) {
-    document.getElementById('summaryColor').textContent = colorMap[bgColor] || bgColor;
+    document.getElementById('summaryColor').textContent = colorMap[bgColor] || "Antrasit";
   }
 }
+
 
 // New: Select Category Logic
 function selectCategory(category) {
@@ -513,18 +539,47 @@ function selectCategory(category) {
   fantasyStyles.style.display = 'none';
 
   // Show relevant ones based on new categories
+  const pageCountSelector = document.getElementById('pageCountSelector');
+  if (pageCountSelector) {
+    pageCountSelector.style.display = 'block'; // Default to show
+  }
+
   if (category === 'animation') {
     romanticStyles.style.display = 'block';
     cinematicStyles.style.display = 'block';
     // Set default style for this category
     setDefaultStyle('Disney Pixar (Romantik)');
-  } else if (category === 'album') {
+  } else if (category === 'magazin') {
     friendsStyles.style.display = 'block';
     setDefaultStyle('Best Friends Illustrated');
+    
+    // Fix page count to 16 for Magazin
+    selectedPageCount = "16 Sayfa";
+    if (pageCountSelector) {
+      pageCountSelector.style.display = 'none'; // Hide selector for Magazin
+    }
   } else if (category === 'kisisel') {
     modernStyles.style.display = 'block';
     fantasyStyles.style.display = 'block';
     setDefaultStyle('Arcane Stili');
+  }
+
+  // Handle pre-selected style (hide selection group)
+  if (preselectedStyle) {
+    setDefaultStyle(preselectedStyle);
+    const styleGroup = document.getElementById('styleSelectionGroup');
+    const backBtn = document.getElementById('backToCategoryBtn');
+    
+    if (styleGroup) styleGroup.style.display = 'none';
+    if (backBtn) backBtn.style.display = 'none';
+    
+    preselectedStyle = null; // IMPORTANT: Reset after applying
+  } else {
+    const styleGroup = document.getElementById('styleSelectionGroup');
+    const backBtn = document.getElementById('backToCategoryBtn');
+    
+    if (styleGroup) styleGroup.style.display = 'block';
+    if (backBtn) backBtn.style.display = 'block';
   }
 }
 
@@ -548,7 +603,7 @@ function finishDesign() {
     
     let categoryLabel = "Belirtilmedi";
     if (selectedCategory === 'animation') categoryLabel = "Animation Style";
-    if (selectedCategory === 'album') categoryLabel = "Album Style";
+    if (selectedCategory === 'magazin') categoryLabel = "Magazin Style";
     if (selectedCategory === 'kisisel') categoryLabel = "Kişisel Style";
 
     const messageText = `*YENİ DEFTER SİPARİŞİ (ÖZEL TASARIM)*\n\n` +
@@ -557,9 +612,12 @@ function finishDesign() {
                         `• Sayfa Düzeni: ${selectedLayout}\n` +
                         `• Sayfa Sayısı: ${selectedPageCount}\n` +
                         `• Tasarım Stili: ${selectedStyle}\n` +
+                        `• Fiyat: ${currentDesignData && currentDesignData.price ? currentDesignData.price : 'Teklif Alın'}\n` +
                         `• Kapak Rengi: ${colorName}\n` +
-                        `• Kapak Metni: ${userText || 'Yok'}\n\n` +
+                        `• Kapak Başlığı: ${userTitle || 'Yok'}\n` +
+                        `• İsimler: ${userNames || 'Yok'}\n\n` +
                         `Merhaba! Özel tasarım defterimi sipariş etmek istiyorum. Kapakta kullanılacak fotoğrafı da şimdi gönderiyorum.`;
+
 
     const waUrl = `https://wa.me/905359287488?text=${encodeURIComponent(messageText)}`;
     window.open(waUrl, '_blank');
@@ -620,7 +678,19 @@ function backToCategories() {
 }
 
 function openDesignerWithCategory(category) {
+    if (category === 'magazin') {
+        openMagazineDesigner();
+        return;
+    }
     preselectedCategory = category;
+    preselectedStyle = null;
+    openDesigner();
+}
+
+function openDesignerWithStyle(category, styleName) {
+    console.log('Opening designer for specific style:', styleName, 'in category:', category);
+    preselectedCategory = category;
+    preselectedStyle = styleName;
     openDesigner();
 }
 
@@ -631,8 +701,10 @@ function openDesigner() {
     // If category is pre-selected, skip category selection and go to style selection
     if (preselectedCategory) {
         selectCategory(preselectedCategory);
-        preselectedCategory = null; // Reset for next time
+        preselectedCategory = null; // Reset category
+        // Note: preselectedStyle is checked inside selectCategory and reset there if needed
     } else {
+        preselectedStyle = null; // Reset style if opening normally
         resetCategorySelection(); // Ensure we start at category selection
     }
     
@@ -642,14 +714,6 @@ function openDesigner() {
 function closeDesigner() {
     document.getElementById('designerModal').style.display = 'none';
     document.body.style.overflow = 'auto';
-}
-
-// Close modal on click outside
-window.onclick = function(event) {
-    const modal = document.getElementById('designerModal');
-    if (event.target == modal) {
-        closeDesigner();
-    }
 }
 
 // Header scroll effect
@@ -680,3 +744,417 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     }
   });
 });
+
+// --- Customization Modal Logic ---
+let currentDesignData = null;
+let customLayout = "Cizgili";
+let customPageCount = "100 Sayfa";
+let customBgColor = "#1a1a1a";
+let customTitle = "";
+let customNames = "";
+
+function openCustomizationModal(designData) {
+  console.log('===== openCustomizationModal CALLED =====');
+  console.log('Design data received:', designData);
+  
+  currentDesignData = designData;
+  
+  // Reset to defaults
+  customLayout = "Cizgili";
+  customPageCount = "100 Sayfa";
+  customBgColor = "#1a1a1a";
+  customTitle = "";
+  customNames = "";
+  
+  console.log('Defaults reset');
+  
+  // Update design info display
+  const iconElement = document.getElementById('customSelectedDesignIcon');
+  const nameElement = document.getElementById('customSelectedDesignName');
+  const descElement = document.getElementById('customSelectedDesignDesc');
+  
+  console.log('Icon element:', iconElement);
+  console.log('Name element:', nameElement);
+  console.log('Desc element:', descElement);
+  
+  if (iconElement && nameElement && descElement) {
+    // Check if first image is an actual image file or emoji
+    const firstImg = designData.images[0];
+    if (firstImg.endsWith('.png') || firstImg.endsWith('.jpg') || firstImg.endsWith('.jpeg') || firstImg.endsWith('.webp')) {
+      iconElement.innerHTML = `<img src="${firstImg}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">`;
+    } else {
+      iconElement.textContent = firstImg;
+    }
+    
+    nameElement.textContent = designData.name;
+    descElement.textContent = designData.desc;
+    console.log('Design info updated');
+  }
+  
+  // Reset form inputs
+  const titleInput = document.getElementById('customTitleInput');
+  const namesInput = document.getElementById('customNamesInput');
+  if (titleInput) titleInput.value = "";
+  if (namesInput) namesInput.value = "";
+  
+  console.log('Form inputs reset');
+  
+  // Reset selections to defaults
+  document.querySelectorAll('#customLayoutSelector .selection-card').forEach(card => {
+    card.classList.toggle('active', card.dataset.value === 'Cizgili');
+  });
+  
+  document.querySelectorAll('#customPageCountSelector .selection-card').forEach(card => {
+    card.classList.toggle('active', card.dataset.value === '100 Sayfa');
+  });
+  
+  document.querySelectorAll('#customColorPicker .color-option').forEach(opt => {
+    opt.classList.toggle('active', opt.dataset.color === '#1a1a1a');
+  });
+  
+  console.log('Selections reset');
+  
+  // Initialize selectors
+  initCustomizationSelectors();
+  console.log('Selectors initialized');
+  
+  // Update summary
+  updateCustomizationSummary();
+  console.log('Summary updated');
+  
+  // Show modal
+  const modal = document.getElementById('customizationModal');
+  console.log('Modal element:', modal);
+  console.log('Modal current display:', modal ? modal.style.display : 'N/A');
+  
+  if (modal) {
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    console.log('Modal display set to block');
+    console.log('Modal display after setting:', modal.style.display);
+    console.log('Modal computed style:', window.getComputedStyle(modal).display);
+  } else {
+    console.error('Customization modal element not found!');
+  }
+  
+  console.log('===== openCustomizationModal COMPLETE =====');
+}
+
+function closeCustomizationModal() {
+  document.getElementById('customizationModal').style.display = 'none';
+  document.body.style.overflow = 'auto';
+  currentDesignData = null;
+}
+
+function initCustomizationSelectors() {
+  // Layout Selector
+  const layoutSelector = document.getElementById('customLayoutSelector');
+  if (layoutSelector) {
+    layoutSelector.querySelectorAll('.selection-card').forEach(card => {
+      card.addEventListener('click', () => {
+        layoutSelector.querySelectorAll('.selection-card').forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+        customLayout = card.dataset.value;
+        updateCustomizationSummary();
+      });
+    });
+  }
+
+  // Page Count Selector
+  const pageCountSelector = document.getElementById('customPageCountSelector');
+  if (pageCountSelector) {
+    pageCountSelector.querySelectorAll('.selection-card').forEach(card => {
+      card.addEventListener('click', () => {
+        pageCountSelector.querySelectorAll('.selection-card').forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+        customPageCount = card.dataset.value;
+        updateCustomizationSummary();
+      });
+    });
+  }
+
+  // Color Picker
+  const colorPicker = document.getElementById('customColorPicker');
+  if (colorPicker) {
+    colorPicker.querySelectorAll('.color-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        colorPicker.querySelectorAll('.color-option').forEach(o => o.classList.remove('active'));
+        opt.classList.add('active');
+        customBgColor = opt.dataset.color;
+        updateCustomizationSummary();
+      });
+    });
+  }
+}
+
+function updateCustomizationSummary() {
+  const titleInput = document.getElementById('customTitleInput');
+  const namesInput = document.getElementById('customNamesInput');
+  
+  customTitle = titleInput ? titleInput.value : "";
+  customNames = namesInput ? namesInput.value : "";
+  
+  // Update summary fields
+  if (currentDesignData) {
+    const summaryDesign = document.getElementById('customSummaryDesign');
+    if (summaryDesign) summaryDesign.textContent = currentDesignData.name;
+  }
+  
+  const summaryLayout = document.getElementById('customSummaryLayout');
+  if (summaryLayout) summaryLayout.textContent = customLayout;
+  
+  const summaryPages = document.getElementById('customSummaryPages');
+  if (summaryPages) summaryPages.textContent = customPageCount;
+  
+  const summaryTitle = document.getElementById('customSummaryTitle');
+  if (summaryTitle) summaryTitle.textContent = customTitle || "-";
+  
+  const summaryNames = document.getElementById('customSummaryNames');
+  if (summaryNames) summaryNames.textContent = customNames || "-";
+  
+  // Color name mapping
+  const colorMap = {
+    "#1a1a1a": "Antrasit",
+    "#000000": "Siyah",
+    "#f4f1ea": "Krem",
+    "#4a1010": "Bordo",
+    "#2d342d": "Haki"
+  };
+  
+  const summaryColor = document.getElementById('customSummaryColor');
+  if (summaryColor) summaryColor.textContent = colorMap[customBgColor] || "Antrasit";
+}
+
+function submitCustomOrder() {
+  if (!currentDesignData) return;
+  
+  const colorMap = {
+    "#1a1a1a": "Antrasit",
+    "#000000": "Siyah",
+    "#f4f1ea": "Krem",
+    "#4a1010": "Bordo",
+    "#2d342d": "Haki"
+  };
+  
+  const colorName = colorMap[customBgColor] || "Antrasit";
+  
+  const messageText = `*Yeni Defter Siparişi*
+
+Tasarım: ${currentDesignData.name}
+Stil: ${currentDesignData.styleVal}
+Boyut: A5
+Sayfa Düzeni: ${customLayout}
+Sayfa Sayısı: ${customPageCount}
+Kapak Rengi: ${colorName}
+Başlık: ${customTitle || '-'}
+İsimler: ${customNames || '-'}
+
+Merhaba! Sipariş etmek istiyorum. Fotoğrafı da gönderiyorum.`;
+
+  const waUrl = `https://wa.me/905359287488?text=${encodeURIComponent(messageText)}`;
+  window.open(waUrl, '_blank');
+  
+  // Close modal after sending
+  closeCustomizationModal();
+}
+
+// Update window click handler to include customization and magazine modals
+window.onclick = function(event) {
+  const designerModal = document.getElementById('designerModal');
+  const customModal = document.getElementById('customizationModal');
+  const magazineModal = document.getElementById('magazineDesignerModal');
+  
+  if (event.target == designerModal) {
+    closeDesigner();
+  }
+  
+  if (event.target == customModal) {
+    closeCustomizationModal();
+  }
+
+  if (event.target == magazineModal) {
+    closeMagazineDesigner();
+  }
+}
+
+// Magazine Designer Logic
+let magCurrentIdx = 0;
+const magPagesData = Array.from({ length: 16 }, () => ({
+  image: null,
+  firstName: "",
+  secondName: "",
+  title: "",
+  message1: "",
+  message2: ""
+}));
+
+function openMagazineDesigner() {
+  magCurrentIdx = 0;
+  // Clear data if needed or keep for current session
+  document.getElementById('magazineDesignerModal').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  renderMagPage();
+}
+
+function closeMagazineDesigner() {
+  document.getElementById('magazineDesignerModal').style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+
+function renderMagPage() {
+  const container = document.getElementById('magPageContent');
+  const isFirstPage = magCurrentIdx === 0;
+  const pageData = magPagesData[magCurrentIdx];
+  
+  // Update Progress
+  document.getElementById('magCurrentPage').textContent = `Sayfa ${magCurrentIdx + 1} / 16`;
+  document.getElementById('magPageType').textContent = isFirstPage ? "Kapak & Giriş" : `İç Sayfa ${magCurrentIdx + 1}`;
+  document.getElementById('magProgressBar').style.width = `${((magCurrentIdx + 1) / 16) * 100}%`;
+  
+  // Update Nav Buttons
+  document.getElementById('magPrevBtn').style.display = magCurrentIdx > 0 ? 'block' : 'none';
+  document.getElementById('magNextBtn').textContent = magCurrentIdx === 15 ? 'TASARIMI TAMAMLA' : 'Sonraki Sayfa →';
+
+  let html = `
+    <div class="mag-page-header">
+      <h3>${isFirstPage ? 'Magazin Kapağı' : `Sayfa ${magCurrentIdx + 1}`}</h3>
+      <p>${isFirstPage ? 'Kapak başlığını, isimleri ve kapak fotoğrafını belirleyin.' : 'Bu sayfa için bir fotoğraf ve iki kısa mesaj ekleyin.'}</p>
+    </div>
+
+    <div class="mag-input-group">
+      <label>FOTOĞRAF</label>
+      <div id="magImageUpload" class="mag-image-upload-area ${pageData.image ? 'has-image' : ''}" onclick="document.getElementById('magFileInput').click()">
+        <div class="upload-placeholder">
+          <i>📸</i>
+          <p>Fotoğraf Seçmek İçin Tıklayın</p>
+        </div>
+        <img id="magPreviewImg" class="mag-image-preview" src="${pageData.image || ''}" style="${pageData.image ? 'display:block' : 'display:none'}">
+        <input type="file" id="magFileInput" style="display:none" accept="image/*" onchange="handleMagImageChange(event)">
+      </div>
+    </div>
+  `;
+
+  if (isFirstPage) {
+    html += `
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div class="mag-input-group">
+          <label>SENİN İSMİN</label>
+          <input type="text" id="magFirstName" class="text-input" value="${pageData.firstName}" placeholder="Örn: Ali">
+        </div>
+        <div class="mag-input-group">
+          <label>O'NUN İSMİ</label>
+          <input type="text" id="magSecondName" class="text-input" value="${pageData.secondName}" placeholder="Örn: Ayşe">
+        </div>
+      </div>
+      <div class="mag-input-group">
+        <label>MAGAZİN BAŞLIĞI</label>
+        <input type="text" id="magTitle" class="text-input" value="${pageData.title}" placeholder="Örn: Our Love Story">
+      </div>
+    `;
+  }
+
+  html += `
+    <div class="mag-input-group">
+      <label>MESAJ 1</label>
+      <textarea id="magMessage1" class="text-input" style="height: 80px; resize: none;" placeholder="Kısa bir mesaj yazın...">${pageData.message1}</textarea>
+    </div>
+    <div class="mag-input-group">
+      <label>MESAJ 2</label>
+      <textarea id="magMessage2" class="text-input" style="height: 80px; resize: none;" placeholder="İkinci bir mesaj yazın...">${pageData.message2}</textarea>
+    </div>
+  `;
+
+  container.innerHTML = html;
+  
+  // Scrol to top of container
+  container.scrollTop = 0;
+}
+
+function handleMagImageChange(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const result = e.target.result;
+      magPagesData[magCurrentIdx].image = result;
+      const previewImg = document.getElementById('magPreviewImg');
+      const uploadArea = document.getElementById('magImageUpload');
+      if (previewImg) {
+        previewImg.src = result;
+        previewImg.style.display = 'block';
+      }
+      if (uploadArea) {
+        uploadArea.classList.add('has-image');
+      }
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function saveMagCurrentPageData() {
+  const pageData = magPagesData[magCurrentIdx];
+  pageData.message1 = document.getElementById('magMessage1').value;
+  pageData.message2 = document.getElementById('magMessage2').value;
+  
+  if (magCurrentIdx === 0) {
+    pageData.firstName = document.getElementById('magFirstName').value;
+    pageData.secondName = document.getElementById('magSecondName').value;
+    pageData.title = document.getElementById('magTitle').value;
+  }
+}
+
+function magNextPage() {
+  saveMagCurrentPageData();
+  
+  if (magCurrentIdx < 15) {
+    magCurrentIdx++;
+    renderMagPage();
+  } else {
+    finishMagDesign();
+  }
+}
+
+function magPrevPage() {
+  saveMagCurrentPageData();
+  if (magCurrentIdx > 0) {
+    magCurrentIdx--;
+    renderMagPage();
+  }
+}
+
+function finishMagDesign() {
+  let messageText = `*DOT EDITORIAL MAGAZINE SİPARİŞİ*\n\n`;
+  messageText += `• Ürün: Dot Editorial Edition (16 Sayfa)\n`;
+  messageText += `• Başlık: ${magPagesData[0].title || 'Yok'}\n`;
+  messageText += `• İsimler: ${magPagesData[0].firstName} & ${magPagesData[0].secondName}\n\n`;
+  
+  messageText += `*SAYFA DETAYLARI:*\n`;
+  
+  magPagesData.forEach((page, idx) => {
+    messageText += `\n[SAYFA ${idx + 1}]\n`;
+    if (idx === 0) {
+      messageText += `• Başlık: ${page.title}\n`;
+      messageText += `• İsimler: ${page.firstName} & ${page.secondName}\n`;
+    }
+    messageText += `• Mesaj 1: ${page.message1 || '-'}\n`;
+    messageText += `• Mesaj 2: ${page.message2 || '-'}\n`;
+    messageText += `• Fotoğraf: ${page.image ? 'Eklendi ✅' : 'Eklenmedi ❌'}\n`;
+  });
+
+  messageText += `\nMerhaba! 16 sayfalık özel magazinimi tasarladım. Detayları yukarıdaki gibidir. Fotoğrafları şimdi WeTransfer üzerinden dot.note.2026@gmail.com adresine seçip gönderiyorum.`;
+
+  const waUrl = `https://wa.me/905359287488?text=${encodeURIComponent(messageText)}`;
+  
+  // Open WhatsApp
+  window.open(waUrl, '_blank');
+  
+  // Open WeTransfer in a separate tab after a small delay to avoid popup blockers
+  setTimeout(() => {
+    const wtUrl = `https://wetransfer.com/?to=dot.note.2026@gmail.com`;
+    window.open(wtUrl, '_blank');
+  }, 1000);
+
+  closeMagazineDesigner();
+}
+
+
