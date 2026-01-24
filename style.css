@@ -1,731 +1,2088 @@
-<!doctype html>
-<html lang="tr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DOT NOTE - Özel Tasarım Defterler</title>
-    <meta
-      name="description"
-      content="El yapımı, özel tasarım defterler. 50+ farklı tasarım, premium kalite, 24 saat teslimat."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="logo.png">
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <!-- Loading Screen -->
-    <div id="loader" class="loader">
-      <div class="loader-content">
-        <img src="logo.png" alt="DOT NOTE Logo" class="loader-logo">
-        <div class="loader-dots">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
-    </div>
+/* CSS extracted from index.html */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    <!-- Header -->
-    <header>
-      <div class="header-content">
-        <div class="logo" onclick="showHome()">
-          <img src="logo.png" alt="DOT NOTE Logo">
-          <span class="logo-text">DOT NOTE</span>
-        </div>
-        <nav id="mainNav">
-          <a href="#products">Ürünler</a>
-          <a href="hakkimizda.html">Hakkımızda</a>
-          <a href="#contact">İletişim</a>
-          <a href="#" onclick="openDesigner(); return false;">KENDİN TASARLA</a>
-        </nav>
-        <div class="menu-toggle" id="menuToggle">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
-    </header>
+:root {
+  --primary-color: #0b1b4d;
+  --secondary-color: #162a5e;
+  --accent-color: #0b1b4d;
+  --accent-light: #1a3d8f;
+  --text-primary: #0F172A;
+  --text-secondary: #64748B;
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F8FAFC;
+  --bg-accent: #F1F5F9;
+  --border-color: #E2E8F0;
+  --border-width: 2px;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
 
-    <!-- Home Page -->
-    <div id="homePage">
-      <!-- Hero Section -->
-      <section class="hero">
-        <div class="hero-content">
-          <h1>ÖZEL TASARIM<br />DEFTERLER</h1>
-          <p>
-            El yapımı, premium kalitede, size özel tasarlanmış defterler. Her
-            sayfa bir sanat eseri.
-          </p>
-        <a href="#products" class="cta-button">ÜRÜNLERİ KEŞFET</a>
-        </div>
-      </section>
+* {
+  scroll-behavior: smooth;
+}
 
-      <!-- Stats Section -->
-      <section class="stats">
-        <div class="stat-item">
-          <div class="stat-icon">✨</div>
-          <div class="stat-content">
-            <h3>100% EL YAPIMI</h3>
-            <p>Özenle Hazırlanır</p>
-          </div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-icon">📦</div>
-          <div class="stat-content">
-            <h3>HIZLI TESLİMAT</h3>
-            <p>2 Haftada Kapınızda</p>
-          </div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-icon">💎</div>
-          <div class="stat-content">
-            <h3>ÖZEL TASARIM</h3>
-            <p>Size Özel 10+ Seçenek</p>
-          </div>
-        </div>
-      </section>
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
+/* Typography */
+h1 {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+}
 
+h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
 
-      <!-- Categories Selection Section -->
-      <section class="products-section main-section" id="products">
-        <h2 class="section-title">TASARIMLARIMIZ</h2>
-        <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem; font-size: 1.1rem;">
-          Sevdiğin stili seç, örnekleri keşfet ve kendi defterini tasarla
-        </p>
-        
-        <div class="category-cards-container">
-          <div class="category-nav-card" onclick="navigateToCategory('animation')" data-category="animation">
-            <div class="category-card-icon" style="height: 120px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
-              <img src="animation-card.png" alt="Animation" style="max-height: 100%; border-radius: 8px;">
-            </div>
-            <h3>Animation Style</h3>
-            <p>Romantik anime ve sinematik tasarımlar</p>
-            <div class="category-card-arrow">→</div>
-          </div>
-          
-          <div class="category-nav-card" onclick="navigateToCategory('magazin')" data-category="magazin">
-            <div class="category-card-icon" style="height: 120px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
-              <img src="album-card.png" alt="Magazin" style="max-height: 100%; border-radius: 8px;">
-            </div>
-            <h3>Magazin Style</h3>
-            <p>Polaroid ve fotoğraf albümü tarzı</p>
-            <div class="category-card-arrow">→</div>
-          </div>
-          
-          <div class="category-nav-card" onclick="navigateToCategory('kisisel')" data-category="kisisel">
-            <div class="category-card-icon" style="height: 120px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
-              <img src="kisisel-card.png" alt="Kişisel" style="max-height: 100%; border-radius: 8px;">
-            </div>
-            <h3>Kişisel Style</h3>
-            <p>Minimal ve kişiye özel tasarımlar</p>
-            <div class="category-card-arrow">→</div>
-          </div>
-        </div>
-      </section>
+h3 {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-weight: 700;
+}
 
+/* Header with Glassmorphism */
+header {
+  position: sticky;
+  top: 0;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 1rem var(--spacing-sm);
+  z-index: 1000;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
 
-      <!-- How to Order Section -->
-      <section class="how-to-order">
-        <h2 class="section-title">NASIL SİPARİŞ VERİLİR?</h2>
-        <div class="steps-container">
-          <div class="step-item">
-            <div class="step-icon">🎨</div>
-            <h3>1. Kendin Tasarla</h3>
-            <p>Kendin Tasarla’ butonuna tıklayın, istediğiniz detayları seçin ve tasarımı tamamlayın</p>
-          </div>
-          <div class="step-arrow">→</div>
-          <div class="step-item">
-            <div class="step-icon">📸</div>
-            <h3>2. Kapak Fotoğrafını Gönder</h3>
-            <p>Kullanıcı, defter kapağında kullanılmasını istediği fotoğrafı WhatsApp üzerinden gönderir.</p>
-          </div>
-          <div class="step-arrow">→</div>
-          <div class="step-item">
-            <div class="step-icon">✨</div>
-            <h3>3. Kapak Tasarımları Hazırlanır</h3>
-            <p>Paylaşılan bilgiler ve fotoğrafa göre 3 farklı kapak tasarımı hazırlanır. Tasarım önizlemeleri WhatsApp üzerinden kullanıcıya gönderilir.</p>
-          </div>
-          <div class="step-arrow">→</div>
-           <div class="step-item">
-            <div class="step-icon">✅</div>
-            <h3>4. Seçim & Ödeme</h3>
-            <p>Kullanıcı beğendiği tasarımı seçer. Ödeme bilgileri paylaşılır.</p>
-          </div>
-          <div class="step-arrow">→</div>
-          <div class="step-item">
-            <div class="step-icon">📦</div>
-            <h3>5. Üretim & Teslimat</h3>
-            <p>Ödeme sonrası defter üretime alınır. Sipariş özenle hazırlanır ve yaklaşık 2 hafta içinde adresine teslim edilir.</p>
-          </div>
-        </div>
-      </section>
+header.scrolled {
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+  padding: 0.8rem var(--spacing-sm);
+}
 
+.header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+.logo {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
 
+.logo img {
+  height: 60px;
+  width: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
 
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
 
-      <!-- Custom Designer Modal -->
-      <div id="designerModal" class="designer-modal">
-        <div class="modal-content">
-          <span class="close-modal" onclick="closeDesigner()">&times;</span>
-          <h2 class="modal-title">KENDİN TASARLA</h2>
-          
-          <div class="designer-container-modal" style="display: block; max-width: 800px; margin: 0 auto; padding: 1rem;">
+nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
 
-            <!-- 1. Category Selector Phase -->
-            <div id="designCategorySelector" class="category-phase">
-              <h3 style="text-align: center; margin-bottom: 2rem;">Hangi Stili Seçiyorsun?</h3>
-              <div class="category-selection-container">
-                <div class="category-selection-card" onclick="selectCategory('animation')">
-                  <div class="cat-icon">�</div>
-                  <h3>Animation Style</h3>
-                  <p>Romantik anime ve sinematik tasarımlar</p>
-                </div>
-                <div class="category-selection-card" onclick="selectCategory('magazin')">
-                  <div class="cat-icon">�</div>
-                  <h3>Magazin Style</h3>
-                  <p>Polaroid ve fotoğraf albümü tarzı</p>
-                </div>
-                <div class="category-selection-card" onclick="selectCategory('kisisel')">
-                  <div class="cat-icon">✨</div>
-                  <h3>Kişisel Style</h3>
-                  <p>Minimal ve kişiye özel tasarımlar</p>
-                </div>
-              </div>
-            </div>
-          
-            <!-- 2. Tools Area (Hidden initially) -->
-            <div id="designToolsWrapper" class="designer-tools" style="padding: 0; display: none;">
-              <div style="margin-bottom: 1rem;">
-                 <button id="backToCategoryBtn" onclick="resetCategorySelection()" class="back-button-small">← Kategori Seçimine Dön</button>
-              </div>
+nav a:not(.nav-cta) {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  padding-bottom: 4px;
+}
 
-              <h3>Dizayn Araçları</h3>
-            
-              <div class="tool-group">
-                <label>Sayfa Düzeni</label>
-                <div class="selection-grid" id="layoutSelector">
-                  <div class="selection-card active" data-value="Cizgili">Çizgili</div>
-                  <div class="selection-card" data-value="Noktali">Noktalı</div>
-                  <div class="selection-card" data-value="Bos">Boş</div>
-                </div>
-              </div>
+/* Category Selection Styles */
+.category-selection-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
 
-              <div class="tool-group">
-                <label>Sayfa Sayısı</label>
-                <div class="selection-grid" id="pageCountSelector">
-                  <div class="selection-card active" data-value="100 Sayfa">100 Sayfa</div>
-                  <div class="selection-card" data-value="150 Sayfa">150 Sayfa</div>
-                  <div class="selection-card" data-value="200 Sayfa">200 Sayfa</div>
-                </div>
-              </div>
+.category-selection-card {
+  background: #F8FAFC;
+  border: 2px solid #E2E8F0;
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
 
-              <div class="tool-group" id="styleSelectionGroup">
-                <label>Kapak Tasarım Stili</label>
-                
-                <div class="style-category" id="romanticStyles">
-                  <span class="category-label">🌹 ROMANTİK / ÇİFT</span>
-                  <div class="style-grid">
-                    <div class="style-card active" data-value="Disney Pixar (Romantik)">Disney Pixar</div>
-                    <div class="style-card" data-value="Anime (Makoto Shinkai)">Romantic Anime</div>
-                    <div class="style-card" data-value="Studio Ghibli">Studio Ghibli</div>
-                    <div class="style-card" data-value="Yarı-Gerçekçi">Semi-realistic</div>
-                  </div>
-                </div>
+.category-selection-card:hover {
+  border-color: #000;
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  background: #fff;
+}
 
-                <div class="style-category" id="friendsStyles">
-                  <span class="category-label">👯‍♀️ ARKADAŞ / DOST</span>
-                  <div class="style-grid">
-                    <div class="style-card" data-value="Best Friends Illustrated">Best Friends Illustrated</div>
-                    <div class="style-card" data-value="Sonsuz Dostluk">Friends Forever</div>
-                    <div class="style-card" data-value="Suluboya Anılar">Watercolor Memories</div>
-                    <div class="style-card" data-value="Eğlenceli Çizimler">Fun Doodles</div>
-                  </div>
-                </div>
+.cat-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
 
-                <div class="style-category" id="cinematicStyles">
-                  <span class="category-label">🎬 SİNEMATİK & DRAMATİK</span>
-                  <div class="style-grid">
-                    <div class="style-card" data-value="Arcane Stili">Arcane Style</div>
-                    <div class="style-card" data-value="DreamWorks">DreamWorks</div>
-                    <div class="style-card" data-value="Sinematik Konsept Sanatı">Painterly Art</div>
-                  </div>
-                </div>
+.category-selection-card:hover .cat-icon {
+  transform: scale(1.1);
+}
 
-                <div class="style-category" id="modernStyles">
-                  <span class="category-label">✨ MODERN & ZARİF</span>
-                  <div class="style-grid">
-                    <div class="style-card" data-value="Minimalist İllüstrasyon">Minimalist</div>
-                    <div class="style-card" data-value="Yüksek Kalite Editoryal">High-end Editorial</div>
-                    <div class="style-card" data-value="Sulu Boya">Soft Watercolor</div>
-                  </div>
-                </div>
+.category-selection-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
 
-                <div class="style-category" id="fantasyStyles">
-                  <span class="category-label">🌌 FANTASTİK / MASALSI</span>
-                  <div class="style-grid">
-                    <div class="style-card" data-value="Masalsı İllüstrasyon">Fairytale Illustration</div>
-                    <div class="style-card" data-value="Ethereal Fantasy">Ethereal Fantasy</div>
-                    <div class="style-card" data-value="Modern Hikaye Kitabı">Storybook Style</div>
-                  </div>
-                </div>
-              </div>
+.category-selection-card p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
 
-              <div class="tool-group">
-                <label>Kapak Rengi</label>
-                <div class="color-picker" id="colorPicker">
-                  <div class="color-option active" style="background: #1a1a1a" data-color="#1a1a1a"></div>
-                  <div class="color-option" style="background: #000000" data-color="#000000"></div>
-                  <div class="color-option" style="background: #f4f1ea" data-color="#f4f1ea"></div>
-                  <div class="color-option" style="background: #4a1010" data-color="#4a1010"></div>
-                  <div class="color-option" style="background: #2d342d" data-color="#2d342d"></div>
-                </div>
-              </div>
+.back-button-small {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
 
-              <div class="tool-group">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                  <div>
-                    <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Kapak Başlığı</label>
-                    <input type="text" id="titleInput" placeholder="Örn: Our Story" class="text-input" oninput="updateTextFromInput()">
-                  </div>
-                  <div>
-                    <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">İsimler</label>
-                    <input type="text" id="namesInput" placeholder="Örn: Ali & Ayşe" class="text-input" oninput="updateTextFromInput()">
-                  </div>
-                </div>
-              </div>
+.back-button-small:hover {
+  color: #000;
+  text-decoration: underline;
+}
 
-              <!-- Live Summary Section -->
-              <div class="order-summary-box">
-                <div class="summary-title">Sipariş Özeti</div>
-                <div class="summary-row">
-                  <span class="summary-label">Boyut:</span>
-                  <span class="summary-value">A5 (Standard)</span>
-                </div>
-                <div class="summary-row">
-                  <span class="summary-label">Sayfa Düzeni:</span>
-                  <span class="summary-value" id="summaryLayout">Çizgili</span>
-                </div>
-                <div class="summary-row">
-                  <span class="summary-label">Sayfa Sayısı:</span>
-                  <span class="summary-value" id="summaryPages">80 Sayfa</span>
-                </div>
-                <div class="summary-row">
-                  <span class="summary-label">Tasarım Stili:</span>
-                  <span class="summary-value" id="summaryStyle">Disney Pixar (Romantik)</span>
-                </div>
-                <div class="summary-row">
-                  <span class="summary-label">Kapak Rengi:</span>
-                  <span class="summary-value" id="summaryColor">Beyaz</span>
-                </div>
-                <div class="summary-row">
-                  <span class="summary-label">Kapak Başlığı:</span>
-                  <span class="summary-value" id="summaryTitle">-</span>
-                </div>
-                <div class="summary-row">
-                  <span class="summary-label">İsimler:</span>
-                  <span class="summary-value" id="summaryNames">-</span>
-                </div>
-                <div class="summary-row" style="margin-top: 5px; border-top: 1px dashed #E2E8F0; padding-top: 5px;">
-                  <span class="summary-label" style="color: #64748B; font-weight: 700;">📸 Kapak Fotoğrafı:</span>
-                  <span class="summary-value" style="color: #475569;">WhatsApp'tan Gönderilecek</span>
-                </div>
-              </div>
+@media (max-width: 768px) {
+  .category-selection-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .category-selection-card {
+    min-height: 150px;
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: left;
+     padding: 1.5rem;
+     gap: 1.5rem;
+  }
 
-                <button class="order-button" style="margin-top: 1.5rem;" onclick="finishDesign()">TASARIMI TAMAMLA & WHATSAPP’TAN SİPARİŞ VER</button>
-                <p class="designer-note">* Siparişiniz WhatsApp üzerinden iletilecektir. Lütfen açılacak ekranda kapakta olmasını istediğiniz fotoğrafı da bize göndermeyi unutmayın!</p>
-            </div>
-          </div>
-        </div>
-      </div>
+  .cat-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0;
+  }
 
-      <!-- Contact Section -->
-      <section class="contact-section" id="contact">
-        <div class="contact-container">
-
-          <div class="contact-column">
-            <h4>SOSYAL MEDYA</h4>
-            <a href="https://instagram.com/dotnote" target="_blank">Instagram</a>
-            <a href="#" target="_blank">TikTok</a>
-            <a href="#" target="_blank">Pinterest</a>
-          </div>
-          <div class="contact-column">
-            <h4>İLETİŞİM</h4>
-            <a href="mailto:dot.note.2026@gmail.com">dot.note.2026@gmail.com</a>
-            <p>+90 535 928 74 88</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Footer -->
-      <footer>
-        <p>&copy; 2026 DOT NOTE. Tüm hakları saklıdır.</p>
-      </footer>
-    </div>
-
-    <!-- Customization Modal (Outside homePage so it's always accessible) -->
-    <div id="customizationModal" class="designer-modal">
-      <div class="modal-content">
-        <span class="close-modal" onclick="closeCustomizationModal()">&times;</span>
-        <h2 class="modal-title">DEFTER ÖZELLİKLERİNİ BELİRLE</h2>
-        
-        <div class="designer-container-modal" style="display: block; max-width: 800px; margin: 0 auto; padding: 1rem;">
-          
-          <div class="customization-tools" style="padding: 0;">
-            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">
-              Seçtiğiniz tasarım için defter özelliklerini belirleyin
-            </p>
-
-            <!-- Selected Design Display -->
-            <div class="tool-group" style="background: var(--bg-secondary); padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 2rem;">
-              <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Seçilen Tasarım</label>
-              <div style="display: flex; align-items: center; gap: 1rem;">
-                <div id="customSelectedDesignIcon" style="font-size: 3rem;">🎨</div>
-                <div>
-                  <h3 id="customSelectedDesignName" style="margin: 0; font-size: 1.3rem;">Disney Pixar Style</h3>
-                  <p id="customSelectedDesignDesc" style="margin: 0; color: var(--text-secondary); font-size: 0.9rem;">Film posteri tarzında romantik çiftler</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="tool-group">
-              <label>Sayfa Düzeni</label>
-              <div class="selection-grid" id="customLayoutSelector">
-                <div class="selection-card active" data-value="Cizgili">Çizgili</div>
-                <div class="selection-card" data-value="Noktali">Noktalı</div>
-                <div class="selection-card" data-value="Bos">Boş</div>
-              </div>
-            </div>
-
-            <div class="tool-group">
-              <label>Sayfa Sayısı</label>
-              <div class="selection-grid" id="customPageCountSelector">
-                <div class="selection-card" data-value="50 Sayfa">50 Sayfa</div>
-                <div class="selection-card active" data-value="100 Sayfa">100 Sayfa</div>
-                <div class="selection-card" data-value="150 Sayfa">150 Sayfa</div>
-                <div class="selection-card" data-value="200 Sayfa">200 Sayfa</div>
-              </div>
-            </div>
-
-            <div class="tool-group">
-              <label>Kapak Rengi</label>
-              <div class="color-picker" id="customColorPicker">
-                <div class="color-option active" style="background: #1a1a1a" data-color="#1a1a1a"></div>
-                <div class="color-option" style="background: #000000" data-color="#000000"></div>
-                <div class="color-option" style="background: #f4f1ea" data-color="#f4f1ea"></div>
-                <div class="color-option" style="background: #4a1010" data-color="#4a1010"></div>
-                <div class="color-option" style="background: #2d342d" data-color="#2d342d"></div>
-              </div>
-            </div>
-
-            <div class="tool-group">
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                <div>
-                  <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Kapak Başlığı</label>
-                  <input type="text" id="customTitleInput" placeholder="Örn: Our Story" class="text-input" oninput="updateCustomizationSummary()">
-                </div>
-                <div>
-                  <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">İsimler</label>
-                  <input type="text" id="customNamesInput" placeholder="Örn: Ali & Ayşe" class="text-input" oninput="updateCustomizationSummary()">
-                </div>
-              </div>
-            </div>
-
-            <!-- Live Summary Section -->
-            <div class="order-summary-box">
-              <div class="summary-title">Sipariş Özeti</div>
-              <div class="summary-row">
-                <span class="summary-label">Tasarım:</span>
-                <span class="summary-value" id="customSummaryDesign">-</span>
-              </div>
-              <div class="summary-row">
-                <span class="summary-label">Boyut:</span>
-                <span class="summary-value">A5 (Standard)</span>
-              </div>
-              <div class="summary-row">
-                <span class="summary-label">Sayfa Düzeni:</span>
-                <span class="summary-value" id="customSummaryLayout">Çizgili</span>
-              </div>
-              <div class="summary-row">
-                <span class="summary-label">Sayfa Sayısı:</span>
-                <span class="summary-value" id="customSummaryPages">100 Sayfa</span>
-              </div>
-              <div class="summary-row">
-                <span class="summary-label">Kapak Rengi:</span>
-                <span class="summary-value" id="customSummaryColor">Antrasit</span>
-              </div>
-              <div class="summary-row">
-                <span class="summary-label">Kapak Başlığı:</span>
-                <span class="summary-value" id="customSummaryTitle">-</span>
-              </div>
-              <div class="summary-row">
-                <span class="summary-label">İsimler:</span>
-                <span class="summary-value" id="customSummaryNames">-</span>
-              </div>
-              <div class="summary-row" style="margin-top: 5px; border-top: 1px dashed #E2E8F0; padding-top: 5px;">
-                <span class="summary-label" style="color: #64748B; font-weight: 700;">📸 Kapak Fotoğrafı:</span>
-                <span class="summary-value" style="color: #475569;">WhatsApp'tan Gönderilecek</span>
-              </div>
-            </div>
-
-            <button class="order-button" style="margin-top: 1.5rem;" onclick="submitCustomOrder()">TASARIMI TAMAMLA & WHATSAPP'TAN SİPARİŞ VER</button>
-            <p class="designer-note">* Siparişiniz WhatsApp üzerinden iletilecektir. Lütfen açılacak ekranda kapakta olmasını istediğiniz fotoğrafı da bize göndermeyi unutmayın!</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Magazine Designer Modal -->
-    <div id="magazineDesignerModal" class="designer-modal">
-      <div class="modal-content">
-        <span class="close-modal" onclick="closeMagazineDesigner()">&times;</span>
-        <h2 class="modal-title" style="font-family: serif; letter-spacing: -1px;">DOT EDITORIAL DESIGNER</h2>
-        
-        <div class="magazine-designer-container" style="max-width: 800px; margin: 0 auto; padding: 1rem;">
-          <!-- Progress Indicator -->
-          <div class="magazine-progress">
-            <div class="progress-info">
-              <span id="magCurrentPage">Sayfa 1 / 16</span>
-              <span id="magPageType">Kapak & Giriş</span>
-            </div>
-            <div class="progress-bar-container">
-              <div id="magProgressBar" class="progress-bar" style="width: 6.25%;"></div>
-            </div>
-          </div>
-
-          <!-- Page Content Area -->
-          <div id="magPageContent" class="mag-page-content">
-            <!-- Content will be injected by JavaScript -->
-          </div>
-
-          <!-- Navigation Buttons -->
-          <div class="mag-nav-buttons" style="display: flex; justify-content: space-between; margin-top: 2rem; gap: 1rem;">
-            <button id="magPrevBtn" class="back-button-small" onclick="magPrevPage()" style="display: none;">← Geri</button>
-            <div style="flex-grow: 1;"></div>
-            <button id="magNextBtn" class="order-button" onclick="magNextPage()" style="margin: 0;">Sonraki Sayfa →</button>
-          </div>
-          
-          <p class="designer-note" style="margin-top: 1.5rem; text-align: center;">
-            * Her sayfa için fotoğraf ve mesajlarınızı ekleyin. Tamamladığınızda WhatsApp üzerinden bize iletebilirsiniz.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Category Pages (Outside homePage so they can be shown when homePage is hidden) -->
-    
-    <!-- Animation Style Category Page -->
-    <section class="category-page animation-page hidden" id="animation-page">
-      <button class="back-to-categories" onclick="backToCategories()">← Kategorilere Dön</button>
-      
-      <div class="category-hero-image" style="text-align: center; margin-bottom: 2rem;">
-        <img src="animation-style.png" alt="Animation Style" style="max-width: 100%; height: auto; max-height: 500px; border-radius: 16px; box-shadow: 0 10px 40px rgba(11, 27, 77, 0.2);">
-      </div>
-
-      <div class="category-page-header">
-        <h2>🎬 Animation Style</h2>
-        <p>Kapağı biz tasarlıyoruz, defteri sen dolduruyorsun. Dot Note, hayal gücünü animasyon ruhuyla birleştirir.</p>
-      </div>
-
-      <div class="examples-grid">
-        <div class="example-card" onclick="showExampleDetail('animation-1')" style="cursor: pointer;">
-          <div class="example-image">
-            <img src="cinematic-romance-1.png" alt="Disney Pixar Style" style="width: 100%; height: 100%; object-fit: cover;">
-          </div>
-          <div class="example-info">
-            <h4>Disney Pixar Style <span class="price-badge">500 ₺</span></h4>
-            <p>Film posteri tarzında romantik çiftler</p>
-          </div>
-        </div>
-
-        <div class="example-card" onclick="showExampleDetail('animation-2')" style="cursor: pointer;">
-          <div class="example-image">
-            <img src="anime-cinema-style.jpg" alt="Anime Cinema Style" style="width: 100%; height: 100%; object-fit: cover;">
-          </div>
-          <div class="example-info">
-            <h4>Anime Cinema Style <span class="price-badge">500 ₺</span></h4>
-            <p>Sevimli anime tarzı karakterler</p>
-          </div>
-        </div>
-
-        <div class="example-card" onclick="showExampleDetail('animation-3')" style="cursor: pointer;">
-          <div class="example-image">
-            <img src="ghibli-style-1.jpg" alt="Studio Ghibli Style" style="width: 100%; height: 100%; object-fit: cover;">
-          </div>
-          <div class="example-info">
-            <h4>Studio Ghibli Çizim Stili <span class="price-badge">500 ₺</span></h4>
-            <p>Suluboya tarzı romantik sahneler</p>
-          </div>
-        </div>
-
-      </div>
+  .category-selection-card h3 {
+     margin-bottom: 0.2rem;
+  }
+}
 
 
-    </section>
+.nav-cta {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
 
-    <!-- Magazin Style Category Page -->
-    <section class="category-page magazin-page hidden" id="magazin-page">
-      <button class="back-to-categories" onclick="backToCategories()">← Kategorilere Dön</button>
-      
-      <div class="category-page-header">
-        <h2 style="font-family: serif; letter-spacing: -1px;">VOGUE EDITORIAL</h2>
-        <p>Klasik defterlerin ötesinde, 16 sayfalık size özel bir magazin dergisi.</p>
-      </div>
+@media (max-width: 992px) {
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    z-index: 1001;
+  }
 
-      <div class="magazine-showcase">
-        <div class="magazine-cover-large" onclick="showExampleDetail('magazin-1')">
-          <div class="magazine-badge">16 SAYFA</div>
-          <div class="magazine-content">
-            <span style="font-size: 5rem;">📸</span>
-            <div class="magazine-info-overlay">
-              <h3>Dot Editorial Edition</h3>
-              <p>Minimalist, şık ve tamamen size özel.</p>
-              <span class="price-badge" style="font-size: 1.2rem; padding: 0.5rem 1rem;">450 ₺</span>
-            </div>
-          </div>
-        </div>
-      </div>
+  .menu-toggle span {
+    width: 25px;
+    height: 2px;
+    background: #000;
+    transition: 0.3s;
+  }
 
-      <div class="category-cta-container">
-        <button class="category-cta-button" onclick="openDesignerWithCategory('magazin')">
-          Magazinini Tasarla - 16 Sayfa
-        </button>
-      </div>
-    </section>
+  nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 70%;
+    background: #ffffff;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+    padding: 2rem;
+  }
 
-    <!-- Kişisel Style Category Page -->
-    <section class="category-page kisisel-page hidden" id="kisisel-page">
-      <button class="back-to-categories" onclick="backToCategories()">← Kategorilere Dön</button>
-      
-      <div class="category-page-header">
-        <h2>✨ Kişisel Style</h2>
-        <p>Minimal ve kişiye özel tasarımlarla kendinizi ifade edin</p>
-      </div>
+  nav.active {
+    right: 0;
+  }
 
-      <div class="examples-grid">
-        <div class="example-card" onclick="showExampleDetail('kisisel-1')" style="cursor: pointer;">
-          <div class="example-image">🌙</div>
-          <div class="example-info">
-            <h4>Minimal Moon</h4>
-            <p>Temiz minimal tasarım</p>
-          </div>
-        </div>
+  nav a {
+    font-size: 1.4rem !important;
+  }
 
-        <div class="example-card" onclick="showExampleDetail('kisisel-2')" style="cursor: pointer;">
-          <div class="example-image">🌿</div>
-          <div class="example-info">
-            <h4>Nature Serenity</h4>
-            <p>Botanik minimalizm</p>
-          </div>
-        </div>
+  .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+  .menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+}
 
-        <div class="example-card" onclick="showExampleDetail('kisisel-3')" style="cursor: pointer;">
-          <div class="example-image">⭐</div>
-          <div class="example-info">
-            <h4>Cosmic Dreams</h4>
-            <p>Uzay ve galaksi teması</p>
-          </div>
-        </div>
+nav a:not(.nav-cta):after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-color);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-        <div class="example-card" onclick="showExampleDetail('kisisel-4')" style="cursor: pointer;">
-          <div class="example-image">🎯</div>
-          <div class="example-info">
-            <h4>Goal Getter</h4>
-            <p>Verimlilik odaklı</p>
-          </div>
-        </div>
+nav a:not(.nav-cta):hover {
+  color: var(--accent-color);
+}
 
-        <div class="example-card" onclick="showExampleDetail('kisisel-5')" style="cursor: pointer;">
-          <div class="example-image">💎</div>
-          <div class="example-info">
-            <h4>Luxury Life</h4>
-            <p>Premium ve zarif estetik</p>
-          </div>
-        </div>
-      </div>
+nav a:not(.nav-cta):hover:after {
+  width: 100%;
+}
 
-      <div class="category-cta-container">
-        <button class="category-cta-button" onclick="openDesignerWithCategory('kisisel')">
-          Kendin Tasarla - Kişisel Style
-        </button>
-      </div>
-    </section>
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 5px;
+}
 
-    <!-- Product Detail Page -->
-    <div id="detailPage" class="product-detail">
-      <div class="detail-header">
-        <button class="back-button" onclick="showHome()">← Geri Dön</button>
-      </div>
-      <div class="detail-content">
-        <div class="detail-images">
-          <div class="main-image" id="mainImage">📕</div>
-          <div class="thumbnail-grid" id="thumbnailGrid">
-            <!-- Thumbnails will be injected by JS -->
-          </div>
-        </div>
-        <div class="detail-info">
-          <h1 id="detailTitle"></h1>
-          <div class="detail-price" id="detailPrice"></div>
+.menu-toggle span {
+  width: 25px;
+  height: 3px;
+  background: #000000;
+  transition: all 0.3s ease;
+}
 
-          <div class="specs">
-            <h3>Ürün Özellikleri</h3>
-            <div class="spec-item">
-              <span class="spec-label">Sayfa Sayısı:</span>
-              <span>160 Sayfa</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">Kağıt Türü:</span>
-              <span>Premium 120gsm</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">Boyut:</span>
-              <span>A5 (14.8 x 21 cm)</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">Cilt Türü:</span>
-              <span>Sert Kapak</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">Kişiselleştirme:</span>
-              <span>Mevcut</span>
-            </div>
-          </div>
+/* Hero Section - Elevated */
+.hero {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg) var(--spacing-md);
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at top right, #f8fafc, #f1f5f9, #e2e8f0);
+}
 
-          <div class="features">
-            <h3>Özellikler</h3>
-            <ul>
-              <li>El yapımı özel tasarım kapak</li>
-              <li>Çevre dostu, geri dönüştürülebilir kağıt</li>
-              <li>Noktalı ve çizgili sayfa seçenekleri</li>
-              <li>Elastik kapama bandı</li>
-              <li>İç cep bölümü</li>
-              <li>Şerit yer imi</li>
-              <li>İsim ve mesaj kişiselleştirme imkanı</li>
-              <li>Özel hediye kutusu ile gönderim</li>
-            </ul>
-          </div>
+.hero:before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(11, 27, 77, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: blob-float 20s ease-in-out infinite;
+}
 
-          <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem;">
-            <button class="order-button" id="orderButton" style="width: 100%; cursor: pointer;">SİPARİŞ VER</button>
+.hero:after {
+  content: '';
+  position: absolute;
+  bottom: -10%;
+  left: -5%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(26, 61, 143, 0.05) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: blob-float 15s ease-in-out infinite reverse;
+}
 
-          </div>
-        </div>
-      </div>
-    </div>
+@keyframes blob-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+}
 
-    <!-- WhatsApp Button -->
-    <a
-      href="https://wa.me/905359287488"
-      target="_blank"
-      class="whatsapp-button"
-      title="WhatsApp ile iletişime geç"
-    >
-      💬
-    </a>
+.hero-content {
+  max-width: 1400px;
+  width: 100%;
+  text-align: center;
+  animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+}
 
-    <script src="script.js" defer></script>
-    <!-- Version: 1.0.1 - Redeploy Trigger -->
-</body>
-</html>
+.hero h1 {
+  margin-bottom: var(--spacing-md);
+}
+
+.hero p {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  max-width: 600px;
+  margin: 0 auto var(--spacing-md);
+  font-weight: 400;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 1.2rem 3rem;
+  background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: var(--radius-md);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.cta-button:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0a1642 0%, #0e2157 100%);
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+}
+
+.cta-button:hover:before {
+  left: 0;
+}
+
+/* Stats Section */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem var(--spacing-md);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.5rem;
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.stat-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent-light);
+}
+
+.stat-icon {
+  width: 50px;
+  height: 50px;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-item h3 {
+  font-size: 1rem;
+  font-weight: 800;
+  margin-bottom: 0;
+  letter-spacing: 0.5px;
+  color: var(--primary-color);
+  text-transform: uppercase;
+}
+
+.stat-item p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Products Grid */
+.products-section {
+  padding: var(--spacing-lg) var(--spacing-md);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section-title {
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+@media (max-width: 600px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .header-content .logo-text {
+    font-size: 1.2rem;
+  }
+}
+
+/* Filter Buttons - Enhanced Styles */
+.filter-btn {
+  padding: 1rem 2rem;
+  background: transparent;
+  border: 2px solid #E2E8F0;
+  border-radius: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1rem;
+  color: var(--text-secondary);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.filter-btn:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+
+/* All Items - Classic Style */
+.filter-btn[data-filter="all"] {
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  color: #fff;
+  border-color: #000;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.filter-btn[data-filter="all"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.filter-btn[data-filter="all"].active {
+  background: linear-gradient(135deg, #000000 0%, #2d2d2d 100%);
+  animation: pulse 2s infinite;
+}
+
+/* Animation Style Branding */
+.filter-btn[data-filter="couple"] {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-light) 100%);
+  border-color: var(--primary-color);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(11, 27, 77, 0.2);
+}
+
+.filter-btn[data-filter="couple"]:before {
+  background: linear-gradient(135deg, var(--accent-light) 0%, var(--primary-color) 100%);
+}
+
+.filter-btn[data-filter="couple"]:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 30px rgba(11, 27, 77, 0.4);
+}
+
+.filter-btn[data-filter="couple"]:hover:before {
+  opacity: 1;
+}
+
+.filter-btn[data-filter="couple"].active {
+  background: linear-gradient(135deg, var(--accent-light) 0%, var(--primary-color) 100%);
+  box-shadow: 0 6px 30px rgba(11, 27, 77, 0.5);
+}
+
+/* Magazin Style Branding */
+.filter-btn[data-filter="friends"] {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-light) 100%);
+  border-color: var(--primary-color);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(11, 27, 77, 0.2);
+}
+
+.filter-btn[data-filter="friends"]:before {
+  background: linear-gradient(135deg, var(--accent-light) 0%, var(--primary-color) 100%);
+}
+
+.filter-btn[data-filter="friends"]:hover {
+  transform: translateY(-3px) rotate(-1deg);
+  box-shadow: 0 6px 30px rgba(11, 27, 77, 0.4);
+}
+
+.filter-btn[data-filter="friends"]:hover:before {
+  opacity: 1;
+}
+
+.filter-btn[data-filter="friends"].active {
+  background: linear-gradient(135deg, var(--accent-light) 0%, var(--primary-color) 100%);
+  box-shadow: 0 6px 30px rgba(11, 27, 77, 0.5);
+}
+
+/* Personal Category - Kişisel Style Branding */
+.filter-btn[data-filter="alone"] {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-light) 100%);
+  border-color: var(--primary-color);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(11, 27, 77, 0.2);
+}
+
+.filter-btn[data-filter="alone"]:before {
+  background: linear-gradient(135deg, var(--accent-light) 0%, var(--primary-color) 100%);
+}
+
+.filter-btn[data-filter="alone"]:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 6px 30px rgba(11, 27, 77, 0.4);
+}
+
+.filter-btn[data-filter="alone"]:hover:before {
+  opacity: 1;
+}
+
+.filter-btn[data-filter="alone"].active {
+  background: linear-gradient(135deg, var(--accent-light) 0%, var(--primary-color) 100%);
+  box-shadow: 0 6px 30px rgba(11, 27, 77, 0.5);
+}
+
+/* Animations */
+@keyframes shimmer {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.1); }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  10%, 30% { transform: scale(1.05); }
+  20%, 40% { transform: scale(0.98); }
+}
+
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(-3px) scale(1.05); }
+  50% { transform: translateY(-5px) scale(1.05); }
+}
+
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(-3px) rotate(-2deg); }
+  50% { transform: translateY(-5px) rotate(-2deg); }
+}
+
+@keyframes disco {
+  0%, 100% { filter: hue-rotate(0deg); }
+  50% { filter: hue-rotate(10deg); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 6px 30px rgba(102, 126, 234, 0.6); }
+  50% { box-shadow: 0 6px 40px rgba(102, 126, 234, 0.9), 0 0 50px rgba(118, 75, 162, 0.6); }
+}
+
+@keyframes aurora {
+  0%, 100% { filter: hue-rotate(0deg) brightness(1); }
+  50% { filter: hue-rotate(15deg) brightness(1.1); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+/* Category Navigation Cards - Glassmorphism */
+.category-cards-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.category-nav-card {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+}
+
+.category-nav-card:hover {
+  transform: translateY(-15px);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.15);
+  border-color: var(--accent-light);
+}
+
+.category-nav-card img {
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
+  transition: transform 0.5s ease;
+}
+
+.category-nav-card:hover img {
+  transform: scale(1.05) rotate(2deg);
+}
+
+.category-card-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.category-nav-card:hover .category-card-icon {
+  transform: scale(1.1);
+}
+
+.category-nav-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.category-nav-card p {
+  color: var(--text-secondary);
+  position: relative;
+  z-index: 1;
+  margin-bottom: 1rem;
+}
+
+.category-card-arrow {
+  font-size: 2rem;
+  font-weight: bold;
+  position: relative;
+  z-index: 1;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.category-nav-card:hover .category-card-arrow {
+  opacity: 1;
+  transform: translateX(5px);
+}
+
+/* Category Pages */
+.category-page {
+  min-height: 100vh;
+  padding: var(--spacing-lg) var(--spacing-md);
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+}
+
+.category-page.animation-page,
+.category-page.magazin-page,
+.category-page.kisisel-page {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+}
+
+.category-page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.category-page-header h2 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 1rem;
+}
+
+.category-page-header p {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+}
+
+.back-to-categories {
+  background: none;
+  border: 2px solid var(--border-color);
+  padding: 0.8rem 2rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.back-to-categories:hover {
+  border-color: #000;
+  transform: translateX(-5px);
+}
+
+.examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto 4rem;
+}
+
+.example-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.example-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+}
+
+.example-image {
+  width: 100%;
+  height: 300px;
+  background: linear-gradient(135deg, var(--bg-accent) 0%, var(--bg-secondary) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.animation-page .example-image,
+.magazin-page .example-image,
+.kisisel-page .example-image {
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+}
+
+.example-info {
+  padding: 1.5rem;
+}
+
+.example-info h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price-badge {
+  background: var(--primary-color);
+  color: #fff;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.example-info p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* Magazine Showcase Styles */
+.magazine-showcase {
+  max-width: 800px;
+  margin: 0 auto 4rem;
+  padding: 0 1rem;
+}
+
+.magazine-cover-large {
+  position: relative;
+  background: #fff;
+  border-radius: 24px;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.magazine-cover-large:hover {
+  transform: scale(1.02);
+  box-shadow: 0 30px 70px rgba(0,0,0,0.15);
+}
+
+.magazine-badge {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  background: #000;
+  color: #fff;
+  padding: 0.5rem 1.2rem;
+  border-radius: 100px;
+  font-weight: 900;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  z-index: 10;
+}
+
+.magazine-info-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 3rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+  color: #fff;
+  text-align: left;
+}
+
+.magazine-info-overlay h3 {
+  font-family: serif;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.magazine-info-overlay p {
+  color: rgba(255,255,255,0.8);
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Category CTA Button */
+.category-cta-container {
+  text-align: center;
+  padding: 4rem 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.category-cta-button {
+  display: inline-block;
+  padding: 1.5rem 3rem;
+  font-size: 1.3rem;
+  font-weight: 800;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-light) 100%);
+  box-shadow: 0 6px 30px rgba(11, 27, 77, 0.3);
+}
+
+.animation-page .category-cta-button,
+.magazin-page .category-cta-button,
+.kisisel-page .category-cta-button {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-light) 100%);
+  box-shadow: 0 6px 30px rgba(11, 27, 77, 0.3);
+}
+
+.category-cta-button:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 10px 40px rgba(11, 27, 77, 0.5);
+}
+
+@media (max-width: 992px) {
+  .category-cards-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .examples-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .category-nav-card {
+    padding: 2rem 1.5rem;
+  }
+}
+
+.product-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+  opacity: 0;
+  animation: fadeInUp 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.05);
+}
+
+.product-card:hover {
+  transform: translateY(-15px) scale(1.02);
+  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.15);
+  border-color: var(--accent-light);
+  background: rgba(255, 255, 255, 1);
+}
+
+.product-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  z-index: 10;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+}
+
+.product-image {
+  width: 100%;
+  height: 300px;
+  background: linear-gradient(135deg, var(--bg-accent) 0%, var(--bg-secondary) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.product-image:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+.product-card:hover .product-image:before {
+  left: 100%;
+}
+
+.product-info {
+  padding: 1.5rem;
+}
+
+.product-info h3 {
+  margin-bottom: 0.5rem;
+}
+
+.product-info p {
+  color: #666;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.product-price {
+  font-size: 1.8rem;
+  font-weight: 900;
+}
+
+
+
+/* About Section */
+.about {
+  padding: var(--spacing-lg) var(--spacing-md);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.about:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -20%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.about-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  position: relative;
+  z-index: 1;
+}
+
+.about h2 {
+  margin-bottom: var(--spacing-md);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+}
+
+.about h3 {
+  margin-top: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+}
+
+.about-content p {
+  line-height: 1.8;
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+}
+
+/* How to Order Section */
+.how-to-order {
+  padding: var(--spacing-lg) var(--spacing-md);
+  background: var(--bg-secondary);
+  text-align: center;
+}
+
+.steps-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.step-item {
+  flex: 1;
+  min-width: 250px;
+  background: var(--bg-primary);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.step-item:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.step-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  background: var(--bg-accent);
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+}
+
+.step-item h3 {
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.step-item p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.step-arrow {
+  font-size: 2rem;
+  color: var(--accent-light);
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .steps-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .step-arrow {
+    transform: rotate(90deg);
+  }
+}
+
+/* Custom Designer Styles */
+.custom-design-section {
+  padding: var(--spacing-lg) var(--spacing-md);
+  background: var(--bg-secondary);
+}
+
+.designer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+  background: white;
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.designer-preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f0f0f0;
+  padding: 2rem;
+  border-radius: var(--radius-md);
+}
+
+.canvas-wrapper {
+  position: relative;
+  box-shadow: var(--shadow-xl);
+}
+
+#designCanvas {
+  background: white;
+  max-width: 100%;
+  height: auto;
+}
+
+.designer-tools {
+  padding: 1rem;
+}
+
+.designer-tools h3 {
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+}
+
+.tool-group {
+  margin-bottom: 2rem;
+}
+
+.tool-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.file-input {
+  display: none;
+}
+
+.upload-btn, .tool-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #000;
+  background: transparent;
+  color: #000;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: var(--radius-sm);
+}
+
+.upload-btn:hover, .tool-btn:hover {
+  background: #000;
+  color: white;
+}
+
+.text-input {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #E2E8F0;
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.5rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  background: #F8FAFC;
+  transition: all 0.3s ease;
+}
+
+.text-input:focus {
+  outline: none;
+  border-color: #000;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
+}
+
+.color-picker {
+  display: flex;
+  gap: 1rem;
+}
+
+.color-option {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.color-option:hover {
+  transform: scale(1.1);
+  border-color: #000;
+}
+
+.color-option.active {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 2px white, 0 0 0 4px #000;
+  z-index: 1;
+}
+
+/* Radio Cards */
+.selection-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.selection-card {
+  border: 1px solid #E2E8F0;
+  border-radius: var(--radius-sm);
+  padding: 0.8rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #F8FAFC;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.selection-card:hover {
+  border-color: #000;
+  background: #fff;
+}
+
+.selection-card.active {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+  box-shadow: var(--shadow-md);
+}
+
+/* Fixed Info */
+.fixed-info {
+  background: #F1F5F9;
+  padding: 0.8rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  border: 1px dashed #CBD5E1;
+  margin-bottom: 1rem;
+}
+
+/* Summary Box */
+.order-summary-box {
+  margin-top: 1.5rem;
+  padding: 1.2rem;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: var(--radius-sm);
+  text-align: left;
+}
+
+.summary-title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.8rem;
+  color: #64748B;
+  border-bottom: 1px solid #E2E8F0;
+  padding-bottom: 0.4rem;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+}
+
+.summary-label {
+  color: #64748B;
+}
+
+.summary-value {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* Style Selection */
+.style-category {
+  margin-bottom: 1.5rem;
+}
+
+.category-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #94A3B8;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.style-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.style-card {
+  border: 1px solid #E2E8F0;
+  border-radius: var(--radius-sm);
+  padding: 0.6rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.style-card:hover {
+  border-color: #000;
+}
+
+.style-card.active {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+.designer-note {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 1rem;
+  text-align: center;
+}
+
+ @media (max-width: 768px) {
+  .designer-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Contact Section - Refined */
+.contact-section {
+  background: #020617; /* Slate 950 for deeper look */
+  padding: 5rem 2rem;
+  color: white;
+  margin-top: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.contact-column h4 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #64748B;
+  margin-bottom: 1.5rem;
+}
+
+.contact-column p, 
+.contact-column a {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #ffffff;
+  display: block;
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.contact-column a:hover {
+  color: var(--accent-light);
+}
+
+/* Footer */
+footer {
+  background: #020617;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding: 2rem var(--spacing-md);
+  text-align: center;
+  margin-top: 0;
+}
+
+footer p {
+  color: #64748B;
+  font-size: 0.9rem;
+}
+
+/* WhatsApp Button - Premium Glow */
+.whatsapp-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 65px;
+  height: 65px;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 999;
+  text-decoration: none;
+  box-shadow: 0 10px 40px -10px rgba(37, 211, 102, 0.5);
+}
+
+.whatsapp-button:hover {
+  transform: scale(1.1) translateY(-5px) rotate(8deg);
+  box-shadow: 0 20px 50px -10px rgba(37, 211, 102, 0.7);
+}
+
+.whatsapp-button:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: inherit;
+  opacity: 0.5;
+  z-index: -1;
+  animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+  0% { transform: scale(1); opacity: 0.5; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* Custom CTA Section */
+.custom-cta-section {
+    padding: 4rem var(--spacing-md);
+    background: #0F172A;
+    color: white;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.custom-cta-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.custom-cta-content p {
+    color: #ccc;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-button.large {
+    font-size: 1.2rem;
+    padding: 1.2rem 4rem;
+    background: white;
+    color: black;
+}
+.cta-button.large:before {
+    background: #e2e2e2;
+}
+
+/* Modal */
+.designer-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 2000;
+    overflow-y: auto;
+    padding: 2rem 1rem;
+}
+
+.modal-content {
+    background: white;
+    max-width: 1100px;
+    margin: 2rem auto;
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2.5rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.modal-title {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.designer-container-modal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+@media (max-width: 900px) {
+    .designer-container-modal {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .modal-content {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    .canvas-wrapper {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+}
+
+/* Product Detail Page */
+.product-detail {
+  display: none;
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.product-detail.active {
+  display: block;
+}
+
+.detail-header {
+  padding: var(--spacing-md);
+  border-bottom: var(--border-width) solid #000000;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.back-button:hover {
+  background: var(--bg-accent);
+  color: var(--text-primary);
+  border-color: var(--text-primary);
+}
+
+.detail-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--spacing-lg) var(--spacing-md);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+}
+
+.detail-images {
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+}
+
+.main-image {
+  width: 100%;
+  height: 500px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  margin-bottom: var(--spacing-md);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  padding: 1.5rem;
+}
+
+.thumbnail-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.thumbnail {
+  height: 100px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  position: relative;
+}
+
+.thumbnail:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.thumbnail.active {
+  border-color: var(--accent-color);
+  border-width: 2px;
+  box-shadow: var(--shadow-md);
+}
+
+.detail-info h1 {
+  margin-bottom: var(--spacing-sm);
+}
+
+.detail-price {
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: var(--spacing-md);
+}
+
+.specs {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  background: var(--bg-secondary);
+}
+
+.specs h3 {
+  margin-bottom: var(--spacing-sm);
+}
+
+.spec-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.spec-item:last-child {
+  border-bottom: none;
+}
+
+.spec-label {
+  font-weight: 600;
+}
+
+.features {
+  margin-bottom: var(--spacing-md);
+}
+
+.features h3 {
+  margin-bottom: var(--spacing-sm);
+}
+
+.features ul {
+  list-style: none;
+}
+
+.features li {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #e0e0e0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.features li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  font-weight: 900;
+}
+
+.features li:last-child {
+  border-bottom: none;
+}
+
+.order-button {
+  width: 100%;
+  padding: 1.2rem;
+  background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  letter-spacing: 0.5px;
+  box-shadow: var(--shadow-md);
+}
+
+.order-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  opacity: 0.95;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .detail-content {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-images {
+    position: static;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-item {
+    border-right: none;
+    border-bottom: var(--border-width) solid #000000;
+  }
+
+  .stat-item:last-child {
+    border-bottom: none;
+  }
+
+  .whatsapp-button {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
+
+/* Utility Classes */
+.hidden {
+  display: none !important;
+}
+
+/* Loader Styles */
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.loader.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.loader-logo {
+  width: 150px;
+  height: auto;
+  animation: logoPulse 2s ease-in-out infinite;
+}
+
+.loader-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.loader-dots span {
+  width: 8px;
+  height: 8px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  animation: dotBounce 1.4s infinite ease-in-out both;
+}
+
+.loader-dots span:nth-child(1) { animation-delay: -0.32s; }
+.loader-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes logoPulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes dotBounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+/* Magazine Designer Specific Styles */
+.magazine-progress {
+  margin-bottom: 2rem;
+  background: var(--bg-secondary);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.progress-bar-container {
+  height: 8px;
+  background: var(--border-color);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-light));
+  width: 0%;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mag-page-content {
+  min-height: 400px;
+  padding: 1rem;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  animation: fadeIn 0.3s ease;
+}
+
+.mag-input-group {
+  margin-bottom: 1.5rem;
+}
+
+.mag-input-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mag-image-upload-area {
+  width: 100%;
+  height: 200px;
+  border: 2px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-secondary);
+}
+
+.mag-image-upload-area:hover {
+  border-color: var(--accent-color);
+  background: #fff;
+}
+
+.mag-image-upload-area i {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.mag-image-preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+
+.mag-image-upload-area.has-image .upload-placeholder {
+  display: none;
+}
+
+.mag-image-upload-area.has-image .mag-image-preview {
+  display: block;
+}
+
+.mag-nav-buttons button {
+  min-width: 150px;
+}
+
+.mag-page-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.mag-page-header h3 {
+  font-family: serif;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .mag-nav-buttons {
+    flex-direction: column-reverse;
+  }
+  .mag-nav-buttons button {
+    width: 100%;
+  }
+  .mag-page-content {
+    min-height: auto;
+  }
+}
+
