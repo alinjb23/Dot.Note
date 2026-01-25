@@ -132,33 +132,21 @@
         <h2 class="section-title">NASIL SİPARİŞ VERİLİR?</h2>
         <div class="steps-container">
           <div class="step-item">
-            <div class="step-icon">🎨</div>
-            <h3>1. Kendin Tasarla</h3>
-            <p>Kendin Tasarla’ butonuna tıklayın, istediğiniz detayları seçin ve tasarımı tamamlayın</p>
+            <div class="step-icon">1</div>
+            <h3>Tasarımını Seç & Siparişi Başlat</h3>
+            <p>Web sitemizden beğendiğin defter tasarımını seç, “Sipariş Ver” butonuna tıkla ve tercihlerini belirle.</p>
           </div>
           <div class="step-arrow">→</div>
           <div class="step-item">
-            <div class="step-icon">📸</div>
-            <h3>2. Kapak Fotoğrafını Gönder</h3>
-            <p>Kullanıcı, defter kapağında kullanılmasını istediği fotoğrafı WhatsApp üzerinden gönderir.</p>
+            <div class="step-icon">2</div>
+            <h3>Detayları WhatsApp’tan Paylaş</h3>
+            <p>Siparişten sonra seni WhatsApp’a yönlendiriyoruz.<br>Kapak fotoğraflarını ve istediğin detayları buradan bize gönderiyorsun.</p>
           </div>
           <div class="step-arrow">→</div>
           <div class="step-item">
-            <div class="step-icon">✨</div>
-            <h3>3. Kapak Tasarımları Hazırlanır</h3>
-            <p>Paylaşılan bilgiler ve fotoğrafa göre 3 farklı kapak tasarımı hazırlanır. Tasarım önizlemeleri WhatsApp üzerinden kullanıcıya gönderilir.</p>
-          </div>
-          <div class="step-arrow">→</div>
-           <div class="step-item">
-            <div class="step-icon">✅</div>
-            <h3>4. Seçim & Ödeme</h3>
-            <p>Kullanıcı beğendiği tasarımı seçer. Ödeme bilgileri paylaşılır.</p>
-          </div>
-          <div class="step-arrow">→</div>
-          <div class="step-item">
-            <div class="step-icon">📦</div>
-            <h3>5. Üretim & Teslimat</h3>
-            <p>Ödeme sonrası defter üretime alınır. Sipariş özenle hazırlanır ve yaklaşık 2 hafta içinde adresine teslim edilir.</p>
+            <div class="step-icon">3</div>
+            <h3>Onayla & Teslim Al</h3>
+            <p>Tasarladığımız kapağı sana WhatsApp’tan iletiyoruz.<br>Onay ve ödeme sonrası defterini hazırlıyor, paketleyip kargoya veriyoruz 🚚</p>
           </div>
         </div>
       </section>
@@ -216,10 +204,8 @@
 
               <div class="tool-group">
                 <label>Sayfa Sayısı</label>
-                <div class="selection-grid" id="pageCountSelector">
-                  <div class="selection-card active" data-value="100 Sayfa">100 Sayfa</div>
-                  <div class="selection-card" data-value="150 Sayfa">150 Sayfa</div>
-                  <div class="selection-card" data-value="200 Sayfa">200 Sayfa</div>
+                <div class="selection-grid" id="pageCountSelector" style="grid-template-columns: 1fr;">
+                  <div class="selection-card active" data-value="200 Sayfa">200 Sayfa</div>
                 </div>
               </div>
 
@@ -298,6 +284,68 @@
                 </div>
               </div>
 
+              <!-- Teslimat Bilgileri Section -->
+              <div class="tool-group address-section">
+                <label style="font-size: 1rem; color: var(--primary-color); border-bottom: 1px solid #eee; padding-bottom: 0.5rem; margin-bottom: 1rem;">Teslimat Bilgileri</label>
+                
+                <div style="margin-bottom: 1rem;">
+                  <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Adres Başlığı* (Ev, İş vb.)</label>
+                  <input type="text" id="addrTitleInput" placeholder="Adres Başlığı" class="text-input">
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                  <div>
+                    <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Ad</label>
+                    <input type="text" id="addrFirstNameInput" placeholder="Ad" class="text-input">
+                  </div>
+                  <div>
+                    <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Soyad</label>
+                    <input type="text" id="addrLastNameInput" placeholder="Soyad" class="text-input">
+                  </div>
+                </div>
+
+                <div style="margin-bottom: 1rem;">
+                  <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Telefon Numarası</label>
+                  <input type="tel" id="addrPhoneInput" placeholder="05xx xxx xx xx" class="text-input" maxlength="11">
+                </div>
+
+                <div style="margin-bottom: 1rem;">
+                  <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Açık Adres (Detaylı)</label>
+                  <textarea id="addrFullInput" placeholder="Mahalle, Cadde, Sokak, No..." class="text-input" style="height: 80px; resize: none;"></textarea>
+                  <p class="address-note">Kargonuzun size sorunsuz bir şekilde ulaşabilmesi için mahalle, cadde, sokak, bina gibi detay bilgileri eksiksiz girdiğinizden emin olun.</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.8rem; margin-bottom: 1rem;">
+                  <div>
+                    <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">İl</label>
+                    <input type="text" id="addrProvinceInput" placeholder="İl" class="text-input" list="provinceList">
+                  </div>
+                  <div>
+                    <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">İlçe</label>
+                    <input type="text" id="addrDistrictInput" placeholder="İlçe" class="text-input" list="districtList">
+                  </div>
+                  <div>
+                    <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Mahalle</label>
+                    <input type="text" id="addrMahalleInput" placeholder="Mahalle" class="text-input" list="mahalleList">
+                  </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 0.8rem; margin-bottom: 1rem;">
+                  <div>
+                    <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Sokak / Cadde</label>
+                    <input type="text" id="addrStreetInput" placeholder="Sokak / Cadde" class="text-input">
+                  </div>
+                  <div>
+                    <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Bina No</label>
+                    <input type="text" id="addrBinaNoInput" placeholder="Bina No" class="text-input">
+                  </div>
+                  <div>
+                    <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Daire No</label>
+                    <input type="text" id="addrDaireNoInput" placeholder="Daire" class="text-input">
+                  </div>
+                </div>
+              </div>
+
               <!-- Live Summary Section -->
               <div class="order-summary-box">
                 <div class="summary-title">Sipariş Özeti</div>
@@ -311,7 +359,7 @@
                 </div>
                 <div class="summary-row">
                   <span class="summary-label">Sayfa Sayısı:</span>
-                  <span class="summary-value" id="summaryPages">80 Sayfa</span>
+                  <span class="summary-value" id="summaryPages">200 Sayfa</span>
                 </div>
                 <div class="summary-row">
                   <span class="summary-label">Tasarım Stili:</span>
@@ -402,11 +450,8 @@
 
             <div class="tool-group">
               <label>Sayfa Sayısı</label>
-              <div class="selection-grid" id="customPageCountSelector">
-                <div class="selection-card" data-value="50 Sayfa">50 Sayfa</div>
-                <div class="selection-card active" data-value="100 Sayfa">100 Sayfa</div>
-                <div class="selection-card" data-value="150 Sayfa">150 Sayfa</div>
-                <div class="selection-card" data-value="200 Sayfa">200 Sayfa</div>
+              <div class="selection-grid" id="customPageCountSelector" style="grid-template-columns: 1fr;">
+                <div class="selection-card active" data-value="200 Sayfa">200 Sayfa</div>
               </div>
             </div>
 
@@ -434,6 +479,68 @@
               </div>
             </div>
 
+            <!-- Teslimat Bilgileri Section -->
+            <div class="tool-group address-section">
+              <label style="font-size: 1rem; color: var(--primary-color); border-bottom: 1px solid #eee; padding-bottom: 0.5rem; margin-bottom: 1rem;">Teslimat Bilgileri</label>
+              
+              <div style="margin-bottom: 1rem;">
+                <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Adres Başlığı* (Ev, İş vb.)</label>
+                <input type="text" id="customaddrTitleInput" placeholder="Adres Başlığı" class="text-input">
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                <div>
+                  <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Ad</label>
+                  <input type="text" id="customaddrFirstNameInput" placeholder="Ad" class="text-input">
+                </div>
+                <div>
+                  <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Soyad</label>
+                  <input type="text" id="customaddrLastNameInput" placeholder="Soyad" class="text-input">
+                </div>
+              </div>
+
+              <div style="margin-bottom: 1rem;">
+                <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Telefon Numarası</label>
+                <input type="tel" id="customaddrPhoneInput" placeholder="05xx xxx xx xx" class="text-input" maxlength="11">
+              </div>
+
+              <div style="margin-bottom: 1rem;">
+                <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Açık Adres (Detaylı)</label>
+                <textarea id="customaddrFullInput" placeholder="Mahalle, Cadde, Sokak, No..." class="text-input" style="height: 80px; resize: none;"></textarea>
+                <p class="address-note">Kargonuzun size sorunsuz bir şekilde ulaşabilmesi için mahalle, cadde, sokak, bina gibi detay bilgileri eksiksiz girdiğinizden emin olun.</p>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.8rem; margin-bottom: 1rem;">
+                <div>
+                  <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">İl</label>
+                  <input type="text" id="customaddrProvinceInput" placeholder="İl" class="text-input" list="provinceList">
+                </div>
+                <div>
+                  <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">İlçe</label>
+                  <input type="text" id="customaddrDistrictInput" placeholder="İlçe" class="text-input" list="districtList">
+                </div>
+                <div>
+                  <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Mahalle</label>
+                  <input type="text" id="customaddrMahalleInput" placeholder="Mahalle" class="text-input" list="mahalleList">
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 0.8rem; margin-bottom: 1rem;">
+                <div>
+                  <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Sokak / Cadde</label>
+                  <input type="text" id="customaddrStreetInput" placeholder="Sokak / Cadde" class="text-input">
+                </div>
+                <div>
+                  <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Bina No</label>
+                  <input type="text" id="customaddrBinaNoInput" placeholder="Bina No" class="text-input">
+                </div>
+                <div>
+                  <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Daire No</label>
+                  <input type="text" id="customaddrDaireNoInput" placeholder="Daire" class="text-input">
+                </div>
+              </div>
+            </div>
+
             <!-- Live Summary Section -->
             <div class="order-summary-box">
               <div class="summary-title">Sipariş Özeti</div>
@@ -451,7 +558,7 @@
               </div>
               <div class="summary-row">
                 <span class="summary-label">Sayfa Sayısı:</span>
-                <span class="summary-value" id="customSummaryPages">100 Sayfa</span>
+                <span class="summary-value" id="customSummaryPages">200 Sayfa</span>
               </div>
               <div class="summary-row">
                 <span class="summary-label">Kapak Rengi:</span>
@@ -673,7 +780,7 @@
             <h3>Ürün Özellikleri</h3>
             <div class="spec-item">
               <span class="spec-label">Sayfa Sayısı:</span>
-              <span>160 Sayfa</span>
+              <span>200 Sayfa</span>
             </div>
             <div class="spec-item">
               <span class="spec-label">Kağıt Türü:</span>
@@ -727,5 +834,10 @@
 
     <script src="script.js" defer></script>
     <!-- Version: 1.0.1 - Redeploy Trigger -->
+    
+    <!-- Address Datalists -->
+    <datalist id="provinceList"></datalist>
+    <datalist id="districtList"></datalist>
+    <datalist id="mahalleList"></datalist>
 </body>
 </html>
