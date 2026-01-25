@@ -45,10 +45,11 @@ body {
 
 /* Typography */
 h1 {
-  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-size: clamp(2.2rem, 7vw, 5rem);
   font-weight: 900;
   letter-spacing: -0.02em;
-  line-height: 0.9;
+  line-height: 1.1;
+  word-break: break-word;
 }
 
 h2 {
@@ -58,7 +59,7 @@ h2 {
 }
 
 h3 {
-  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-size: clamp(1.1rem, 3vw, 1.8rem);
   font-weight: 700;
 }
 
@@ -72,6 +73,7 @@ header {
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   padding: 1rem var(--spacing-sm);
   z-index: 1000;
+  width: 100%;
   transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
@@ -238,6 +240,7 @@ nav a:not(.nav-cta) {
     gap: 6px;
     cursor: pointer;
     z-index: 1001;
+    position: relative;
   }
 
   .menu-toggle span {
@@ -252,7 +255,8 @@ nav a:not(.nav-cta) {
     top: 0;
     right: -100%;
     height: 100vh;
-    width: 70%;
+    width: 80%;
+    max-width: 350px;
     background: #ffffff;
     flex-direction: column;
     justify-content: center;
@@ -261,6 +265,7 @@ nav a:not(.nav-cta) {
     transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: -10px 0 30px rgba(0,0,0,0.1);
     padding: 2rem;
+    z-index: 1000;
   }
 
   nav.active {
@@ -268,7 +273,7 @@ nav a:not(.nav-cta) {
   }
 
   nav a {
-    font-size: 1.4rem !important;
+    font-size: 1.2rem !important;
   }
 
   .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
@@ -312,11 +317,11 @@ nav a:not(.nav-cta):hover:after {
 
 /* Hero Section - Elevated */
 .hero {
-  min-height: 90vh;
+  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-lg) var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-sm);
   position: relative;
   overflow: hidden;
   background: radial-gradient(circle at top right, #f8fafc, #f1f5f9, #e2e8f0);
@@ -424,8 +429,8 @@ nav a:not(.nav-cta):hover:after {
 .stat-item {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
-  padding: 1.5rem;
+  gap: 1rem;
+  padding: 1.2rem;
   background: #ffffff;
   border-radius: var(--radius-md);
   border: 1px solid var(--border-color);
@@ -457,7 +462,7 @@ nav a:not(.nav-cta):hover:after {
 }
 
 .stat-item h3 {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 800;
   margin-bottom: 0;
   letter-spacing: 0.5px;
@@ -496,7 +501,7 @@ nav a:not(.nav-cta):hover:after {
     gap: 1.5rem;
   }
   .header-content .logo-text {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 }
 
@@ -670,7 +675,7 @@ nav a:not(.nav-cta):hover:after {
 /* Category Navigation Cards - Glassmorphism */
 .category-cards-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
@@ -1129,7 +1134,7 @@ nav a:not(.nav-cta):hover:after {
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   gap: var(--spacing-md);
   flex-wrap: wrap;
 }
@@ -1656,7 +1661,7 @@ footer p {
     background: rgba(0,0,0,0.9);
     z-index: 2000;
     overflow-y: auto;
-    padding: 2rem 1rem;
+    padding: 0;
 }
 
 .modal-content {
@@ -1664,8 +1669,22 @@ footer p {
     max-width: 1100px;
     margin: 2rem auto;
     border-radius: var(--radius-lg);
-    padding: 2rem;
+    padding: 2.5rem;
     position: relative;
+    width: 95%;
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+        min-height: 100vh;
+        padding: 4rem 1.5rem 2rem;
+    }
+    .designer-modal {
+        padding: 0;
+    }
 }
 
 .close-modal {
@@ -1675,6 +1694,7 @@ footer p {
     font-size: 2.5rem;
     cursor: pointer;
     line-height: 1;
+    z-index: 10;
 }
 
 .modal-title {
@@ -1760,7 +1780,7 @@ footer p {
 
 .main-image {
   width: 100%;
-  height: 500px;
+  height: clamp(300px, 50vh, 500px);
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
@@ -1771,7 +1791,13 @@ footer p {
   margin-bottom: var(--spacing-md);
   box-shadow: var(--shadow-lg);
   overflow: hidden;
-  padding: 1.5rem;
+  padding: 1rem;
+}
+
+@media (max-width: 768px) {
+  .main-image {
+    height: 350px;
+  }
 }
 
 .thumbnail-grid {
@@ -1781,7 +1807,7 @@ footer p {
 }
 
 .thumbnail {
-  height: 100px;
+  height: 80px;
   background: var(--bg-primary);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
@@ -1792,6 +1818,12 @@ footer p {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   position: relative;
+}
+
+@media (max-width: 768px) {
+  .thumbnail {
+    height: 60px;
+  }
 }
 
 .thumbnail:hover {
@@ -1811,7 +1843,7 @@ footer p {
 }
 
 .detail-price {
-  font-size: 3rem;
+  font-size: clamp(2rem, 8vw, 3rem);
   font-weight: 900;
   margin-bottom: var(--spacing-md);
 }
@@ -1939,11 +1971,11 @@ footer p {
   }
 
   .whatsapp-button {
-    width: 50px;
-    height: 50px;
-    font-size: 1.5rem;
-    bottom: 1rem;
-    right: 1rem;
+    width: 60px;
+    height: 60px;
+    font-size: 1.8rem;
+    bottom: 1.5rem;
+    right: 1.5rem;
   }
 }
 
