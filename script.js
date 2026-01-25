@@ -232,7 +232,7 @@ function showProductDetail(product) {
   const thumbGrid = document.getElementById('thumbnailGrid');
   thumbGrid.innerHTML = views.map((view, idx) => `
     <div class="thumbnail ${idx === 0 ? 'active' : ''}" onclick="changeGalleryView(${idx}, 'product')">
-      ${idx === 0 ? 'Ön' : idx === 1 ? 'Arka' : idx === 2 ? 'Açık' : 'Yan'} Görünüm<br />${view}
+      ${view}
     </div>
   `).join('');
 
@@ -298,11 +298,11 @@ function showExampleDetail(id) {
     thumbGrid.innerHTML = design.images.map((img, idx) => {
       let thumbContent = img;
       if (img.endsWith('.png') || img.endsWith('.jpg') || img.endsWith('.jpeg') || img.endsWith('.webp')) {
-        thumbContent = `<img src="${img}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">`;
+        thumbContent = `<img src="${img}" style="width: 100%; height: 100%; object-fit: cover;">`;
       }
       return `
         <div class="thumbnail ${idx === 0 ? 'active' : ''}" onclick="changeGalleryView(${idx}, 'example', '${id}')">
-          Görünüm ${idx + 1}<br />${thumbContent}
+          ${thumbContent}
         </div>
       `;
     }).join('');
@@ -426,7 +426,7 @@ document.addEventListener("DOMContentLoaded", () => {
 let userText = "";
 let bgColor = "#1a1a1a";
 let selectedLayout = "Cizgili";
-let selectedPageCount = "100 Sayfa";
+let selectedPageCount = "200 Sayfa";
 let selectedStyle = "Disney Pixar (Romantik)";
 let selectedCategory = ""; // New Variable
 let preselectedStyle = null;
@@ -597,14 +597,75 @@ function resetCategorySelection() {
   document.getElementById('designToolsWrapper').style.display = 'none';
 }
 
+// Helper to collect address details
+function getAddressDetails(prefix = "") {
+    const title = document.getElementById(`${prefix}addrTitleInput`)?.value || "Belirtilmedi";
+    const firstName = document.getElementById(`${prefix}addrFirstNameInput`)?.value || "Belirtilmedi";
+    const lastName = document.getElementById(`${prefix}addrLastNameInput`)?.value || "Belirtilmedi";
+    const phone = document.getElementById(`${prefix}addrPhoneInput`)?.value || "Belirtilmedi";
+    const full = document.getElementById(`${prefix}addrFullInput`)?.value || "Belirtilmedi";
+    const province = document.getElementById(`${prefix}addrProvinceInput`)?.value || "Belirtilmedi";
+    const district = document.getElementById(`${prefix}addrDistrictInput`)?.value || "Belirtilmedi";
+    const mahalle = document.getElementById(`${prefix}addrMahalleInput`)?.value || "Belirtilmedi";
+    const street = document.getElementById(`${prefix}addrStreetInput`)?.value || "Belirtilmedi";
+    const binaNo = document.getElementById(`${prefix}addrBinaNoInput`)?.value || "Belirtilmedi";
+    const daireNo = document.getElementById(`${prefix}addrDaireNoInput`)?.value || "Belirtilmedi";
+
+    return `*TESLİMAT BİLGİLERİ*\n` +
+           `• Adres Başlığı: ${title}\n` +
+           `• Ad Soyad: ${firstName} ${lastName}\n` +
+           `• Telefon: ${phone}\n` +
+           `• Açık Adres: ${full}\n` +
+           `• Mahalle: ${mahalle}\n` +
+           `• Sokak/Cadde: ${street}\n` +
+           `• Bina No: ${binaNo} / Daire: ${daireNo}\n` +
+           `• İlçe/İl: ${district} / ${province}`;
+}
+
+function validateAddress(prefix = "") {
+    const fields = [
+        'addrTitleInput', 'addrFirstNameInput', 'addrLastNameInput', 'addrPhoneInput', 
+        'addrFullInput', 'addrProvinceInput', 'addrDistrictInput', 'addrMahalleInput', 
+        'addrStreetInput', 'addrBinaNoInput', 'addrDaireNoInput'
+    ];
+    
+    let isValid = true;
+    let firstMissingField = null;
+
+    fields.forEach(fieldId => {
+        const fullId = `${prefix}${fieldId}`;
+        const input = document.getElementById(fullId);
+        if (input) {
+            if (!input.value.trim()) {
+                input.classList.add('error');
+                isValid = false;
+                if (!firstMissingField) firstMissingField = input;
+            } else {
+                input.classList.remove('error');
+            }
+        }
+    });
+
+    if (!isValid) {
+        if (firstMissingField) firstMissingField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        alert("Lütfen tüm teslimat bilgilerini eksiksiz doldurun.");
+    }
+
+    return isValid;
+}
+
 // Updated Finish Design - DIRECT WhatsApp Link
 function finishDesign() {
+    if (!validateAddress("")) return;
+    
     const colorName = document.getElementById('summaryColor').textContent;
     
     let categoryLabel = "Belirtilmedi";
     if (selectedCategory === 'animation') categoryLabel = "Animation Style";
     if (selectedCategory === 'magazin') categoryLabel = "Magazin Style";
     if (selectedCategory === 'kisisel') categoryLabel = "Kişisel Style";
+
+    const addressInfo = getAddressDetails("");
 
     const messageText = `*YENİ DEFTER SİPARİŞİ (ÖZEL TASARIM)*\n\n` +
                         `• Kategori: ${categoryLabel}\n` +
@@ -616,6 +677,7 @@ function finishDesign() {
                         `• Kapak Rengi: ${colorName}\n` +
                         `• Kapak Başlığı: ${userTitle || 'Yok'}\n` +
                         `• İsimler: ${userNames || 'Yok'}\n\n` +
+                        `${addressInfo}\n\n` +
                         `Merhaba! Özel tasarım defterimi sipariş etmek istiyorum. Kapakta kullanılacak fotoğrafı da şimdi gönderiyorum.`;
 
 
@@ -748,7 +810,7 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 // --- Customization Modal Logic ---
 let currentDesignData = null;
 let customLayout = "Cizgili";
-let customPageCount = "100 Sayfa";
+let customPageCount = "200 Sayfa";
 let customBgColor = "#1a1a1a";
 let customTitle = "";
 let customNames = "";
@@ -927,6 +989,7 @@ function updateCustomizationSummary() {
 
 function submitCustomOrder() {
   if (!currentDesignData) return;
+  if (!validateAddress("custom")) return;
   
   const colorMap = {
     "#1a1a1a": "Antrasit",
@@ -937,6 +1000,7 @@ function submitCustomOrder() {
   };
   
   const colorName = colorMap[customBgColor] || "Antrasit";
+  const addressInfo = getAddressDetails("custom");
   
   const messageText = `*Yeni Defter Siparişi*
 
@@ -948,6 +1012,8 @@ Sayfa Sayısı: ${customPageCount}
 Kapak Rengi: ${colorName}
 Başlık: ${customTitle || '-'}
 İsimler: ${customNames || '-'}
+
+${addressInfo}
 
 Merhaba! Sipariş etmek istiyorum. Fotoğrafı da gönderiyorum.`;
 
@@ -1004,16 +1070,86 @@ function closeMagazineDesigner() {
 function renderMagPage() {
   const container = document.getElementById('magPageContent');
   const isFirstPage = magCurrentIdx === 0;
-  const pageData = magPagesData[magCurrentIdx];
+  const isAddressPage = magCurrentIdx === 16;
+  const pageData = isAddressPage ? null : magPagesData[magCurrentIdx];
   
   // Update Progress
-  document.getElementById('magCurrentPage').textContent = `Sayfa ${magCurrentIdx + 1} / 16`;
-  document.getElementById('magPageType').textContent = isFirstPage ? "Kapak & Giriş" : `İç Sayfa ${magCurrentIdx + 1}`;
-  document.getElementById('magProgressBar').style.width = `${((magCurrentIdx + 1) / 16) * 100}%`;
+  document.getElementById('magCurrentPage').textContent = isAddressPage ? "Sipariş Tamamlanıyor" : `Sayfa ${magCurrentIdx + 1} / 16`;
+  document.getElementById('magPageType').textContent = isAddressPage ? "Teslimat Bilgileri" : (isFirstPage ? "Kapak & Giriş" : `İç Sayfa ${magCurrentIdx + 1}`);
+  document.getElementById('magProgressBar').style.width = `${((magCurrentIdx + 1) / 17) * 100}%`;
   
   // Update Nav Buttons
   document.getElementById('magPrevBtn').style.display = magCurrentIdx > 0 ? 'block' : 'none';
-  document.getElementById('magNextBtn').textContent = magCurrentIdx === 15 ? 'TASARIMI TAMAMLA' : 'Sonraki Sayfa →';
+  document.getElementById('magNextBtn').textContent = magCurrentIdx === 16 ? 'TASARIMI TAMAMLA' : 'Sonraki Sayfa →';
+
+  if (isAddressPage) {
+    container.innerHTML = `
+      <div class="mag-page-header">
+        <h3>Teslimat Bilgileri</h3>
+        <p>Defterinizin size ulaşması için lütfen kargo bilgilerini doldurun.</p>
+      </div>
+
+      <div class="mag-input-group address-section">
+        <div style="margin-bottom: 1rem;">
+          <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Adres Başlığı* (Ev, İş vb.)</label>
+          <input type="text" id="magaddrTitleInput" placeholder="Adres Başlığı" class="text-input">
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+          <div>
+            <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Ad</label>
+            <input type="text" id="magaddrFirstNameInput" placeholder="Ad" class="text-input">
+          </div>
+          <div>
+            <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Soyad</label>
+            <input type="text" id="magaddrLastNameInput" placeholder="Soyad" class="text-input">
+          </div>
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+          <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Telefon Numarası</label>
+          <input type="tel" id="magaddrPhoneInput" placeholder="05xx xxx xx xx" class="text-input" maxlength="11">
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+          <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Açık Adres (Detaylı)</label>
+          <textarea id="magaddrFullInput" placeholder="Mahalle, Cadde, Sokak, No..." class="text-input" style="height: 80px; resize: none;"></textarea>
+          <p class="address-note">Kargonuzun size sorunsuz bir şekilde ulaşabilmesi için mahalle, cadde, sokak, bina gibi detay bilgileri eksiksiz girdiğinizden emin olun.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.8rem; margin-bottom: 1rem;">
+          <div>
+            <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">İl</label>
+            <input type="text" id="magaddrProvinceInput" placeholder="İl" class="text-input" list="provinceList">
+          </div>
+          <div>
+            <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">İlçe</label>
+            <input type="text" id="magaddrDistrictInput" placeholder="İlçe" class="text-input" list="districtList">
+          </div>
+          <div>
+            <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Mahalle</label>
+            <input type="text" id="magaddrMahalleInput" placeholder="Mahalle" class="text-input" list="mahalleList">
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 0.8rem; margin-bottom: 1rem;">
+          <div>
+            <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Sokak / Cadde</label>
+            <input type="text" id="magaddrStreetInput" placeholder="Sokak / Cadde" class="text-input">
+          </div>
+          <div>
+            <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Bina No</label>
+            <input type="text" id="magaddrBinaNoInput" placeholder="Bina No" class="text-input">
+          </div>
+          <div>
+            <label style="font-size: 0.8rem; margin-bottom: 0.3rem;">Daire No</label>
+            <input type="text" id="magaddrDaireNoInput" placeholder="Daire" class="text-input">
+          </div>
+        </div>
+      </div>
+    `;
+    return;
+  }
 
   let html = `
     <div class="mag-page-header">
@@ -1092,6 +1228,7 @@ function handleMagImageChange(event) {
 }
 
 function saveMagCurrentPageData() {
+  if (magCurrentIdx >= 16) return; // Don't save for address page
   const pageData = magPagesData[magCurrentIdx];
   pageData.message1 = document.getElementById('magMessage1').value;
   pageData.message2 = document.getElementById('magMessage2').value;
@@ -1104,12 +1241,12 @@ function saveMagCurrentPageData() {
 }
 
 function magNextPage() {
-  saveMagCurrentPageData();
-  
-  if (magCurrentIdx < 15) {
+  if (magCurrentIdx < 16) {
+    saveMagCurrentPageData();
     magCurrentIdx++;
     renderMagPage();
   } else {
+    if (!validateAddress("mag")) return;
     finishMagDesign();
   }
 }
@@ -1123,11 +1260,13 @@ function magPrevPage() {
 }
 
 function finishMagDesign() {
+  const addressInfo = getAddressDetails("mag");
   let messageText = `*DOT EDITORIAL MAGAZINE SİPARİŞİ*\n\n`;
   messageText += `• Ürün: Dot Editorial Edition (16 Sayfa)\n`;
   messageText += `• Başlık: ${magPagesData[0].title || 'Yok'}\n`;
   messageText += `• İsimler: ${magPagesData[0].firstName} & ${magPagesData[0].secondName}\n\n`;
   
+  messageText += `${addressInfo}\n\n`;
   messageText += `*SAYFA DETAYLARI:*\n`;
   
   magPagesData.forEach((page, idx) => {
@@ -1156,5 +1295,90 @@ function finishMagDesign() {
 
   closeMagazineDesigner();
 }
+
+/**
+ * Address Selection Service
+ * Handles Provinces, Districts, and Neighborhoods cascading autocompletes
+ */
+const AddressService = {
+    provinces: [],
+    currentProvince: null,
+    currentDistrict: null,
+    
+    async init() {
+        try {
+            const response = await fetch('https://turkiyeapi.dev/api/v1/provinces');
+            const result = await response.json();
+            if (result.status === "OK") {
+                this.provinces = result.data;
+                this.updateDatalist('provinceList', this.provinces.map(p => p.name));
+            }
+        } catch (error) {
+            console.error('Failed to load provinces:', error);
+        }
+
+        // Global listeners to handle all address inputs (even those in dynamic modals)
+        document.body.addEventListener('input', (e) => {
+            const id = e.target.id;
+            if (id.endsWith('addrProvinceInput')) {
+                this.handleProvinceChange(e.target);
+            } else if (id.endsWith('addrDistrictInput')) {
+                this.handleDistrictChange(e.target);
+            }
+        });
+    },
+
+    updateDatalist(listId, items) {
+        const list = document.getElementById(listId);
+        if (list) {
+            list.innerHTML = items.map(item => `<option value="${item}">`).join('');
+        }
+    },
+
+    handleProvinceChange(input) {
+        const val = input.value.trim();
+        const province = this.provinces.find(p => p.name.toLowerCase() === val.toLowerCase());
+        
+        if (province) {
+            this.currentProvince = province;
+            this.updateDatalist('districtList', province.districts.map(d => d.name));
+            
+            // Clear subsequent fields in the same modal/group
+            const prefix = input.id.replace('addrProvinceInput', '');
+            const districtInput = document.getElementById(`${prefix}addrDistrictInput`);
+            const mahalleInput = document.getElementById(`${prefix}addrMahalleInput`);
+            if (districtInput) districtInput.value = "";
+            if (mahalleInput) mahalleInput.value = "";
+        }
+    },
+
+    async handleDistrictChange(input) {
+        if (!this.currentProvince) return;
+        
+        const val = input.value.trim();
+        const district = this.currentProvince.districts.find(d => d.name.toLowerCase() === val.toLowerCase());
+        
+        if (district) {
+            this.currentDistrict = district;
+            try {
+                const response = await fetch(`https://turkiyeapi.dev/api/v1/districts/${district.id}`);
+                const result = await response.json();
+                if (result.status === "OK" && result.data.neighborhoods) {
+                    this.updateDatalist('mahalleList', result.data.neighborhoods.map(n => n.name));
+                }
+            } catch (error) {
+                console.error('Failed to load neighborhoods:', error);
+            }
+            
+            // Clear subsequent fields
+            const prefix = input.id.replace('addrDistrictInput', '');
+            const mahalleInput = document.getElementById(`${prefix}addrMahalleInput`);
+            if (mahalleInput) mahalleInput.value = "";
+        }
+    }
+};
+
+// Initialize address service when script loads
+AddressService.init();
 
 
