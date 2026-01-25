@@ -369,6 +369,7 @@ document.querySelectorAll("nav a").forEach((link) => {
   link.addEventListener("click", () => {
     document.getElementById("menuToggle").classList.remove("active");
     document.getElementById("mainNav").classList.remove("active");
+    document.body.classList.remove("menu-open");
   });
 });
 
@@ -404,6 +405,7 @@ document.addEventListener("DOMContentLoaded", () => {
       menuToggle.addEventListener('click', () => {
           menuToggle.classList.toggle('active');
           mainNav.classList.toggle('active');
+          document.body.classList.toggle('menu-open', mainNav.classList.contains('active'));
           document.body.style.overflow = mainNav.classList.contains('active') ? 'hidden' : '';
       });
 
@@ -412,6 +414,7 @@ document.addEventListener("DOMContentLoaded", () => {
           link.addEventListener('click', () => {
               menuToggle.classList.remove('active');
               mainNav.classList.remove('active');
+              document.body.classList.remove('menu-open');
               document.body.style.overflow = '';
           });
       });
